@@ -4,6 +4,7 @@ package com.wisape.fiveidiotweather;
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -27,6 +28,8 @@ public class fiveidiotnet {
 
         try {
             InputStream in = new BufferedInputStream(conn.getInputStream());
+            InputStreamReader reader = new InputStreamReader(in);
+            context = reader.toString();
 
         } finally {
             conn.disconnect();
