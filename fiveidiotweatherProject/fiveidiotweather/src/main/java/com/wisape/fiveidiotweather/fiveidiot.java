@@ -38,6 +38,7 @@ public class fiveidiot extends Activity {
         public void run() {
             super.run();
             fiveidiotnet net = new fiveidiotnet("http://m.weather.com.cn/data/101110101.html");
+            while (true) {
             try {
                 texts = net.getContext();
             } catch (IOException e) {
@@ -51,6 +52,7 @@ public class fiveidiot extends Activity {
                 sleep(100000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
             }
         }
     }
