@@ -1,5 +1,7 @@
 package com.wisape.fiveidiotweather;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -7,7 +9,8 @@ import org.json.JSONObject;
  * Created by wispae on 13-9-21.
  */
 public class fiveidiotanalyze {
-    private static String weather_info = null;
+    private String weather_info = null;
+    private JSONObject json_object = null;
     /**
      *{"weatherinfo":{"city":"西安","city_en":"xian","date_y":"2013年9月26日",
      * "date":"","week":"星期四","fchh":"18","cityid":"101110101","temp1":"14℃~26℃",
@@ -34,24 +37,152 @@ public class fiveidiotanalyze {
 
     public fiveidiotanalyze(String info){
         weather_info = info;
+        init_info(weather_info);
     }
 
-    static void init_info(String info) {
-        JSONObject json_object = null;
-        String city = null;
-        String data = null;
+    void init_info(String info) {
         try {
             json_object = new JSONObject(info).getJSONObject("weatherinfo");
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public String get_city() {
+        String city = null;
         if (null != json_object) {
             try {
                 city = json_object.getString("city");
-                data = json_object.getString("date_y");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+        return city;
+    }
+
+    public String get_date() {
+        String date = null;
+        if (null != json_object) {
+            try {
+                date = json_object.getString("date_y");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return date;
+    }
+    public String get_week() {
+        String week = null;
+        if (null != json_object) {
+            try {
+                week = json_object.getString("week");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return week;
+    }
+
+    public String [] get_temps() {
+        String temp[] = new String[6];
+        if (null != json_object) {
+            try {
+                temp[0] = json_object.getString("temp1");
+                temp[1] = json_object.getString("temp2");
+                temp[2] = json_object.getString("temp3");
+                temp[3] = json_object.getString("temp4");
+                temp[4] = json_object.getString("temp5");
+                temp[5] = json_object.getString("temp6");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return temp;
+    }
+
+    public String [] get_weathers() {
+        String weather[] = new String[6];
+        if (null != json_object) {
+            try {
+                weather[0] = json_object.getString("weather1");
+                weather[1] = json_object.getString("weather2");
+                weather[2] = json_object.getString("weather3");
+                weather[3] = json_object.getString("weather4");
+                weather[4] = json_object.getString("weather5");
+                weather[5] = json_object.getString("weather6");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return weather;
+    }
+
+    public String [] get_winds() {
+        String wind[] = new String[6];
+        if (null != json_object) {
+            try {
+                wind[0] = json_object.getString("wind1");
+                wind[1] = json_object.getString("wind2");
+                wind[2] = json_object.getString("wind3");
+                wind[3] = json_object.getString("wind4");
+                wind[4] = json_object.getString("wind5");
+                wind[5] = json_object.getString("wind6");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return wind;
+    }
+
+    public String[] get_cy() {
+        String cy[] = new String[4];
+        if (null != json_object) {
+            try {
+                cy[0] = json_object.getString("index");
+                cy[1] = json_object.getString("incex_d");
+                cy[2] = json_object.getString("index48");
+                cy[3] = json_object.getString("incex48_d");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return cy;
+    }
+
+    public String[] get_uv() {
+        String uv[] = new String[2];
+        if (null != json_object) {
+            try {
+                uv[0] = json_object.getString("index_uv");
+                uv[1] = json_object.getString("index_uv");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return uv;
+    }
+
+    public String get_tr() {
+        String tr = null;
+        if (null != json_object) {
+            try {
+                tr = json_object.getString("index_tr");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return tr;
+    }
+
+    public String get_gm() {
+        String gm = null;
+        if (null != json_object) {
+            try {
+                gm = json_object.getString("index_ag");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return gm;
     }
 }

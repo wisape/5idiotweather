@@ -46,7 +46,14 @@ public class fiveidiot extends Activity {
             }
 
             if(text != null) {
-                Log.d("5sha", texts);
+                //Log.d("5sha", texts);
+                fiveidiotanalyze an = new fiveidiotanalyze(texts);
+                String[] abc = an.get_weathers();
+                if (null != abc) {
+                    Log.d("5sha", abc[0]);
+                    text.setText(abc[0]);
+                } else
+                    Log.d("5sha", "no city info");
             }
             try {
                 sleep(100000);
