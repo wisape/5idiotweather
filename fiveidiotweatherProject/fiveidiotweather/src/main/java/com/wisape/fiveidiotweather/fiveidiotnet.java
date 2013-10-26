@@ -23,7 +23,7 @@ public class fiveidiotnet {
 
     public String getContext() throws IOException {
         URL weatherUrl = new URL(weatherAddress);
-        String context = "诶有数据";
+        String context = "No data!!";
         HttpURLConnection conn = (HttpURLConnection) weatherUrl.openConnection();
 
         try {

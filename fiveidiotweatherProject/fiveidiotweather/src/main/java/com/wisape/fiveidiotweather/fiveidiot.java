@@ -45,13 +45,13 @@ public class fiveidiot extends Activity {
                 e.printStackTrace();
             }
 
-            if(text != null) {
+            if(texts != null) {
                 //Log.d("5sha", texts);
                 fiveidiotanalyze an = new fiveidiotanalyze(texts);
                 String[] abc = an.get_weathers();
                 if (null != abc) {
-                    Log.d("5sha", abc[0]);
-                    text.setText(abc[0]);
+                    Log.d("5sha", abc[3]);
+                    text.setText(abc[5]);
                 } else
                     Log.d("5sha", "no city info");
             }
