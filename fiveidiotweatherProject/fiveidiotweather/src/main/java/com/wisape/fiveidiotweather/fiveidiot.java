@@ -1,5 +1,6 @@
 package com.wisape.fiveidiotweather;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -16,8 +17,10 @@ public class fiveidiot extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text = (TextView)findViewById(R.id.text);
-        mythread th = new mythread();
-        th.start();
+        Intent it = new Intent("com.wisape.fiveidiotweather.fiveidiotservice");
+        startService(it);
+        //mythread th = new mythread();
+        //th.start();
     }
 
 

@@ -1,9 +1,11 @@
-package com.wisape.fiveidiotweather.com.wisape.fiveidiotweather.db;
+package com.wisape.fiveidiotweather;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by wisape on 13-10-27.
@@ -18,14 +20,20 @@ public class fiveidiotdb {
     }
 
     public void insert(String key, String vlaue) {
+        Log.d("5sha", "insert1");
         ContentValues cv = new ContentValues();
-        Cursor cursor = query(key);
-        if (cursor.getCount() > 0)
-            update(key, vlaue);
-        else {
+        Log.d("5sha", "insert1");
+//        Cursor cursor = query(key);
+//        Log.d("5sha", "insert3");
+//        if (cursor.getCount() > 0) {
+//            Log.d("5sha", "insert4");
+//            update(key, vlaue);
+//        } else {
+            Log.d("5sha", "insert5");
             cv.put(key, vlaue);
             db.insert(DB_NAME, null, cv);
-        }
+        Log.d("5sha", "insert6");
+       // }
     }
 
     public int update(String key, String value) {
@@ -49,5 +57,25 @@ public class fiveidiotdb {
             return cursor.getString(0);
         else
             return null;
+    }
+
+    /**
+     * Created by wisape on 13-10-27.
+     */
+
+    public static class fiveidiotdbhelper extends SQLiteOpenHelper {
+        public fiveidiotdbhelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+            super(context, name, factory, version);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i2) {
+
+        }
     }
 }

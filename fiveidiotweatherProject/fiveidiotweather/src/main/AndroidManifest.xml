@@ -24,7 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".fiveidiotservice"/>
+        <service android:name=".fiveidiotservice">
+            <intent-filter>
+                <action android:name="com.wisape.fiveidiotweather.fiveidiotservice"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
