@@ -2,28 +2,37 @@ package com.wisape.fiveidiotweather;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.logging.Handler;
 
 /**
  * Created by wisape on 13-9-21.
  */
 public class fiveidiotservice extends Service {
-
+    private fiveidiotdb db = null;
+    private Handler mHandler = null;
     public IBinder onBind(Intent intent) {
-        return null;
+        return new fiBinder();
+    }
+
+    public class fiBinder extends Binder {
+        fiveidiotservice getService() {
+            return fiveidiotservice.this;
+        }
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        db = new fiveidiotdb(this);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        final fiveidiotdb db = new fiveidiotdb(this);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -48,4 +57,10 @@ public class fiveidiotservice extends Service {
         }).start();
         return super.onStartCommand(intent, flags, startId);
     }
+
+    public void setHandler(Handler handler) {
+        mHandler = handler;
+    }
+
+
 }

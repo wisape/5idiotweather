@@ -1,28 +1,65 @@
 package com.wisape.fiveidiotweather;
 
+import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class fiveidiot extends Activity {
-    String texts = null;
-    TextView text = null;
+    private TextView text = null;
+    private ServiceConnection sconn;
+    private fiveidiotservice fs;
+    private Handler mHandler = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text = (TextView)findViewById(R.id.text);
-        Intent it = new Intent("com.wisape.fiveidiotweather.fiveidiotservice");
-        startService(it);
-        //mythread th = new mythread();
-        //th.start();
-    }
+        mHandler = new Handler() {
+            @Override
+            public void close() {
 
+            }
+
+            @Override
+            public void flush() {
+
+            }
+
+            @Override
+            public void publish(LogRecord logRecord) {
+
+            }
+        };
+        sconn = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                fs = ((fiveidiotservice.fiBinder)iBinder).getService();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+
+            }
+        };
+
+        Intent it = new Intent("com.wisape.fiveidiotweather.fiveidiotservice");
+        bindService(it, sconn, Context.BIND_AUTO_CREATE);
+
+        fs.setHandler(mHandler);
+        startService(it);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -31,40 +68,9 @@ public class fiveidiot extends Activity {
         return true;
     }
 
-    class mythread extends Thread {
-        @Override
-        public synchronized void start() {
-            super.start();
-        }
-
-        @Override
-        public void run() {
-            super.run();
-            fiveidiotnet net = new fiveidiotnet("http://m.weather.com.cn/data/101110101.html");
-            while (true) {
-            try {
-                texts = net.getContext();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            if(texts != null) {
-                //Log.d("5sha", texts);
-                fiveidiotanalyze an = new fiveidiotanalyze(texts);
-                String[] abc = an.get_weathers();
-                if (null != abc) {
-                    Log.d("5sha", abc[3]);
-                    text.setText(abc[5]);
-                } else
-                    Log.d("5sha", "no city info");
-            }
-            try {
-                sleep(100000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            }
-        }
+    @Override
+    protected void onStop() {
+        unbindService(sconn);
+        super.onStop();
     }
-    
 }
