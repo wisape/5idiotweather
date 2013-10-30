@@ -7,45 +7,40 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.IBinder;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.Menu;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
+
 
 public class fiveidiot extends Activity {
     private TextView text = null;
     private ServiceConnection sconn;
     private fiveidiotservice fs;
-    private Handler mHandler = null;
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    text.setText(msg.getData().getString("date"));
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         text = (TextView)findViewById(R.id.text);
-        mHandler = new Handler() {
-            @Override
-            public void close() {
 
-            }
-
-            @Override
-            public void flush() {
-
-            }
-
-            @Override
-            public void publish(LogRecord logRecord) {
-
-            }
-        };
         sconn = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 fs = ((fiveidiotservice.fiBinder)iBinder).getService();
+                fs.setHandler(mHandler);
             }
 
             @Override
@@ -54,11 +49,11 @@ public class fiveidiot extends Activity {
             }
         };
 
-        Intent it = new Intent("com.wisape.fiveidiotweather.fiveidiotservice");
+        Intent it = new Intent(this, fiveidiotservice.class);
+        //startService(it);
         bindService(it, sconn, Context.BIND_AUTO_CREATE);
-
-        fs.setHandler(mHandler);
         startService(it);
+
     }
 
     @Override
@@ -73,4 +68,5 @@ public class fiveidiot extends Activity {
         unbindService(sconn);
         super.onStop();
     }
+
 }

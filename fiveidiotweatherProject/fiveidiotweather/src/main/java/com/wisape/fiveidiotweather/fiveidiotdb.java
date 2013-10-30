@@ -14,40 +14,38 @@ import android.util.Log;
 public class fiveidiotdb {
     private SQLiteDatabase db = null;
     private static final String DB_NAME = "fiveidiot";
+    private static final String NAME = "name";
+    private static final String VALUE = "value";
     public fiveidiotdb(Context context) {
         fiveidiotdbhelper dbhelper = new fiveidiotdbhelper(context, DB_NAME , null, 1);
         db = dbhelper.getWritableDatabase();
     }
 
     public void insert(String key, String vlaue) {
-        Log.d("5sha", "insert1");
         ContentValues cv = new ContentValues();
-        Log.d("5sha", "insert1");
 //        Cursor cursor = query(key);
-//        Log.d("5sha", "insert3");
 //        if (cursor.getCount() > 0) {
-//            Log.d("5sha", "insert4");
 //            update(key, vlaue);
 //        } else {
-            Log.d("5sha", "insert5");
-            cv.put(key, vlaue);
+            cv.put(NAME, key);
+            cv.put(VALUE, vlaue);
             db.insert(DB_NAME, null, cv);
-        Log.d("5sha", "insert6");
-       // }
+//        }
+//        cursor.close();
     }
 
     public int update(String key, String value) {
         ContentValues cv = new ContentValues();
-        cv.put(key, value);
-        return db.update(DB_NAME, cv, "name = ?", new String[]{key});
+        cv.put(VALUE, value);
+        return db.update(DB_NAME, cv,  NAME +" = ?", new String[]{key});
     }
 
     public int delete(String key) {
-        return db.delete(DB_NAME, "name = ?", new String[]{key});
+        return db.delete(DB_NAME, NAME +" = ?", new String[]{key});
     }
 
     public Cursor query(String key) {
-        return db.query(DB_NAME, null, "name = ?", new String[]{key}, null, null, null);
+        return db.query(DB_NAME, null,  NAME +" = ?", new String[]{key}, null, null, null);
     }
 
     public String getvalue(String key) {
@@ -70,7 +68,7 @@ public class fiveidiotdb {
 
         @Override
         public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+            String sql = "create table "+ DB_NAME +" ( "+ NAME +" , "+ VALUE +"  );";
         }
 
         @Override

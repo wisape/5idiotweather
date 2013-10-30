@@ -3,11 +3,13 @@ package com.wisape.fiveidiotweather;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import java.io.IOException;
-import java.util.logging.Handler;
 
 /**
  * Created by wisape on 13-9-21.
@@ -50,8 +52,15 @@ public class fiveidiotservice extends Service {
                         db.insert("data", wt_an.get_date());
                         String[] weather = wt_an.get_weathers();
                         db.insert("weather0", weather[0]);
+                        Message message = new Message();
+                        Bundle bundle = new Bundle();
+                        message.what = 1;
+                        bundle.putString("date", wt_an.get_date());
+                        message.setData(bundle);
+                        mHandler.sendMessage(message);
                         Log.d("5sha", "save in the database");
                     }
+
                 }
             }
         }).start();
