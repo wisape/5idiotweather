@@ -57,8 +57,8 @@ public class fiveidiotservice extends Service {
                         message.what = 1;
                         bundle.putString("date", wt_an.get_date());
                         message.setData(bundle);
-                        mHandler.sendMessage(message);
-                        Log.d("5sha", "save in the database");
+                        if (mHandler != null)
+                            mHandler.sendMessage(message);
                     }
 
                 }
