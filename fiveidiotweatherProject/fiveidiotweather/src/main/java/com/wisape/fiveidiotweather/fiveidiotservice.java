@@ -49,20 +49,22 @@ public class fiveidiotservice extends Service {
                     if (wt_content != null) {
                         fiveidiotanalyze wt_an = new fiveidiotanalyze(wt_content);
                         db.insert("city", wt_an.get_city());
-                        db.insert("data", wt_an.get_date());
+                        db.insert("date", wt_an.get_date());
                         String[] weather = wt_an.get_weathers();
                         db.insert("weather0", weather[0]);
-                        Message message = new Message();
-                        Bundle bundle = new Bundle();
-                        message.what = 1;
-                        bundle.putString("date", wt_an.get_date());
-                        message.setData(bundle);
-                        if (mHandler != null)
-                            mHandler.sendMessage(message);
+//                        Message message = new Message();
+//                        Bundle bundle = new Bundle();
+//                        message.what = 1;
+//                        bundle.putString("date", db.getvalue("date"));
+//                        message.setData(bundle);
+//                        if (mHandler != null)
+//                            mHandler.sendMessage(message);
                     }
 
                 }
             }
+
+
         }).start();
         return super.onStartCommand(intent, flags, startId);
     }

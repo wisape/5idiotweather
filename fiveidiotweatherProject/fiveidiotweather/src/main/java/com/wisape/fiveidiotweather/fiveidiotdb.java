@@ -13,13 +13,15 @@ import android.util.Log;
 
 public class fiveidiotdb {
     private SQLiteDatabase db = null;
+    private SQLiteDatabase db_r = null;
     private static final String DB_NAME = "fiveidiot";
     private static final String TABLE_NAME = "weather";
     private static final String NAME = "name";
     private static final String VALUE = "value";
-    public fiveidiotdb(Context context) {
+    public fiveidiotdb(Context context ) {
         fiveidiotdbhelper dbhelper = new fiveidiotdbhelper(context, DB_NAME , null, 1);
         db = dbhelper.getWritableDatabase();
+        db_r = dbhelper.getReadableDatabase();
         db.execSQL("create table if not exists "+ TABLE_NAME +" ( "+ NAME +" TEXT, "+ VALUE +"  TEXT);");
     }
 
@@ -50,12 +52,16 @@ public class fiveidiotdb {
     }
 
     public String getvalue(String key) {
+        String tvalue = null;
         Cursor cursor = query(key);
 
-        if (cursor.getCount() > 0)
-            return cursor.getString(0);
-        else
-            return null;
+        if (cursor.getCount() > 0) {
+            for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
+                tvalue = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));
+            }
+        }
+        cursor.close();
+        return tvalue;
     }
 
     /**
