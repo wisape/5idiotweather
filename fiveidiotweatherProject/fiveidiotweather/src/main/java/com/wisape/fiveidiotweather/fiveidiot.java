@@ -13,12 +13,10 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.util.Log;
 
-
-
 public class fiveidiot extends Activity {
     private TextView text = null;
-    private ServiceConnection sconn;
-    private fiveidiotservice fs;
+    private ServiceConnection sconn = null;
+    private fiveidiotservice fs = null;
     private InterThread interthread = null;
     private Handler mHandler = new Handler() {
         @Override
@@ -46,7 +44,6 @@ public class fiveidiot extends Activity {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 fs = ((fiveidiotservice.fiBinder)iBinder).getService();
-                fs.setHandler(mHandler);
             }
 
             @Override
@@ -55,10 +52,7 @@ public class fiveidiot extends Activity {
             }
         };
 
-        Intent it = new Intent(this, fiveidiotservice.class);
-        //startService(it);
-//        bindService(it, sconn, Context.BIND_AUTO_CREATE);
-        startService(it);
+        start_weather_service("http://m.weather.com.cn/data/101110101.html");
         interthread = new InterThread(mHandler);
         interthread.run();
 
@@ -86,9 +80,7 @@ public class fiveidiot extends Activity {
         @Override
         public void run() {
             fiveidiotdb db = new fiveidiotdb(fiveidiot.this);
-            Log.d("5sha", "In thread");
             while (true) {
-                Log.d("5sha", "In thread while");
                 Message message = new Message();
                 Bundle bundle = new Bundle();
                 try {
@@ -103,13 +95,21 @@ public class fiveidiot extends Activity {
                 message.what = 1;
                 if (inhandler != null) {
                     inhandler.sendMessage(message);
-                    Log.d("5sha", "Send Message");
-                    Log.d("5sha", db.getvalue("city"));
-                    Log.d("5sha", db.getvalue("date"));
-                    Log.d("5sha", db.getvalue("weather0"));
+//                    Log.d("5sha", "Send Message");
+//                    Log.d("5sha", db.getvalue("city"));
+//                    Log.d("5sha", db.getvalue("date"));
+//                    Log.d("5sha", db.getvalue("weather0"));
                 }
             }
         }
+    }
+
+    private void start_weather_service(String wpath)
+    {
+        Intent it = new Intent(this, fiveidiotservice.class);
+        bindService(it, sconn, Context.BIND_AUTO_CREATE);
+        it.putExtra("weather_path", wpath);
+        startService(it);
     }
 
 }
