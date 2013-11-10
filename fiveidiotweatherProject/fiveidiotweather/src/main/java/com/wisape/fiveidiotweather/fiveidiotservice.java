@@ -61,7 +61,15 @@ public class fiveidiotservice extends Service {
                         db.insert("city", wt_an.get_city());
                         db.insert("date", wt_an.get_date());
                         String[] weather = wt_an.get_weathers();
-                        db.insert("weather0", weather[0]);
+                        String[] temp = wt_an.get_temps();
+                        String[] wind = wt_an.get_winds();
+                        String[] image = wt_an.get_images();
+                        for (int i = 0; i < weather.length; i++) {
+                            db.insert("weather" + i, weather[i]);
+                            db.insert("temp" + i, temp[i]);
+                            db.insert("wind" + i, wind[i]);
+                            db.insert("image" + i, image[i]);
+                        }
                         Log.d("5sha", wt_an.get_city());
                     }
                     try {

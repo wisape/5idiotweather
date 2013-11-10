@@ -1,5 +1,6 @@
 package com.wisape.fiveidiotweather;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +22,9 @@ public class fiveidiot extends FragmentActivity {
         MainFragment mainFragment = new MainFragment();
         fragmentTransaction.add(R.id.main_activity, mainFragment);
         fragmentTransaction.commit();
+        Intent intent = new Intent(this, fiveidiotservice.class);
+        intent.putExtra("weather_path", "http://m.weather.com.cn/data/101110101.html");
+        startService(intent);
 
     }
 

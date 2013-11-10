@@ -134,6 +134,23 @@ public class fiveidiotanalyze {
         return wind;
     }
 
+    public String [] get_images() {
+        String wind[] = new String[6];
+        if (null != json_object) {
+            try {
+                wind[0] = json_object.getString("img_title1");
+                wind[1] = json_object.getString("img_title2");
+                wind[2] = json_object.getString("img_title3");
+                wind[3] = json_object.getString("img_title4");
+                wind[4] = json_object.getString("img_title5");
+                wind[5] = json_object.getString("img_title6");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return wind;
+    }
+
     public String[] get_cy() {
         String cy[] = new String[4];
         if (null != json_object) {
