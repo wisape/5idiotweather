@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 
 /**
  * Created by wisape on 13-11-5.
@@ -25,6 +26,7 @@ public class fiveidiot extends FragmentActivity {
         Intent intent = new Intent(this, fiveidiotservice.class);
         intent.putExtra("weather_path", "http://m.weather.com.cn/data/101110101.html");
         startService(intent);
+        Log.d("5sha", "weather" + (2 + 1));
 
     }
 

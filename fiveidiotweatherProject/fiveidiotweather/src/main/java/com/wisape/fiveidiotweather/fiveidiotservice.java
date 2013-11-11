@@ -60,6 +60,15 @@ public class fiveidiotservice extends Service {
                         fiveidiotanalyze wt_an = new fiveidiotanalyze(wt_content);
                         db.insert("city", wt_an.get_city());
                         db.insert("date", wt_an.get_date());
+                        db.insert("week", wt_an.get_week());
+                        db.insert("dress", wt_an.get_dress()[0]);
+                        db.insert("dress_d", wt_an.get_dress()[1]);
+                        db.insert("chenlian", wt_an.get_cl());
+                        db.insert("washcar", wt_an.get_xc());
+                        db.insert("suncure", wt_an.get_ls());
+                        db.insert("uv", wt_an.get_uv());
+                        db.insert("travel", wt_an.get_tr());
+                        db.insert("allergy", wt_an.get_gm());
                         String[] weather = wt_an.get_weathers();
                         String[] temp = wt_an.get_temps();
                         String[] wind = wt_an.get_winds();
@@ -68,7 +77,8 @@ public class fiveidiotservice extends Service {
                             db.insert("weather" + i, weather[i]);
                             db.insert("temp" + i, temp[i]);
                             db.insert("wind" + i, wind[i]);
-                            db.insert("image" + i, image[i]);
+                            db.insert("image" + i, image[i * 2]);
+                            db.insert("image_n" + i, image[i * 2 + 1]);
                         }
                         Log.d("5sha", wt_an.get_city());
                     }

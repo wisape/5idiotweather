@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,8 @@ import java.util.Map;
  */
 public class fiveidiotreaddb {
     private SQLiteOpenHelper dbhelper = null;
-    public static final String[] DEF_PROPS = {"city", "date", "week","temp", "weather", "image", "wind"};
-    public static final String[] SMP_PROPS = {"image", "temp", "weather", "wind"};
+    public static final String[] DEF_PROPS = {"city", "date", "week", "uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
+    public static final String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind"};
     private static final String DB_NAME = "fiveidiot";
     private static final String TABLE_NAME = "weather";
     private static final String NAME = "name";
@@ -57,9 +58,26 @@ public class fiveidiotreaddb {
         return value;
     }
 
-    List<Map<String, Object>> getAdapterData() {
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+    Map<String, Object> getDetailAdapterData() {
+        HashMap<String, Object> map = new HashMap<String, Object>();
 
+        for (int i = 0; i < DEF_PROPS.length; i++) {
+            map.put(DEF_PROPS[i], getvalue(DEF_PROPS[i]));
+        }
+
+        return map;
+    }
+
+    List<Map<String, Object>> getSimpleAdapterData() {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        HashMap<String, Object> map = null;
+        for (int i = 0; i < 6; i++) {
+            map = new HashMap<String, Object>();
+            for (int j = 0; j < SMP_PROPS.length; j++) {
+                map.put(SMP_PROPS[j], getvalue(SMP_PROPS[j] + i));
+            }
+            list.add(map);
+        }
         return  list;
     }
 }
