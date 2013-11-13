@@ -1,10 +1,13 @@
 package com.wisape.fiveidiotweather;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,20 +27,23 @@ import java.util.List;
 public class MainFragment extends ListFragment {
     TextView titleView;
     SimpleAdapter adapter = null;
+    ViewPager viewPager;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        titleView = (TextView) findViewById(R.id.main_title);
-//        titleView.setText("西安");
         adapter = new SimpleAdapter(getActivity(), getData(),
                 R.layout.meta_fragment, new String[]{"image", "title", "detail"},
                 new int[]{R.id.imageView, R.id.title, R.id.detail});
         setListAdapter(adapter);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.main_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.main_fragment, container, false);
+
+        ((TextView) rootView.findViewById(R.id.main_title)).setText("西安");
+        return rootView;
     }
 
     private List<Map<String, Object>> getData() {
@@ -56,12 +62,16 @@ public class MainFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        SubFragment subFragment = new SubFragment();
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.replace(R.id.main_activity, subFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        SubFragment subFragment = new SubFragment();
+//        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//        fragmentTransaction.replace(R.id.main_activity, subFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+        Intent it = new Intent(getActivity(), fiveidiotdetail.class);
+        startActivity(it);
+
     }
+
 }
