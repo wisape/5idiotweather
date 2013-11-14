@@ -12,5 +12,10 @@
             android:layout_gravity="center"
             android:text="Title"
             android:textSize="50sp"/>
+    <TextView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:textSize="70sp"
+            android:text="正文"/>
 
 </LinearLayout>

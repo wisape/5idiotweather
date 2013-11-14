@@ -1,5 +1,6 @@
 package com.wisape.fiveidiotweather;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,7 @@ public class MainFragment extends ListFragment {
     TextView titleView;
     SimpleAdapter adapter = null;
     ViewPager viewPager;
+    OnMainChangeFragment mCallback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,12 @@ public class MainFragment extends ListFragment {
         return rootView;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mCallback = (OnMainChangeFragment) activity;
+    }
+
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         HashMap<String, Object> map = null;
@@ -62,16 +70,11 @@ public class MainFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        SubFragment subFragment = new SubFragment();
-//        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//        fragmentTransaction.replace(R.id.main_activity, subFragment);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
-        Intent it = new Intent(getActivity(), fiveidiotdetail.class);
-        startActivity(it);
+        mCallback.onMainFragmentClicked(position);
+    }
 
+    public interface OnMainChangeFragment {
+        public void onMainFragmentClicked(int position);
     }
 
 }
