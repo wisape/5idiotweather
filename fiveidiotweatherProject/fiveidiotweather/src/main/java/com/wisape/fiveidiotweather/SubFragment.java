@@ -12,6 +12,7 @@ import android.widget.TextView;
  * Created by wisape on 13-11-5.
  */
 public class SubFragment extends Fragment {
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

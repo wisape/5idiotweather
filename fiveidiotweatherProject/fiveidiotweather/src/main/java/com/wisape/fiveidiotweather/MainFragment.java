@@ -26,9 +26,7 @@ import java.util.List;
  */
 
 public class MainFragment extends ListFragment {
-    TextView titleView;
     SimpleAdapter adapter = null;
-    ViewPager viewPager;
     OnMainChangeFragment mCallback;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,11 +68,11 @@ public class MainFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        mCallback.onMainFragmentClicked(position);
+        mCallback.onMainFragmentClicked(this, position);
     }
+
 
     public interface OnMainChangeFragment {
-        public void onMainFragmentClicked(int position);
+        public void onMainFragmentClicked(Fragment fragment, int position);
     }
-
 }
