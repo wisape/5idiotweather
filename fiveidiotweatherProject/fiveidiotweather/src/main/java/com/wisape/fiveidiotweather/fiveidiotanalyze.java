@@ -11,6 +11,7 @@ import org.json.JSONObject;
 public class fiveidiotanalyze {
     private String weather_info = null;
     private JSONObject json_object = null;
+    private String[] WEEKS = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日",};
     /**
      *{"weatherinfo":{"city":"西安","city_en":"xian","date_y":"2013年9月26日",
      * "date":"","week":"星期四","fchh":"18","cityid":"101110101","temp1":"14℃~26℃",
@@ -71,16 +72,38 @@ public class fiveidiotanalyze {
         }
         return date;
     }
-    public String get_week() {
-        String week = null;
+
+    public String get_nowtemp() {
+        String fchh = null;
         if (null != json_object) {
             try {
-                week = json_object.getString("week");
+                fchh = json_object.getString("fchh");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
-        return week;
+        return fchh;
+    }
+    public String[] get_week() {
+        String weeks[] = new String[6];
+        String week = null;
+        int i = 0;
+        if (null != json_object) {
+            try {
+                week = json_object.getString("week");
+                for (i = 0; i < WEEKS.length; i++) {
+                    if (week == WEEKS[i]) {
+                       break;
+                    }
+                }
+                for (int j = 0; j < 6; j++) {
+                    weeks[j] = WEEKS[(i + j) % 7];
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return weeks;
     }
 
     public String [] get_temps() {
@@ -90,12 +113,6 @@ public class fiveidiotanalyze {
                 for (int i = 0; i < 6; i++) {
                     temp[i] = json_object.getString("temp" + (i + 1));
                 }
-//                temp[0] = json_object.getString("temp1");
-//                temp[1] = json_object.getString("temp2");
-//                temp[2] = json_object.getString("temp3");
-//                temp[3] = json_object.getString("temp4");
-//                temp[4] = json_object.getString("temp5");
-//                temp[5] = json_object.getString("temp6");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -111,12 +128,6 @@ public class fiveidiotanalyze {
                     weather[i] = json_object.getString("weather" + (i + 1));
                 }
 
-//                weather[0] = json_object.getString("weather1");
-//                weather[1] = json_object.getString("weather2");
-//                weather[2] = json_object.getString("weather3");
-//                weather[3] = json_object.getString("weather4");
-//                weather[4] = json_object.getString("weather5");
-//                weather[5] = json_object.getString("weather6");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -131,12 +142,6 @@ public class fiveidiotanalyze {
                 for (int i = 0; i < 6; i++) {
                     wind[i] = json_object.getString("wind" + (i + 1));
                 }
-//                wind[0] = json_object.getString("wind1");
-//                wind[1] = json_object.getString("wind2");
-//                wind[2] = json_object.getString("wind3");
-//                wind[3] = json_object.getString("wind4");
-//                wind[4] = json_object.getString("wind5");
-//                wind[5] = json_object.getString("wind6");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -151,12 +156,6 @@ public class fiveidiotanalyze {
                 for (int i = 0; i < 12; i++) {
                     image[i] = json_object.getString("img_title" + (i + 1));
                 }
-//                wind[0] = json_object.getString("img_title1");
-//                wind[1] = json_object.getString("img_title2");
-//                wind[2] = json_object.getString("img_title3");
-//                wind[3] = json_object.getString("img_title4");
-//                wind[4] = json_object.getString("img_title5");
-//                wind[5] = json_object.getString("img_title6");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -16,8 +16,9 @@ import java.util.Map;
  */
 public class fiveidiotreaddb {
     private SQLiteOpenHelper dbhelper = null;
-    public static final String[] DEF_PROPS = {"city", "date", "week", "uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
-    public static final String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind"};
+    public static final String[] TODAY_PROPS = {"city", "date", "nowtemp"};
+    public static final String[] DEF_PROPS = {"uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
+    public static final String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
     private static final String DB_NAME = "fiveidiot";
     private static final String TABLE_NAME = "weather";
     private static final String NAME = "name";
@@ -35,15 +36,14 @@ public class fiveidiotreaddb {
 
             }
         };
-
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
-
-        db.close();
+//
+//        SQLiteDatabase db = dbhelper.getReadableDatabase();
+//
+//        db.close();
     }
 
-    private String getvalue(String key) {
+    private String getvalue(SQLiteDatabase db, String key) {
         String value = null;
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME, null, NAME + " = ?", new String[]{key}, null, null, null);
 
@@ -53,31 +53,50 @@ public class fiveidiotreaddb {
             }
         }
         cursor.close();
-        db.close();
 
         return value;
     }
 
-    Map<String, Object> getDetailAdapterData() {
+    public Map<String, Object> getTodayDetailMapData() {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
         HashMap<String, Object> map = new HashMap<String, Object>();
 
         for (int i = 0; i < DEF_PROPS.length; i++) {
-            map.put(DEF_PROPS[i], getvalue(DEF_PROPS[i]));
+            map.put(DEF_PROPS[i], getvalue(db, DEF_PROPS[i]));
         }
-
+        db.close();
         return map;
     }
 
-    List<Map<String, Object>> getSimpleAdapterData() {
+    private List<Map<String, Object>> getBriefAdapterData() {
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         HashMap<String, Object> map = null;
         for (int i = 0; i < 6; i++) {
             map = new HashMap<String, Object>();
             for (int j = 0; j < SMP_PROPS.length; j++) {
-                map.put(SMP_PROPS[j], getvalue(SMP_PROPS[j] + i));
+                map.put(SMP_PROPS[j], getvalue(db, SMP_PROPS[j] + i));
             }
             list.add(map);
         }
+        db.close();
         return  list;
+    }
+
+    public Map<String, Object> getTodayBriefMapData() {
+        Map<String, Object> map = getBriefAdapterData().get(0);
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+
+        for (int i = 0; i < TODAY_PROPS.length; i++) {
+            map.put(TODAY_PROPS[i], getvalue(db, TODAY_PROPS[i]));
+        }
+
+        db.close();
+        return map;
+    }
+
+    public List<Map<String, Object>> getAfterBriefAdapterData() {
+        List<Map<String, Object>> list = getBriefAdapterData();
+        return list.subList(1, list.size());
     }
 }

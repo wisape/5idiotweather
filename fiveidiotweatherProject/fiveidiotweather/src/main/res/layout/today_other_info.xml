@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:stretchColumns="0,2,3"
+            android:layout_margin="10dp">
+
+        <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="@dimen/small_size"
+                    android:text="过敏:"
+                    android:gravity="right"
+                    android:layout_column="0"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/default_state"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="left"
+                    android:id="@+id/allergy"
+                    android:layout_column="0"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textSize="@dimen/small_size"
+                    android:text="紫外线:"
+                    android:gravity="right"
+                    android:layout_column="0"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/default_state"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="left"
+                    android:id="@+id/uv"
+                    android:layout_column="1"/>
+        </TableRow>
+
+        <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="旅行:"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="right"
+                    android:layout_column="0"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/default_state"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="left"
+                    android:id="@+id/travel"
+                    android:layout_column="0"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="防晒:"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="right"
+                    android:layout_column="0"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/default_state"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="left"
+                    android:id="@+id/sucare"
+                    android:layout_column="1"/>
+        </TableRow>
+
+        <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="1">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="晨练:"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="right"
+                    android:layout_column="0"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/default_state"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="left"
+                    android:id="@+id/chenlian"
+                    android:layout_column="0"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="洗车:"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="right"
+                    android:layout_column="0"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/default_state"
+                    android:textSize="@dimen/small_size"
+                    android:gravity="left"
+                    android:id="@+id/washcar"
+                    android:layout_column="1"/>
+        </TableRow>
+
+    </TableLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_gravity="center">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/small_size"
+                android:text="穿衣建议："/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_margin="10dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="@dimen/small_size"
+                android:text="建议着长袖衫裤等服装。体弱者宜着长袖衫裤加马甲。昼夜温差较大，需适时增减衣服，避免感冒着凉"
+                android:id="@+id/index_d"/>
+    </LinearLayout>
+</LinearLayout>

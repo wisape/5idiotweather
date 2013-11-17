@@ -32,7 +32,7 @@ public class MainFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         adapter = new SimpleAdapter(getActivity(), getData(),
-                R.layout.meta_fragment, new String[]{"image", "title", "detail"},
+                R.layout.after_meta, new String[]{"image", "title", "detail"},
                 new int[]{R.id.imageView, R.id.title, R.id.detail});
         setListAdapter(adapter);
     }

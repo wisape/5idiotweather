@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#3333">
+    <TextView
+            android:id="@+id/sub_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:background="#2F7CBF"/>
+
+    <fragment android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:name="com.wisape.fiveidiotweather.fiveidiot_today_brief"
+              tools:layout="@layout/today_brief">
+    </fragment>
+
+    <!--spin the base weather information-->
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#2F7CBF"/>
+
+    <!--other information for weather-->
+
+    <fragment android:id="@+id/weather_other"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_weight="0.618"
+              android:name="com.wisape.fiveidiotweather.fiveidiot_after_brief"
+              tools:layout="@layout/after_brief">
+    </fragment>
+
+</LinearLayout>
