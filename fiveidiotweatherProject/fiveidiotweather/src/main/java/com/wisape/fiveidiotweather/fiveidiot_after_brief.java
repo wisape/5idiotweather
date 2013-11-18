@@ -20,7 +20,7 @@ public class fiveidiot_after_brief extends ListFragment {
         super.onCreate(savedInstanceState);
         readdb = new fiveidiotreaddb(getActivity());
         adapter = new SimpleAdapter(getActivity(), readdb.getAfterBriefAdapterData(),
-                R.layout.after_brief, new String[]{"image", "weather",
+                R.layout.after_meta, new String[]{"image", "weather",
                 "temp", "wind", "week", "date"},
                 new int[]{R.id.after_image, R.id.weather_d, R.id.temp_d,
                 R.id.wind_d, R.id.week_d, R.id.data_d});
@@ -30,7 +30,7 @@ public class fiveidiot_after_brief extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.main_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.after_brief, container, false);
         return rootView;
     }
 

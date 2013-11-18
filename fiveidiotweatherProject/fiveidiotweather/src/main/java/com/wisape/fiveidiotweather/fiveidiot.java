@@ -88,7 +88,7 @@ public class fiveidiot extends FragmentActivity implements MainFragment.OnMainCh
 
         @Override
         public Fragment getItem(int i) {
-            Fragment fragment = new MainFragment();
+            Fragment fragment = new fiveidiot_main_fragment();
 
             return fragment;
         }
