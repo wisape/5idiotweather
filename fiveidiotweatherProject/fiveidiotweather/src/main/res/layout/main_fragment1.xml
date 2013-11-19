@@ -2,25 +2,16 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
               android:background="#ffffff">
-    <TextView
-            android:id="@+id/sub_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="30sp"
-            android:background="#2F7CBF"/>
 
     <FrameLayout android:id="@+id/today_brief"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:layout_margin="10dp"
               android:background="#999"
-              android:layout_weight="1"/>
->
+              android:layout_weight="0.4"/>
 
     <!--spin the base weather information-->
     <View

@@ -11,7 +11,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="30sp"
+            android:textSize="30dp"
             android:background="#2F7CBF"/>
 
     <LinearLayout
@@ -22,96 +22,114 @@
             android:layout_gravity="center">
 
         <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.9"
+                android:layout_weight="0.5"
                 android:layout_gravity="center">
 
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:layout_height="wrap_content">
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textSize="@dimen/large_size"
-                        android:text="30℃"
-                        android:id="@+id/week_d"/>
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="@dimen/meida_size"
-                        android:text="星期"
-                        android:id="@+id/week_d"/>
-
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_margin="5dp"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="@dimen/small_size"
-                        android:text="日期"
-                        android:id="@+id/data_d"/>
-
-
-            </LinearLayout>
-
-            <ImageView
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.618"
-                    android:id="@+id/weather_image_d"
-                    android:src="@drawable/ic_launcher"
-                    android:layout_gravity="center"/>
+                    android:layout_weight="0.2"
+                    android:layout_gravity="center">
 
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_gravity="center_vertical"
-                    android:layout_height="wrap_content">
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.6"
+                            android:layout_gravity="center">
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:layout_marginBottom="30dp"
+                                android:layout_weight="1"
+                                android:textSize="@dimen/large_size"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:text="上海"
+                                android:id="@+id/city"/>
 
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.4"
+                            android:id="@+id/today_image"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_launcher"/>
+                    </LinearLayout>
 
-                <TextView
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="top"
+                            android:layout_weight="1"
+                            android:layout_gravity="center">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:gravity="top"
+                                android:layout_gravity="center"
+                                android:textAppearance="?android:attr/textAppearanceLarge"
+                                android:textSize="45dp"
+                                android:text="30℃"
+                                android:id="@+id/date"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="20dp"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textSize="@dimen/meida_size"
+                                android:text="多云转晴"
+                                android:id="@+id/weather"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textSize="@dimen/meida_size"
+                                android:text="10℃~20℃"
+                                android:id="@+id/temp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textSize="@dimen/meida_size"
-                        android:text="天气"
-                        android:id="@+id/weather_d"/>
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center">
 
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_margin="5dp"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textSize="@dimen/meida_size"
-                        android:text="温度"
-                        android:id="@+id/temp_d"/>
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textSize="@dimen/small_size"
-                        android:text="风"
-                        android:id="@+id/wind_d"/>
-            </LinearLayout>
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:layout_weight="0.7"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="2013年11月20日"
+                            android:id="@+id/date"/>
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="星期一"
+                            android:id="@+id/week"/>
+                </LinearLayout>
+
+
         </LinearLayout>
 
         <!--spin the base weather information-->
+
         <View
                 android:layout_width="match_parent"
                 android:layout_height="2px"
@@ -119,173 +137,353 @@
 
         <!--other information for weather-->
 
-        <TableLayout
+        <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:stretchColumns="0,2,3"
-                android:layout_margin="10dp">
+                android:layout_weight="1.1"
+                android:layout_gravity="center">
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_weight="1">
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="@dimen/small_size"
-                    android:text="过敏:"
-                    android:gravity="right"
-                    android:layout_column="0"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/default_state"
-                    android:textSize="@dimen/small_size"
-                    android:gravity="left"
-                    android:id="@+id/allergy"
-                    android:layout_column="0"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="@dimen/small_size"
-                    android:text="紫外线:"
-                    android:gravity="right"
-                    android:layout_column="0"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/default_state"
-                    android:textSize="@dimen/small_size"
-                    android:gravity="left"
-                    android:id="@+id/uv"
-                    android:layout_column="1"/>
-        </TableRow>
-
-            <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="1">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="旅行:"
-                        android:textSize="@dimen/small_size"
-                        android:gravity="right"
-                        android:layout_column="0"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/default_state"
-                        android:textSize="@dimen/small_size"
-                        android:gravity="left"
-                        android:id="@+id/travel"
-                        android:layout_column="0"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="防晒:"
-                        android:textSize="@dimen/small_size"
-                        android:gravity="right"
-                        android:layout_column="0"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/default_state"
-                        android:textSize="@dimen/small_size"
-                        android:gravity="left"
-                        android:id="@+id/sucare"
-                        android:layout_column="1"/>
-            </TableRow>
-
-            <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_weight="1">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="晨练:"
-                        android:textSize="@dimen/small_size"
-                        android:gravity="right"
-                        android:layout_column="0"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/default_state"
-                        android:textSize="@dimen/small_size"
-                        android:gravity="left"
-                        android:id="@+id/chenlian"
-                        android:layout_column="0"/>
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="洗车:"
-                        android:textSize="@dimen/small_size"
-                        android:gravity="right"
-                        android:layout_column="0"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/default_state"
-                        android:textSize="@dimen/small_size"
-                        android:gravity="left"
-                        android:id="@+id/washcar"
-                        android:layout_column="1"/>
-            </TableRow>
-
-        </TableLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:layout_gravity="center">
-
-            <TextView
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="@dimen/small_size"
-                    android:text="穿衣建议："/>
-
-            <TextView
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="星期一"
+                        android:id="@+id/week_1"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
+                        android:id="@+id/image_1"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="多云转晴"
+                        android:id="@+id/weather_1"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="10℃~20℃"
+                        android:id="@+id/temp_1"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:layout_margin="10dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="@dimen/small_size"
-                    android:text="建议着长袖衫裤等服装。体弱者宜着长袖衫裤加马甲。昼夜温差较大，需适时增减衣服，避免感冒着凉"
-                    android:id="@+id/index_d"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="星期一"
+                        android:id="@+id/week_2"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
+                        android:id="@+id/image_2"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="多云转晴"
+                        android:id="@+id/weather_2"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="10℃~20℃"
+                        android:id="@+id/temp_2"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="星期一"
+                        android:id="@+id/week_3"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
+                        android:id="@+id/image_3"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="多云转晴"
+                        android:id="@+id/weather_3"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="10℃~20℃"
+                        android:id="@+id/temp_3"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="星期一"
+                        android:id="@+id/week_4"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
+                        android:id="@+id/image_4"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="多云转晴"
+                        android:id="@+id/weather_4"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="10℃~20℃"
+                        android:id="@+id/temp_4"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="星期一"
+                        android:id="@+id/week_5"/>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.4"
+                        android:id="@+id/image_5"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="多云转晴"
+                        android:id="@+id/weather_5"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:text="10℃~20℃"
+                        android:id="@+id/temp_5"/>
+            </LinearLayout>
+
         </LinearLayout>
+
+        <!--<TableLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1.1"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:stretchColumns="0,2,3"-->
+                <!--android:layout_margin="5dp">-->
+
+            <!--<TableRow-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_weight="1">-->
+
+            <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:textSize="@dimen/small_size"-->
+                    <!--android:text="过敏:"-->
+                    <!--android:gravity="right"-->
+                    <!--android:layout_column="0"/>-->
+            <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:text="@string/default_state"-->
+                    <!--android:textSize="@dimen/small_size"-->
+                    <!--android:gravity="left"-->
+                    <!--android:id="@+id/allergy"-->
+                    <!--android:layout_column="0"/>-->
+
+            <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:textSize="@dimen/small_size"-->
+                    <!--android:text="紫外线:"-->
+                    <!--android:gravity="right"-->
+                    <!--android:layout_column="0"/>-->
+            <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:text="@string/default_state"-->
+                    <!--android:textSize="@dimen/small_size"-->
+                    <!--android:gravity="left"-->
+                    <!--android:id="@+id/uv"-->
+                    <!--android:layout_column="1"/>-->
+        <!--</TableRow>-->
+
+            <!--<TableRow-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_weight="1">-->
+
+                <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                        <!--android:text="旅行:"-->
+                        <!--android:textSize="@dimen/small_size"-->
+                        <!--android:gravity="right"-->
+                        <!--android:layout_column="0"/>-->
+                <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                        <!--android:text="@string/default_state"-->
+                        <!--android:textSize="@dimen/small_size"-->
+                        <!--android:gravity="left"-->
+                        <!--android:id="@+id/travel"-->
+                        <!--android:layout_column="0"/>-->
+
+                <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                        <!--android:text="防晒:"-->
+                        <!--android:textSize="@dimen/small_size"-->
+                        <!--android:gravity="right"-->
+                        <!--android:layout_column="0"/>-->
+                <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                        <!--android:text="@string/default_state"-->
+                        <!--android:textSize="@dimen/small_size"-->
+                        <!--android:gravity="left"-->
+                        <!--android:id="@+id/sucare"-->
+                        <!--android:layout_column="1"/>-->
+            <!--</TableRow>-->
+
+            <!--<TableRow-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_weight="1">-->
+
+                <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                        <!--android:text="晨练:"-->
+                        <!--android:textSize="@dimen/small_size"-->
+                        <!--android:gravity="right"-->
+                        <!--android:layout_column="0"/>-->
+                <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                        <!--android:text="@string/default_state"-->
+                        <!--android:textSize="@dimen/small_size"-->
+                        <!--android:gravity="left"-->
+                        <!--android:id="@+id/chenlian"-->
+                        <!--android:layout_column="0"/>-->
+
+                <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                        <!--android:text="洗车:"-->
+                        <!--android:textSize="@dimen/small_size"-->
+                        <!--android:gravity="right"-->
+                        <!--android:layout_column="0"/>-->
+                <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                        <!--android:text="@string/default_state"-->
+                        <!--android:textSize="@dimen/small_size"-->
+                        <!--android:gravity="left"-->
+                        <!--android:id="@+id/washcar"-->
+                        <!--android:layout_column="1"/>-->
+            <!--</TableRow>-->
+
+        <!--</TableLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="center">-->
+
+            <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="left"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:textSize="@dimen/small_size"-->
+                    <!--android:text="穿衣建议："/>-->
+
+            <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="left"-->
+                    <!--android:layout_margin="10dp"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                    <!--android:textSize="@dimen/small_size"-->
+                    <!--android:text="建议着长袖衫裤等服装。体弱者宜着长袖衫裤加马甲。昼夜温差较大，需适时增减衣服，避免感冒着凉"-->
+                    <!--android:id="@+id/index_d"/>-->
+        <!--</LinearLayout>-->
     </LinearLayout>
 </LinearLayout>
