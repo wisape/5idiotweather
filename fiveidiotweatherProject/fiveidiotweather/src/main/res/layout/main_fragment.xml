@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:id="@+id/main_fragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff">
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-    <TextView
-            android:id="@+id/main_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textColor="#fff"
-            android:background="#2F7CBF"
-            android:textSize="30sp"/>
+    <FrameLayout android:id="@+id/today_brief"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="#999"
+        android:layout_weight="0.4"/>
 
-    <include layout="@layout/meta_fragment"/>
+    <!--spin the base weather information-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#2F7CBF"/>
 
-    <ListView
-            android:id="@id/android:list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="false"
-            android:background="#2F7CBF"></ListView>
-    </LinearLayout>
+    <!--other information for weather-->
 
-</FrameLayout>
+    <FrameLayout android:id="@+id/weather_other"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="#999"
+        android:layout_weight="0.618" />
+
+
+</LinearLayout>

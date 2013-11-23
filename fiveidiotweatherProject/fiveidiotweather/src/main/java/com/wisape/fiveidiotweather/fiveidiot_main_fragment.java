@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 
 /**
- * Created by wangjianmei on 13-11-17.
+ * Created by wisape on 13-11-17.
  */
 public class fiveidiot_main_fragment extends Fragment {
     @Override
@@ -28,7 +28,7 @@ public class fiveidiot_main_fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.main_fragment1, container, false);
+        View rootView = inflater.inflate(R.layout.main_fragment, container, false);
         return rootView;
     }
 }

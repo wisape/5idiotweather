@@ -1,28 +1,35 @@
 package com.wisape.fiveidiotweather;
 
 import android.content.Intent;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
-import android.app.Activity;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
-
-import java.util.List;
 
 /**
  * Created by wisape on 13-11-5.
  */
 
-public class fiveidiot extends FragmentActivity implements MainFragment.OnMainChangeFragment{
-    FragmentManager fragmentManager;
-    MainPagerAdapter mainPagerAdapter;
-    ViewPager viewPager;
+public class fiveidiot extends FragmentActivity {
+    private DrawerLayout slideLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private ListView menuList;
+    private String[] menuItems;
+    private FragmentManager fragmentManager;
+    private MainPagerAdapter mainPagerAdapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +40,35 @@ public class fiveidiot extends FragmentActivity implements MainFragment.OnMainCh
  */
         Intent intent = new Intent(this, fiveidiotservice.class);
         intent.putExtra("weather_path", "http://m.weather.com.cn/data/101110101.html");
-        startService(intent);
+        startService(intent); 
         Log.d("5sha", "weather" + (2 + 1));
+
+        slideLayout = (DrawerLayout) findViewById(R.id.slide_layout);
+        slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        menuList = (ListView) findViewById(R.id.menu_list);
+        menuItems = getResources().getStringArray(R.array.menu_array);
+
+        menuList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.menu_list_item, menuItems));
+        menuList.setOnItemClickListener(new MenuItemClickListener());
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+
+        mDrawerToggle = new ActionBarDrawerToggle(
+                this, slideLayout, R.drawable.ic_launcher,
+                R.string.slide_open, R.string.slide_close) {
+            public void onDrawerClosed(View view) {
+                getActionBar().setTitle(R.string.app_name);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                getActionBar().setTitle("设置");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        slideLayout.setDrawerListener(mDrawerToggle);
 
         fragmentManager = getSupportFragmentManager();
         mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
@@ -42,24 +76,10 @@ public class fiveidiot extends FragmentActivity implements MainFragment.OnMainCh
         viewPager.setAdapter(mainPagerAdapter);
     }
 
-    @Override
-    public void onMainFragmentClicked(Fragment fragment, int position) {
-        Log.d("5sha", "set sub Adapter");
-        SubFragment subFragment = new SubFragment();
-        FragmentManager fm = fragment.getChildFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.main_fragment, subFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-        int count = fragmentManager.getBackStackEntryCount();
-        Log.d("5sha", "pre count is " + count);
-    }
-
-    @Override
-    public void onBackPressed() {
-        Log.d("5sha", "back Adapter");
-        if (!popMainFragment(fragmentManager)) {
-            super.onBackPressed();
+    private class MenuItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            Toast.makeText(getApplicationContext(), "position is " + i, Toast.LENGTH_LONG).show();
         }
     }
 
