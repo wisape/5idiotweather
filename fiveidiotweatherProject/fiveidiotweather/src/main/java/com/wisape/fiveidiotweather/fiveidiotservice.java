@@ -4,16 +4,20 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by wisape on 13-9-21.
  */
 public class fiveidiotservice extends Service {
+    private final static String per_address = "http://m.weather.com.cn/data/";
+    private final static String suf_address = ".html";
+    private fiveidiot_citys mCitys;
     private fiveidiotdb db = null;
-    private String weather_path = null;
+    private ArrayList<String> city_ids;
+
     public IBinder onBind(Intent intent) {
         return new fiBinder();
     }
@@ -28,61 +32,23 @@ public class fiveidiotservice extends Service {
     public void onCreate() {
         super.onCreate();
         db = new fiveidiotdb(this);
+        mCitys = new fiveidiot_citys(getApplicationContext());
     }
-
-    public void set_weatherpath(String path) {
-        weather_path = path;
-    }
-
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String wt_content = null;
-                String default_path = intent.getStringExtra("weather_path");
+                int i = 0;
+                set_city_ids();
                 while (true) {
-                    fiveidiotnet net = null;
-                    if (weather_path != null) {
-                        net = new fiveidiotnet(weather_path);
-                    } else {
-                        net = new fiveidiotnet(default_path);
-                        Log.d("5sha", default_path);
-                    }
-
-                    try {
-                        wt_content = net.getContext();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    if (wt_content != null) {
-                        fiveidiotanalyze wt_an = new fiveidiotanalyze(wt_content);
-                        db.insert("city", wt_an.get_city());
-                        db.insert("date", wt_an.get_date());
-                        db.insert("dress", wt_an.get_dress()[0]);
-                        db.insert("dress_d", wt_an.get_dress()[1]);
-                        db.insert("chenlian", wt_an.get_cl());
-                        db.insert("washcar", wt_an.get_xc());
-                        db.insert("suncure", wt_an.get_ls());
-                        db.insert("uv", wt_an.get_uv());
-                        db.insert("travel", wt_an.get_tr());
-                        db.insert("allergy", wt_an.get_gm());
-                        db.insert("nowtemp", wt_an.get_nowtemp());
-                        String[] weather = wt_an.get_weathers();
-                        String[] temp = wt_an.get_temps();
-                        String[] wind = wt_an.get_winds();
-                        String[] image = wt_an.get_images();
-                        String[] weeks = wt_an.get_week();
-                        for (int i = 0; i < weather.length; i++) {
-                            db.insert("week" + i, weeks[i]);
-                            db.insert("weather" + i, weather[i]);
-                            db.insert("temp" + i, temp[i]);
-                            db.insert("wind" + i, wind[i]);
-                            db.insert("image" + i, image[i * 2]);
-                            db.insert("image_n" + i, image[i * 2 + 1]);
+                    for (i = 0; i < city_ids.size(); i++) {
+                        try {
+                            unwrap_save_data(city_ids.get(i));
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        Log.d("5sha", wt_an.get_city());
                     }
                     try {
                         Thread.sleep(6000);
@@ -91,9 +57,65 @@ public class fiveidiotservice extends Service {
                     }
                 }
             }
-
         }).start();
         return super.onStartCommand(intent, flags, startId);
+    }
+
+    private ArrayList<String> get_city_ids(ArrayList<String> citys) {
+        ArrayList<String> m_city_ids = new ArrayList<String>();
+        m_city_ids.add("101010100");
+        m_city_ids.add("101180201");
+        return m_city_ids;
+    }
+
+    public void set_city_ids() {
+        city_ids = get_city_ids(mCitys.get_citys());
+    }
+
+    public void update_data(ArrayList<String> update_city_ids) {
+        int i = 0;
+        city_ids = update_city_ids;
+        for (i = 0; i < city_ids.size(); i++) {
+           try {
+                unwrap_save_data(city_ids.get(i));
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+        }
+    }
+
+    private void unwrap_save_data(String city_code) throws IOException {
+        String weather_path = per_address + city_code + suf_address;
+        fiveidiotnet net = new fiveidiotnet(weather_path);
+        fiveidiotanalyze analyzer = new fiveidiotanalyze(net.getContext());
+        String city = analyzer.get_city();
+
+        db.create_table(city);
+
+        db.insert(city, "city", city);
+        db.insert(city, "date", analyzer.get_date());
+        db.insert(city, "dress", analyzer.get_dress()[0]);
+        db.insert(city, "dress_d", analyzer.get_dress()[1]);
+        db.insert(city, "chenlian", analyzer.get_cl());
+        db.insert(city, "washcar", analyzer.get_xc());
+        db.insert(city, "suncure", analyzer.get_ls());
+        db.insert(city, "uv", analyzer.get_uv());
+        db.insert(city, "travel", analyzer.get_tr());
+        db.insert(city, "allergy", analyzer.get_gm());
+        db.insert(city, "nowtemp", analyzer.get_nowtemp());
+        String[] weather = analyzer.get_weathers();
+        String[] temp = analyzer.get_temps();
+        String[] wind = analyzer.get_winds();
+        String[] image = analyzer.get_images();
+        String[] weeks = analyzer.get_week();
+        for (int i = 0; i < weather.length; i++) {
+            db.insert(city, "week" + i, weeks[i]);
+            db.insert(city, "weather" + i, weather[i]);
+            db.insert(city, "temp" + i, temp[i]);
+            db.insert(city, "wind" + i, wind[i]);
+            db.insert(city, "image" + i, image[i * 2]);
+            db.insert(city, "image_n" + i, image[i * 2 + 1]);
+        }
     }
 
 }

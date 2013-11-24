@@ -1,6 +1,8 @@
 package com.wisape.fiveidiotweather;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -18,6 +20,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by wisape on 13-11-5.
  */
@@ -30,18 +34,22 @@ public class fiveidiot extends FragmentActivity {
     private FragmentManager fragmentManager;
     private MainPagerAdapter mainPagerAdapter;
     private ViewPager viewPager;
+    private fiveidiot_citys mCitys;
+    private String[] citys = {"101010100", "101180201", "101020100", "101181401", "101110101"};
+    private ArrayList<String> citys_a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
- * Start the Service which get the weather information
- */
+        /*
+         * Start the Service which get the weather information
+         */
+
+        mCitys = new fiveidiot_citys(getApplicationContext());
         Intent intent = new Intent(this, fiveidiotservice.class);
-        intent.putExtra("weather_path", "http://m.weather.com.cn/data/101110101.html");
-        startService(intent); 
-        Log.d("5sha", "weather" + (2 + 1));
+        intent.putExtra("citys", citys);
+        startService(intent);
 
         slideLayout = (DrawerLayout) findViewById(R.id.slide_layout);
         slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -83,23 +91,6 @@ public class fiveidiot extends FragmentActivity {
         }
     }
 
-    private boolean popMainFragment(FragmentManager fm) {
-        Log.d("5sha", "PopMainFragment");
-        int count = 0;
-        for (int i = 0; i < mainPagerAdapter.getCount(); i++) {
-        Fragment fragment = mainPagerAdapter.getItem(i);
-        if ((count = fragment.getChildFragmentManager().getBackStackEntryCount()) > 0) {
-            Log.d("5sha", "count = " + count);
-            if (fragment.getChildFragmentManager().popBackStackImmediate()) {
-                return true;
-            }
-        }
-        Log.d("5sha", "count = " + count);
-        }
-        return false;
-    }
-
-
     private class MainPagerAdapter extends FragmentPagerAdapter {
 
         public MainPagerAdapter(FragmentManager fm) {
@@ -109,13 +100,12 @@ public class fiveidiot extends FragmentActivity {
         @Override
         public Fragment getItem(int i) {
             Fragment fragment = new fiveidiot_main_fragment();
-
             return fragment;
         }
 
         @Override
         public int getCount() {
-            return 5;
+            return citys.length;
         }
 
         @Override

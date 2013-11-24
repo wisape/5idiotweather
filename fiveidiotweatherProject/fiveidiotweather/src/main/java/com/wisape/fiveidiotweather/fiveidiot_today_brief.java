@@ -34,6 +34,9 @@ public class fiveidiot_today_brief extends Fragment {
     }
 
     private void setViewData(View view, Map<String, Object> data_map) {
+        if (data_map.get("city") == null)
+            return;
+        ((TextView) view.findViewById(R.id.city)).setText(data_map.get("city").toString());
         ((TextView) view.findViewById(R.id.date)).setText(data_map.get("date").toString());
         ((TextView) view.findViewById(R.id.week)).setText(data_map.get("week").toString());
         ((TextView) view.findViewById(R.id.temp)).setText(data_map.get("temp").toString());

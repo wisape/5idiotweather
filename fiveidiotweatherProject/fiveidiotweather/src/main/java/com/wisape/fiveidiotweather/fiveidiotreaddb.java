@@ -5,6 +5,7 @@ import android.database.AbstractWindowedCursor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class fiveidiotreaddb {
     public static final String[] DEF_PROPS = {"uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
     public static final String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
     private static final String DB_NAME = "fiveidiot";
-    private static final String TABLE_NAME = "weather";
+    private static final String TABLE_NAME = "北京";
     private static final String NAME = "name";
     private static final String VALUE = "value";
 
@@ -36,15 +37,14 @@ public class fiveidiotreaddb {
 
             }
         };
-//
-//        SQLiteDatabase db = dbhelper.getReadableDatabase();
-//
-//        db.close();
     }
 
     private String getvalue(SQLiteDatabase db, String key) {
         String value = null;
 
+        if (!has_table(db, TABLE_NAME)) {
+            return value;
+        }
         Cursor cursor = db.query(TABLE_NAME, null, NAME + " = ?", new String[]{key}, null, null, null);
 
         if (cursor.getCount() > 0) {
@@ -53,8 +53,25 @@ public class fiveidiotreaddb {
             }
         }
         cursor.close();
-
         return value;
+    }
+
+    private boolean has_table(SQLiteDatabase db, String table) {
+        Cursor cursor = db.rawQuery("select name from sqlite_master where type='table' order by name", null);
+        while(cursor.moveToNext()) {
+            if (table.equals(cursor.getString(0))) {
+                cursor.close();
+                return true;
+            }
+        }
+        cursor.close();
+       return false;
+    }
+
+    private void delete_talbe(String table) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + table);
+        db.close();
     }
 
     public Map<String, Object> getTodayDetailMapData() {
