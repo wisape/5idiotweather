@@ -1,19 +1,24 @@
 package com.wisape.fiveidiotweather;
 
+import android.app.ActionBar;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,7 +32,10 @@ import java.util.ArrayList;
  */
 
 public class fiveidiot extends FragmentActivity {
+    private ServiceConnection sconn;
+    private fiveidiotservice mservice;
     private DrawerLayout slideLayout;
+    private ActionBar actionBar;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menuList;
     private String[] menuItems;
@@ -35,8 +43,8 @@ public class fiveidiot extends FragmentActivity {
     private MainPagerAdapter mainPagerAdapter;
     private ViewPager viewPager;
     private fiveidiot_citys mCitys;
-    private String[] citys = {"101010100", "101180201", "101020100", "101181401", "101110101"};
-    private ArrayList<String> citys_a;
+    private String[] mcitys = {"101010100", "101180201", "101020100", "101181401", "101110101"};
+    private ArrayList<String> citys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +55,23 @@ public class fiveidiot extends FragmentActivity {
          */
 
         mCitys = new fiveidiot_citys(getApplicationContext());
+        citys = mCitys.get_citys();
+        citys.add("北京");
+        citys.add("安阳");
+        citys.add("上海");
+        sconn = new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                mservice = ((fiveidiotservice.fiBinder)iBinder).getService();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName componentName) {
+
+            }
+        };
         Intent intent = new Intent(this, fiveidiotservice.class);
-        intent.putExtra("citys", citys);
-        startService(intent);
+        bindService(intent, sconn, Context.BIND_AUTO_CREATE);
 
         slideLayout = (DrawerLayout) findViewById(R.id.slide_layout);
         slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -60,8 +82,9 @@ public class fiveidiot extends FragmentActivity {
                 R.layout.menu_list_item, menuItems));
         menuList.setOnItemClickListener(new MenuItemClickListener());
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this, slideLayout, R.drawable.ic_launcher,
@@ -84,6 +107,26 @@ public class fiveidiot extends FragmentActivity {
         viewPager.setAdapter(mainPagerAdapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.fiveidiot, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.update:
+                update_data();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private class MenuItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -91,26 +134,50 @@ public class fiveidiot extends FragmentActivity {
         }
     }
 
-    private class MainPagerAdapter extends FragmentPagerAdapter {
-
+    private class MainPagerAdapter extends FragmentPagerAdapter
+            implements ViewPager.OnPageChangeListener{
         public MainPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public Fragment getItem(int i) {
-            Fragment fragment = new fiveidiot_main_fragment();
+            Fragment fragment = new fiveidiot_main_fragment(citys.get(i));
             return fragment;
         }
 
         @Override
         public int getCount() {
-            return citys.length;
+            return citys.size();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "天气" + position;
+            return citys.get(position);
         }
+
+        @Override
+        public void onPageScrolled(int i, float v, int i2) {
+
+        }
+
+        @Override
+        public void onPageSelected(int i) {
+            Log.d("5sha", "view pager position is " + i);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int i) {
+
+        }
+    }
+
+    private void update_data() {
+        mservice.update_service();
+        update_ui();
+    }
+
+    private void update_ui() {
+
     }
 }

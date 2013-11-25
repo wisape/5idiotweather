@@ -72,15 +72,15 @@ public class fiveidiotservice extends Service {
         city_ids = get_city_ids(mCitys.get_citys());
     }
 
-    public void update_data(ArrayList<String> update_city_ids) {
-        int i = 0;
-        city_ids = update_city_ids;
-        for (i = 0; i < city_ids.size(); i++) {
-           try {
+    public void update_service() {
+        set_city_ids();
+
+        for (int i = 0; i < city_ids.size(); i++) {
+            try {
                 unwrap_save_data(city_ids.get(i));
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

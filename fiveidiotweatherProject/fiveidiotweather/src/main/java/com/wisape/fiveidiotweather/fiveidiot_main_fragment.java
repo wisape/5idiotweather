@@ -13,11 +13,16 @@ import android.view.ViewGroup;
  * Created by wisape on 13-11-17.
  */
 public class fiveidiot_main_fragment extends Fragment {
+    private String mcity;
+
+    public fiveidiot_main_fragment(String city) {
+        mcity = city;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fiveidiot_today_brief tb = new fiveidiot_today_brief();
-        fiveidiot_after_brief ab = new fiveidiot_after_brief();
+        fiveidiot_today_brief tb = new fiveidiot_today_brief(mcity);
+        fiveidiot_after_brief ab = new fiveidiot_after_brief(mcity);
         FragmentManager fm = getChildFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.today_brief, tb);

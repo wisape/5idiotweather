@@ -14,8 +14,12 @@ import java.util.Map;
  */
 
 public class fiveidiot_today_detail extends Fragment {
-    fiveidiotreaddb readdb;
+    private fiveidiotreaddb readdb;
+    private String mcity;
 
+    public fiveidiot_today_detail(String city) {
+        mcity = city;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +31,7 @@ public class fiveidiot_today_detail extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.today_other_info, container, false);
-        Map<String, Object> detail_map = readdb.getTodayDetailMapData();
+        Map<String, Object> detail_map = readdb.getTodayDetailMapData(mcity);
         setViewData(rootView, detail_map);
         return rootView;
     }

@@ -9,13 +9,19 @@ import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
  * Created by wisape on 13-11-17.
  */
 public class fiveidiot_today_brief extends Fragment {
-    fiveidiotreaddb readdb;
+    private fiveidiotreaddb readdb;
+    private String mcity;
+
+    public fiveidiot_today_brief(String city) {
+        mcity = city;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +34,7 @@ public class fiveidiot_today_brief extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.today_brief, container, false);
-        Map<String, Object> brief_map = readdb.getTodayBriefMapData();
+        Map<String, Object> brief_map = readdb.getTodayBriefMapData(mcity);
         setViewData(rootView, brief_map);
         return rootView;
     }

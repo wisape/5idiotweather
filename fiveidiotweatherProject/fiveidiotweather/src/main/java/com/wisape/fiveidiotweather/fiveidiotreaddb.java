@@ -39,13 +39,13 @@ public class fiveidiotreaddb {
         };
     }
 
-    private String getvalue(SQLiteDatabase db, String key) {
+    private String getvalue(SQLiteDatabase db, String table, String key) {
         String value = null;
 
-        if (!has_table(db, TABLE_NAME)) {
+        if (!has_table(db, table)) {
             return value;
         }
-        Cursor cursor = db.query(TABLE_NAME, null, NAME + " = ?", new String[]{key}, null, null, null);
+        Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
 
         if (cursor.getCount() > 0) {
             for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
@@ -65,7 +65,7 @@ public class fiveidiotreaddb {
             }
         }
         cursor.close();
-       return false;
+        return false;
     }
 
     private void delete_talbe(String table) {
@@ -74,25 +74,25 @@ public class fiveidiotreaddb {
         db.close();
     }
 
-    public Map<String, Object> getTodayDetailMapData() {
+    public Map<String, Object> getTodayDetailMapData(String table) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         HashMap<String, Object> map = new HashMap<String, Object>();
 
         for (int i = 0; i < DEF_PROPS.length; i++) {
-            map.put(DEF_PROPS[i], getvalue(db, DEF_PROPS[i]));
+            map.put(DEF_PROPS[i], getvalue(db, table, DEF_PROPS[i]));
         }
         db.close();
         return map;
     }
 
-    private List<Map<String, Object>> getBriefAdapterData() {
+    private List<Map<String, Object>> getBriefAdapterData(String table) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         HashMap<String, Object> map = null;
         for (int i = 0; i < 6; i++) {
             map = new HashMap<String, Object>();
             for (int j = 0; j < SMP_PROPS.length; j++) {
-                map.put(SMP_PROPS[j], getvalue(db, SMP_PROPS[j] + i));
+                map.put(SMP_PROPS[j], getvalue(db, table, SMP_PROPS[j] + i));
             }
             list.add(map);
         }
@@ -100,20 +100,20 @@ public class fiveidiotreaddb {
         return  list;
     }
 
-    public Map<String, Object> getTodayBriefMapData() {
-        Map<String, Object> map = getBriefAdapterData().get(0);
+    public Map<String, Object> getTodayBriefMapData(String table) {
+        Map<String, Object> map = getBriefAdapterData(table).get(0);
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         for (int i = 0; i < TODAY_PROPS.length; i++) {
-            map.put(TODAY_PROPS[i], getvalue(db, TODAY_PROPS[i]));
+            map.put(TODAY_PROPS[i], getvalue(db, table, TODAY_PROPS[i]));
         }
 
         db.close();
         return map;
     }
 
-    public List<Map<String, Object>> getAfterBriefAdapterData() {
-        List<Map<String, Object>> list = getBriefAdapterData();
+    public List<Map<String, Object>> getAfterBriefAdapterData(String table) {
+        List<Map<String, Object>> list = getBriefAdapterData(table);
         return list.subList(1, list.size());
     }
 }

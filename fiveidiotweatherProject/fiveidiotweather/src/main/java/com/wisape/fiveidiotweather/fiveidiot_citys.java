@@ -50,9 +50,9 @@ public class fiveidiot_citys {
     public ArrayList<String> get_citys() {
         ArrayList<String> citys = new ArrayList<String>();
         for (int i = 0; i < MAX_CITYS; i++) {
-            String city = sharedPref.getString(mContext.getString(R.string.city_name) + i, "null");
+            String city = sharedPref.getString(mContext.getString(R.string.city_name) + i, NO_CITY);
             if (!city.equals(NO_CITY))
-            citys.add(city);
+                citys.add(city);
         }
         return citys;
     }
