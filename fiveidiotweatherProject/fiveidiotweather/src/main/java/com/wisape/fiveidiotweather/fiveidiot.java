@@ -124,6 +124,9 @@ public class fiveidiot extends FragmentActivity {
             return true;
         }
         switch (item.getItemId()) {
+            case R.id.newcity:
+//                add new city
+                return true;
             case R.id.update:
                 update_data();
                 return true;
