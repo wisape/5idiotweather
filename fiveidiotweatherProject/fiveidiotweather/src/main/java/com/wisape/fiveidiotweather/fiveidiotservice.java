@@ -34,59 +34,66 @@ public class fiveidiotservice extends Service {
         super.onCreate();
         db = new fiveidiotdb(this);
         mCitys = new fiveidiot_citys(getApplicationContext());
+        get_weather_info_thread thread = new get_weather_info_thread();
+        thread.start();
     }
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int i = 0;
-                set_city_ids();
-                while (true) {
-                    for (i = 0; i < city_ids.size(); i++) {
-                        try {
-                            Log.d("5sha", "in service");
-                            unwrap_save_data(city_ids.get(i));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    try {
-                        Thread.sleep(6000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private ArrayList<String> get_city_ids(ArrayList<String> citys) {
+    private class get_weather_info_thread extends Thread {
+        @Override
+        public void run() {
+            int i = 0;
+            set_city_ids();
+            while (true) {
+                for (i = 0; i < city_ids.size(); i++) {
+                    try {
+                        unwrap_save_data(city_ids.get(i));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                try {
+                    Thread.sleep(6000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private synchronized ArrayList<String> get_city_ids(ArrayList<String> citys) {
         ArrayList<String> m_city_ids = new ArrayList<String>();
         m_city_ids.add("101010100");
         m_city_ids.add("101180201");
         return m_city_ids;
     }
 
-    public void set_city_ids() {
+    public synchronized void set_city_ids() {
         city_ids = get_city_ids(mCitys.get_citys());
     }
 
     public void update_service() {
-        set_city_ids();
-
-        for (int i = 0; i < city_ids.size(); i++) {
-            try {
-                unwrap_save_data(city_ids.get(i));
-            } catch (IOException e) {
-                e.printStackTrace();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int i = 0;
+                set_city_ids();
+                for (i = 0; i < city_ids.size(); i++) {
+                    try {
+                        unwrap_save_data(city_ids.get(i));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-        }
+        }).start();
     }
 
-    private void unwrap_save_data(String city_code) throws IOException {
+    private synchronized void unwrap_save_data(String city_code) throws IOException {
         String weather_path = per_address + city_code + suf_address;
         fiveidiotnet net = new fiveidiotnet(weather_path);
         fiveidiotanalyze analyzer = new fiveidiotanalyze(net.getContext());

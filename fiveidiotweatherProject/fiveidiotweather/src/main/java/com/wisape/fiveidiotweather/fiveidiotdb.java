@@ -29,13 +29,13 @@ public class fiveidiotdb {
         };
     }
 
-    public void create_table(String table) {
+    public synchronized void create_table(String table) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         db.execSQL("create table if not exists "+ table +" ( "+ NAME +" TEXT, "+ VALUE +"  TEXT);");
         db.close();
     }
 
-    public void insert(String table, String key, String vlaue) {
+    public synchronized void insert(String table, String key, String vlaue) {
         ContentValues cv = new ContentValues();
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
@@ -50,20 +50,20 @@ public class fiveidiotdb {
         db.close();
     }
 
-    public int update(SQLiteDatabase db, String table, String key, String value) {
+    public synchronized int update(SQLiteDatabase db, String table, String key, String value) {
         ContentValues cv = new ContentValues();
         cv.put(VALUE, value);
         return db.update(table, cv,  NAME +" = ?", new String[]{key});
     }
 
-    public int delete(String table, String key) {
+    public synchronized int delete(String table, String key) {
         int rel;
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         rel = db.delete(table, NAME + " = ?", new String[]{key});
         return rel;
     }
 
-    public String getvalue(String table, String key) {
+    public synchronized String getvalue(String table, String key) {
         String value = null;
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 

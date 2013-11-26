@@ -34,6 +34,7 @@ import java.util.ArrayList;
 
 public class fiveidiot extends FragmentActivity {
     private ServiceConnection sconn;
+    private Intent service_intent;
     private fiveidiotservice mservice;
     private DrawerLayout slideLayout;
     private ActionBar actionBar;
@@ -71,9 +72,8 @@ public class fiveidiot extends FragmentActivity {
 
             }
         };
-        Intent intent = new Intent(this, fiveidiotservice.class);
-        bindService(intent, sconn, Context.BIND_AUTO_CREATE);
-        startService(intent);
+        service_intent = new Intent(this, fiveidiotservice.class);
+        bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
 
         slideLayout = (DrawerLayout) findViewById(R.id.slide_layout);
         slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -192,8 +192,10 @@ public class fiveidiot extends FragmentActivity {
     }
 
     private void update_data() {
+        bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
         mservice.update_service();
         update_ui();
+        unbindService(sconn);
     }
 
     private void update_ui() {
