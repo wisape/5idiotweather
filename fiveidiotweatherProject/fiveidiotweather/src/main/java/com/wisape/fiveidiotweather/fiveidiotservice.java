@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class fiveidiotservice extends Service {
                 while (true) {
                     for (i = 0; i < city_ids.size(); i++) {
                         try {
+                            Log.d("5sha", "in service");
                             unwrap_save_data(city_ids.get(i));
                         } catch (IOException e) {
                             e.printStackTrace();

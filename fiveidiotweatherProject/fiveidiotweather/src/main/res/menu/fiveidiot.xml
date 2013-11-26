@@ -4,7 +4,7 @@
         <!--android:orderInCategory="100"-->
         <!--android:showAsAction="never" />-->
     <item android:id="@+id/update"
-        android:icon="@drawable/ic_drawer"
+        android:icon="@drawable/ic_action_refresh"
         android:title="update"
         android:showAsAction="ifRoom" />
 </menu>

@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Configuration;
 import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -72,6 +73,7 @@ public class fiveidiot extends FragmentActivity {
         };
         Intent intent = new Intent(this, fiveidiotservice.class);
         bindService(intent, sconn, Context.BIND_AUTO_CREATE);
+        startService(intent);
 
         slideLayout = (DrawerLayout) findViewById(R.id.slide_layout);
         slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -87,7 +89,7 @@ public class fiveidiot extends FragmentActivity {
         actionBar.setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
-                this, slideLayout, R.drawable.ic_launcher,
+                this, slideLayout, R.drawable.ic_drawer,
                 R.string.slide_open, R.string.slide_close) {
             public void onDrawerClosed(View view) {
                 getActionBar().setTitle(R.string.app_name);
@@ -118,6 +120,9 @@ public class fiveidiot extends FragmentActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
         switch (item.getItemId()) {
             case R.id.update:
                 update_data();
@@ -125,6 +130,20 @@ public class fiveidiot extends FragmentActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggls
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     private class MenuItemClickListener implements ListView.OnItemClickListener {
