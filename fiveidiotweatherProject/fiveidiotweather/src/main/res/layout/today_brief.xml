@@ -77,6 +77,14 @@
                         android:textSize="@dimen/meida_size"
                         android:text="10℃~20℃"
                         android:id="@+id/temp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="@dimen/small_size"
+                    android:text="西北风4级"
+                    android:id="@+id/wind"/>
 
             </LinearLayout>
         </LinearLayout>

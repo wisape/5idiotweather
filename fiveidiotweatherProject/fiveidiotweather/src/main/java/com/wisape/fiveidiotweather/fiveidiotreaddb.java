@@ -17,11 +17,10 @@ import java.util.Map;
  */
 public class fiveidiotreaddb {
     private SQLiteOpenHelper dbhelper = null;
-    public static final String[] TODAY_PROPS = {"city", "date", "nowtemp"};
+    public static final String[] TODAY_PROPS = {"city", "date","week0", "weather0", "nowtemp", "temp0", "wind", "humidity"};
     public static final String[] DEF_PROPS = {"uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
     public static final String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
     private static final String DB_NAME = "fiveidiot";
-    private static final String TABLE_NAME = "北京";
     private static final String NAME = "name";
     private static final String VALUE = "value";
 

@@ -1,6 +1,5 @@
 package com.wisape.fiveidiotweather;
 
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -84,6 +83,19 @@ public class fiveidiotanalyze {
         }
         return fchh;
     }
+
+    public String get_update_time() {
+        String fchh = null;
+        if (null != json_object) {
+            try {
+                fchh = json_object.getString("fchh");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return fchh;
+    }
+
     public String[] get_week() {
         String weeks[] = new String[6];
         String week = null;

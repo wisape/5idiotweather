@@ -60,7 +60,6 @@ public class fiveidiot extends FragmentActivity {
         citys = mCitys.get_citys();
         citys.add("北京");
         citys.add("安阳");
-        citys.add("上海");
         sconn = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
