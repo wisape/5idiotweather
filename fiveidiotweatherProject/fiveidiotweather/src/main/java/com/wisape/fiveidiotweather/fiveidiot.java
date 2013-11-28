@@ -1,9 +1,11 @@
 package com.wisape.fiveidiotweather;
 
 import android.app.ActionBar;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.os.IBinder;
@@ -33,6 +35,8 @@ import java.util.ArrayList;
  */
 
 public class fiveidiot extends FragmentActivity {
+    public final static String BROADCAST_UPDATE_UI = "com.wisape.fiveidiotweather.update_ui";
+    private fiveidiot_receiver receiver;
     private ServiceConnection sconn;
     private Intent service_intent;
     private fiveidiotservice mservice;
@@ -106,6 +110,11 @@ public class fiveidiot extends FragmentActivity {
         mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.main_activity);
         viewPager.setAdapter(mainPagerAdapter);
+
+        receiver = new fiveidiot_receiver();
+        IntentFilter update_filter = new IntentFilter(BROADCAST_UPDATE_UI);
+        registerReceiver(receiver, update_filter);
+
     }
 
     @Override
@@ -202,5 +211,12 @@ public class fiveidiot extends FragmentActivity {
 
     private void update_ui() {
 
+    }
+
+    private class fiveidiot_receiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            update_ui();
+        }
     }
 }
