@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -206,6 +207,11 @@ public class fiveidiot extends FragmentActivity {
         public void onPageScrollStateChanged(int i) {
 
         }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return PagerAdapter.POSITION_NONE;
+        }
     }
 
     private void update_data() {
@@ -217,6 +223,8 @@ public class fiveidiot extends FragmentActivity {
     private void update_ui() {
         Log.d("5sha", "need update UI");
         Toast.makeText(this, "need update UI", Toast.LENGTH_LONG).show();
+        mainPagerAdapter.notifyDataSetChanged();
+        viewPager.invalidate();
     }
 
     private class fiveidiot_receiver extends BroadcastReceiver {
