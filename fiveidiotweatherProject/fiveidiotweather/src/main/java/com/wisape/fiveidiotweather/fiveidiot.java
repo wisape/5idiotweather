@@ -205,12 +205,12 @@ public class fiveidiot extends FragmentActivity {
     private void update_data() {
         bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
         mservice.update_service();
-        update_ui();
         unbindService(sconn);
     }
 
     private void update_ui() {
-
+        Log.d("5sha", "need update UI");
+        Toast.makeText(this, "need update UI", Toast.LENGTH_LONG);
     }
 
     private class fiveidiot_receiver extends BroadcastReceiver {
