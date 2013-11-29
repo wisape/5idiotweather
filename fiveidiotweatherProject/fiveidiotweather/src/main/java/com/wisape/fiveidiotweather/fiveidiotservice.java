@@ -140,7 +140,7 @@ public class fiveidiotservice extends Service {
                 return false;
             }
         }
-        if (!date.equals(system_date())) {
+        if (!date.equals(system_date)) {
             gap_date = 1;
         }
         db.insert(city, "date", system_date);
