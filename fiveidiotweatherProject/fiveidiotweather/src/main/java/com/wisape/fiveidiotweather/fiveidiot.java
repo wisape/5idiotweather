@@ -210,7 +210,7 @@ public class fiveidiot extends FragmentActivity {
 
     private void update_ui() {
         Log.d("5sha", "need update UI");
-        Toast.makeText(this, "need update UI", Toast.LENGTH_LONG);
+        Toast.makeText(this, "need update UI", Toast.LENGTH_LONG).show();
     }
 
     private class fiveidiot_receiver extends BroadcastReceiver {

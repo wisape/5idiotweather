@@ -111,6 +111,8 @@ public class fiveidiotservice extends Service {
 
     private synchronized void manage_data(String id) throws IOException {
         boolean today, other;
+        if (!net_available())
+            return;
         today = unwrap_save_now_data(id);
         other = unwrap_save_data(id);
         if (today || other) {
@@ -202,17 +204,24 @@ public class fiveidiotservice extends Service {
         Calendar calendar = Calendar.getInstance();
         int myear, mmonth, mday;
         myear = calendar.get(Calendar.YEAR);
-        mmonth = calendar.get(Calendar.MONTH);
+        mmonth = calendar.get(Calendar.MONTH) + 1;
         mday = calendar.get(Calendar.DATE);
         return myear + "年" + mmonth + "月" + mday + "日";
+    }
+
+    private boolean net_available() {
+        ConnectivityManager manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        if (info != null && info.isAvailable()) {
+            return true;
+        }
+        return false;
     }
 
     private class fiveidiot_net_receiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            ConnectivityManager manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo info = manager.getActiveNetworkInfo();
-            if (info != null && info.isAvailable()) {
+            if (net_available()) {
                 update_service();
             }
         }
