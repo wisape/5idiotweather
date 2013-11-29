@@ -51,6 +51,12 @@ public class fiveidiotservice extends Service {
     }
 
     @Override
+    public void onDestroy() {
+        unregisterReceiver(net_receiver);
+        super.onDestroy();
+    }
+
+    @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);
     }
@@ -198,7 +204,6 @@ public class fiveidiotservice extends Service {
 
         return true;
     }
-
 
     private String system_date() {
         Calendar calendar = Calendar.getInstance();

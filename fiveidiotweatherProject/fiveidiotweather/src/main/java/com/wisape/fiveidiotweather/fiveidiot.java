@@ -118,6 +118,12 @@ public class fiveidiot extends FragmentActivity {
     }
 
     @Override
+    public void onDestroy() {
+        unregisterReceiver(receiver);
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
