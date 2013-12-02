@@ -45,6 +45,7 @@ public class fiveidiot extends FragmentActivity {
     private ActionBar actionBar;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menuList;
+    private ListView cityList;
     private String[] menuItems;
     private FragmentManager fragmentManager;
     private MainPagerAdapter mainPagerAdapter;
@@ -83,10 +84,14 @@ public class fiveidiot extends FragmentActivity {
         slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         menuList = (ListView) findViewById(R.id.menu_list);
         menuItems = getResources().getStringArray(R.array.menu_array);
-
         menuList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.menu_list_item, menuItems));
         menuList.setOnItemClickListener(new MenuItemClickListener());
+
+        cityList = (ListView) findViewById(R.id.city_list);
+        cityList.setAdapter(new ArrayAdapter<String>(this,
+                R.layout.menu_list_item, menuItems));
+        cityList.setOnItemClickListener(new MenuItemClickListener());
 
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
