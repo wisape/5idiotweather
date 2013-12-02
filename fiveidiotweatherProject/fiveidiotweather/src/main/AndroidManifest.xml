@@ -24,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".fiveidiot_add_city" />
 
         <service android:name=".fiveidiotservice">
             <intent-filter>
