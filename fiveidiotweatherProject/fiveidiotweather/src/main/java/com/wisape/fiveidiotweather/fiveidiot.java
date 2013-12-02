@@ -105,8 +105,15 @@ public class fiveidiot extends FragmentActivity {
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
-            public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle("设置");
+            public void onDrawerOpened(View View) {
+                switch (View.getId()) {
+                    case R.id.city_list:
+                        getActionBar().setTitle("城市列表");
+                        break;
+                    case R.id.menu_list:
+                        getActionBar().setTitle("设置");
+                        break;
+                }
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
