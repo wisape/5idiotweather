@@ -146,6 +146,7 @@ public class fiveidiot extends FragmentActivity {
         switch (item.getItemId()) {
             case R.id.newcity:
 //                add new city
+                fiveidiot_cityids_db cityids_db = new fiveidiot_cityids_db(getApplicationContext());
                 return true;
             case R.id.update:
                 update_data();
