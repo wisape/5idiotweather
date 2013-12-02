@@ -90,7 +90,7 @@ public class fiveidiot extends FragmentActivity {
 
         cityList = (ListView) findViewById(R.id.city_list);
         cityList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.menu_list_item, menuItems));
+                R.layout.menu_list_item, citys));
         cityList.setOnItemClickListener(new MenuItemClickListener());
 
         actionBar = getActionBar();
