@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,9 +21,9 @@ public class fiveidiot_cityids_db {
     private final static String DB_NAME = "cityids";
     private final static String PROVINCES_TABLE = "provinces";
     private final static String PROVINCES_ID = "id";
-    private final static String CITYS_PROVINCES_ID = "province id";
+    private final static String CITYS_PROVINCES_ID = "province_id";
     private final static String CITYS_TABLE = "citys";
-    private final static String CITYS_ID = "city num";
+    private final static String CITYS_ID = "city_num";
     private final static String NAME = "name";
     private SQLiteOpenHelper dbhelper;
     private SQLiteDatabase citydb;
@@ -68,21 +69,26 @@ public class fiveidiot_cityids_db {
     }
 
     public ArrayList<String> getProvinces() {
-        ArrayList<String> provinces = null;
+        ArrayList<String> provinces = new ArrayList<String>();
         citydb = dbhelper.getReadableDatabase();
         Cursor cursor = citydb.rawQuery("select * from " + PROVINCES_TABLE, null);
         while (cursor.moveToNext()) {
-            provinces.add(cursor.getString(cursor.getColumnIndex(NAME)));
+            provinces.add(cursor.getString(cursor.getColumnIndexOrThrow(NAME)));
         }
-
+        cursor.close();
         citydb.close();
         return provinces;
     }
 
     public ArrayList<String> getCitys(int province_id) {
-        ArrayList<String> citys = null;
+        ArrayList<String> citys = new ArrayList<String>();
         citydb = dbhelper.getReadableDatabase();
-
+        Cursor cursor = citydb.rawQuery("select * from " + CITYS_TABLE + " where "
+                + CITYS_PROVINCES_ID + " = ?", new String[]{String.valueOf(province_id)});
+        while (cursor.moveToNext()) {
+            citys.add(cursor.getString(cursor.getColumnIndexOrThrow(NAME)));
+        }
+        cursor.close();
         citydb.close();
         return citys;
     }
@@ -90,9 +96,8 @@ public class fiveidiot_cityids_db {
     public String getCityid(String city) {
         String cityid = null;
         citydb = dbhelper.getReadableDatabase();
-        Cursor cursor = citydb.query(true, CITYS_TABLE, new String[]{CITYS_PROVINCES_ID, NAME, CITYS_ID},
-                NAME + "==?", new String[]{city}, null, null, null, null);
-
+        Cursor cursor = citydb.rawQuery("select * from " + CITYS_TABLE + " where "
+                + NAME + " = ?", new String[]{city});
         if (cursor.moveToNext()) {
             cityid = cursor.getString(cursor.getColumnIndex(CITYS_ID));
         }
