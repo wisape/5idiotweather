@@ -67,7 +67,7 @@ public class fiveidiotreaddb {
         return false;
     }
 
-    private void delete_talbe(String table) {
+    private void delete_table(String table) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + table);
         db.close();

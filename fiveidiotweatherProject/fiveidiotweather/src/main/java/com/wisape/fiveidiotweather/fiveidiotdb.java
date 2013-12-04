@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by wisape on 13-10-27.
  */
@@ -54,6 +56,18 @@ public class fiveidiotdb {
         ContentValues cv = new ContentValues();
         cv.put(VALUE, value);
         return db.update(table, cv,  NAME +" = ?", new String[]{key});
+    }
+
+    public synchronized ArrayList<String> getnames(String table) {
+        ArrayList<String> names = new ArrayList<String>();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + table, null);
+        while (cursor.moveToNext()) {
+            names.add(cursor.getString(cursor.getColumnIndexOrThrow(NAME)));
+        }
+        cursor.close();
+        db.close();
+        return names;
     }
 
     public synchronized int delete(String table, String key) {
