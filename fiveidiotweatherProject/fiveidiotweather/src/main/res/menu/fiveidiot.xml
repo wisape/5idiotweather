@@ -7,6 +7,10 @@
         android:icon="@drawable/ic_action_new"
         android:title="newcity"
         android:showAsAction="ifRoom" />
+    <item android:id="@+id/havecitys"
+        android:icon="@drawable/ic_action_place"
+        android:title="citys"
+        android:showAsAction="ifRoom" />
     <item android:id="@+id/update"
         android:icon="@drawable/ic_action_refresh"
         android:title="update"

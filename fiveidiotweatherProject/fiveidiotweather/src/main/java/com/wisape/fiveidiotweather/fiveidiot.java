@@ -91,7 +91,7 @@ public class fiveidiot extends FragmentActivity {
         cityList = (ListView) findViewById(R.id.city_list);
         cityList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.menu_list_item, citys));
-        cityList.setOnItemClickListener(new MenuItemClickListener());
+        cityList.setOnItemClickListener(new CitysItemClickListener());
 
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -156,6 +156,14 @@ public class fiveidiot extends FragmentActivity {
                 Intent it = new Intent(this, fiveidiot_add_city.class);
                 startActivity(it);
                 return true;
+            case R.id.havecitys:
+                if (cityList.isShown()) {
+                    slideLayout.closeDrawer(GravityCompat.END);
+                    return true;
+                } else if (menuList.isShown());
+                    slideLayout.closeDrawer(GravityCompat.START);
+                slideLayout.openDrawer(GravityCompat.END);
+                return true;
             case R.id.update:
                 update_data();
                 return true;
@@ -182,6 +190,14 @@ public class fiveidiot extends FragmentActivity {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Toast.makeText(getApplicationContext(), "position is " + i, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private class CitysItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            slideLayout.closeDrawers();
+            viewPager.setCurrentItem(i, true);
         }
     }
 
