@@ -2,6 +2,8 @@ package com.wisape.fiveidiotweather;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +24,15 @@ public class fiveidiot_add_city extends Activity{
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cityids_db.getProvinces()));
         listView.setOnItemClickListener(new onProvinceItemClick());
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.add_city_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
 
     private class onProvinceItemClick implements AdapterView.OnItemClickListener {
         @Override
