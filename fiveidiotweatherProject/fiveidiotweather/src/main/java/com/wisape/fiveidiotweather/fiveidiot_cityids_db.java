@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * Created by wangjianmei on 13-12-1.
+ * Created by wisape on 13-12-1.
  */
 public class fiveidiot_cityids_db {
     private final static String DB_PATH = "/data/data/com.wisape.fiveidiotweather/databases/";

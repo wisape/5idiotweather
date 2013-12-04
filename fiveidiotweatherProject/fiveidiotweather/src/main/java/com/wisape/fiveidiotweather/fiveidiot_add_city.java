@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 /**
- * Created by gz09 on 13-12-2.
+ * Created by wisape on 13-12-2.
  */
 public class fiveidiot_add_city extends Activity{
     private fiveidiot_cityids_db cityids_db;
