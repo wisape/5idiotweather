@@ -1,21 +1,25 @@
 package com.wisape.fiveidiotweather;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 /**
  * Created by wisape on 13-12-2.
  */
-public class fiveidiot_add_city extends Activity{
+public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTextListener {
     private fiveidiot_cityids_db cityids_db;
     private ListView listView;
+    private SearchView searchView;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_city_activity);
@@ -23,6 +27,7 @@ public class fiveidiot_add_city extends Activity{
         listView = (ListView) findViewById(R.id.add_city);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cityids_db.getProvinces()));
         listView.setOnItemClickListener(new onProvinceItemClick());
+
     }
 
     @Override
@@ -30,7 +35,23 @@ public class fiveidiot_add_city extends Activity{
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.add_city_menu, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(this);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        listView.setAdapter(new ArrayAdapter<String>(fiveidiot_add_city.this, android.R.layout.simple_list_item_1, cityids_db.findCitys(s)));
+        listView.setOnItemClickListener(new onCityItemClick());
+        return false;
     }
 
 
@@ -49,7 +70,6 @@ public class fiveidiot_add_city extends Activity{
             String cityid = cityids_db.getCityid(city);
             //To do add the city
             Toast.makeText(getApplicationContext(), "City is " +city + "id is" + cityid, Toast.LENGTH_SHORT).show();
-
         }
     }
 }

@@ -93,6 +93,22 @@ public class fiveidiot_cityids_db {
         return citys;
     }
 
+
+    public ArrayList<String> findCitys(String part) {
+        ArrayList<String> citys = new ArrayList<String>();
+        citydb = dbhelper.getReadableDatabase();
+        Cursor cursor = citydb.rawQuery("select * from " + CITYS_TABLE, null);
+        while (cursor.moveToNext()) {
+            String city = cursor.getString(cursor.getColumnIndexOrThrow(NAME));
+            if (city.contains(part)) {
+                citys.add(city);
+            }
+        }
+        cursor.close();
+        citydb.close();
+        return citys;
+    }
+
     public String getCityid(String city) {
         String cityid = null;
         citydb = dbhelper.getReadableDatabase();
