@@ -71,7 +71,8 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
             //To do add the city
             Toast.makeText(getApplicationContext(), "City is " +city + "id is" + cityid, Toast.LENGTH_SHORT).show();
             fiveidiot_citys city_box = new fiveidiot_citys(getApplicationContext());
-            city_box.set_city(city, cityid);
+            city_box.set_city(city.replace(".", ""), cityid);
+            finish();
         }
     }
 }

@@ -33,8 +33,8 @@ public class fiveidiot_today_brief extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.today_brief, container, false);
-//        Map<String, Object> brief_map = readdb.getTodayBriefMapData(mcity);
-//        setViewData(rootView, brief_map);
+        Map<String, Object> brief_map = readdb.getTodayBriefMapData(mcity);
+        setViewData(rootView, brief_map);
         return rootView;
     }
 
