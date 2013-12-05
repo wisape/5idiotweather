@@ -11,14 +11,7 @@
     <string name="slide_close">5傻天气</string>
     <string-array name="menu_array">
         <item>设置</item>
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+        <item>关于</item>
     </string-array>
 
 

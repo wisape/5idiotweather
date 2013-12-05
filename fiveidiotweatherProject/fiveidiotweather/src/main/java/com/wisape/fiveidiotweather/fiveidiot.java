@@ -20,6 +20,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -132,6 +133,24 @@ public class fiveidiot extends FragmentActivity {
     public void onDestroy() {
         unregisterReceiver(receiver);
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onKeyDown(int keycode, KeyEvent event) {
+        if (keycode == KeyEvent.KEYCODE_MENU) {
+            if (menuList.isShown()) {
+                slideLayout.closeDrawer(GravityCompat.START);
+                return true;
+            } else if (cityList.isShown());
+                slideLayout.closeDrawer(GravityCompat.END);
+            slideLayout.openDrawer(GravityCompat.START);
+            return true;
+        }
+
+        if (keycode == KeyEvent.KEYCODE_BACK) {
+            finish();
+        }
+        return false;
     }
 
     @Override
