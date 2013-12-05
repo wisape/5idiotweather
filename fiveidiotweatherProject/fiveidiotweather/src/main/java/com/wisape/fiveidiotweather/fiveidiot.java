@@ -127,6 +127,13 @@ public class fiveidiot extends FragmentActivity {
         IntentFilter update_filter = new IntentFilter(BROADCAST_UPDATE_UI);
         registerReceiver(receiver, update_filter);
 
+        update_citys();
+    }
+
+    private void update_citys() {
+        Intent intent = getIntent();
+        viewPager.setCurrentItem(citys.indexOf(intent.getStringExtra("addcity")));
+//        update_data();
     }
 
     @Override
@@ -268,8 +275,6 @@ public class fiveidiot extends FragmentActivity {
     }
 
     private void update_ui() {
-        Log.d("5sha", "need update UI");
-        Toast.makeText(this, "need update UI", Toast.LENGTH_LONG).show();
         mainPagerAdapter.notifyDataSetChanged();
         viewPager.invalidate();
     }

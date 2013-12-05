@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by wisape on 13-11-17.
@@ -38,16 +39,22 @@ public class fiveidiot_today_brief extends Fragment {
         return rootView;
     }
 
+    private String setDefault(Object str1, String str2) {
+        if (str1 == null)
+            return str2;
+        return str1.toString();
+    }
+
     private void setViewData(View view, Map<String, Object> data_map) {
         if (data_map.get("city") == null)
             return;
         ((TextView) view.findViewById(R.id.city)).setText(data_map.get("city").toString());
-        ((TextView) view.findViewById(R.id.date)).setText(data_map.get("date").toString());
-        ((TextView) view.findViewById(R.id.week)).setText(data_map.get("week0").toString());
-        ((TextView) view.findViewById(R.id.temp)).setText(data_map.get("temp0").toString());
-        ((TextView) view.findViewById(R.id.weather)).setText(data_map.get("weather0").toString());
-        ((TextView) view.findViewById(R.id.wind)).setText(data_map.get("wind").toString());
-        ((TextView) view.findViewById(R.id.nowtemp)).setText(data_map.get("nowtemp").toString() + "℃");
+        ((TextView) view.findViewById(R.id.date)).setText(setDefault(data_map.get("date"), "1"));
+        ((TextView) view.findViewById(R.id.week)).setText(setDefault(data_map.get("week0"),"1"));
+        ((TextView) view.findViewById(R.id.temp)).setText(setDefault(data_map.get("temp0"),"1"));
+        ((TextView) view.findViewById(R.id.weather)).setText(setDefault(data_map.get("weather0"),"1"));
+        ((TextView) view.findViewById(R.id.wind)).setText(setDefault(data_map.get("wind"),"1"));
+        ((TextView) view.findViewById(R.id.nowtemp)).setText(setDefault(data_map.get("nowtemp"),"1") + "℃");
         ((ImageView) view.findViewById(R.id.today_image)).setImageResource(R.drawable.cloud);
     }
 }

@@ -2,6 +2,7 @@ package com.wisape.fiveidiotweather;
 
 import android.app.Activity;
 import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -72,6 +73,9 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
             Toast.makeText(getApplicationContext(), "City is " +city + "id is" + cityid, Toast.LENGTH_SHORT).show();
             fiveidiot_citys city_box = new fiveidiot_citys(getApplicationContext());
             city_box.set_city(city.replace(".", ""), cityid);
+            Intent intent = new Intent(fiveidiot_add_city.this, fiveidiot.class);
+            intent.putExtra("addcity", city);
+            startActivity(intent);
             finish();
         }
     }
