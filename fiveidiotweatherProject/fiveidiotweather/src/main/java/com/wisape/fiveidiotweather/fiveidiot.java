@@ -1,6 +1,7 @@
 package com.wisape.fiveidiotweather;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -21,13 +22,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -52,8 +57,9 @@ public class fiveidiot extends FragmentActivity {
     private MainPagerAdapter mainPagerAdapter;
     private ViewPager viewPager;
     private fiveidiot_citys mCitys;
-    private String[] mcitys = {"101010100", "101180201", "101020100", "101181401", "101110101"};
     private ArrayList<String> citys;
+
+    ImageButton discardButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +94,13 @@ public class fiveidiot extends FragmentActivity {
         menuList.setOnItemClickListener(new MenuItemClickListener());
 
         cityList = (ListView) findViewById(R.id.city_list);
-        cityList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.menu_list_item, citys));
+        cityList.setAdapter(new CityArrayAdapter(this,
+                R.layout.city_list_item, R.id.city_list_item, citys));
         cityList.setOnItemClickListener(new CitysItemClickListener());
+//        cityList.setOnClickListener(new DiscardClickListener());
+//        discardButton = (ImageButton) findViewById(R.id.discard_city);
+//        if (discardButton != null)
+//            discardButton.setOnClickListener(new DiscardClickListener());
 
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -222,6 +232,35 @@ public class fiveidiot extends FragmentActivity {
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             slideLayout.closeDrawers();
             viewPager.setCurrentItem(i, true);
+        }
+    }
+
+    private class CityArrayAdapter extends ArrayAdapter<String> {
+        private ArrayList<String> texts;
+        public CityArrayAdapter(Context context, int resource, int textViewResourceId, ArrayList<String> objects) {
+            super(context, resource, textViewResourceId, objects);
+            texts = objects;
+        }
+
+        @Override
+        public View getView(final int position, View convertView,
+                            ViewGroup parent) {
+            LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View row = inflator.inflate(R.layout.city_list_item, parent, false);
+            TextView tv = (TextView) row.findViewById(R.id.city_list_item);
+            tv.setText(texts.get(position));
+            ImageButton btn = (ImageButton) row.findViewById(R.id.discard_city);
+            btn.setTag(position);
+            btn.setOnClickListener(new DiscardClickListener());
+            return row;
+        }
+    }
+
+    private class DiscardClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getApplicationContext(), "删除车概念时", Toast.LENGTH_SHORT).show();
         }
     }
 
