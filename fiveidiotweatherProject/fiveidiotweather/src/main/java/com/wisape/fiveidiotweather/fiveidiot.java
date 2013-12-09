@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -269,19 +270,33 @@ public class fiveidiot extends FragmentActivity {
         citys.remove(position);
         cityArrayAdapter.notifyDataSetChanged();
         cityList.invalidate();
+        mainPagerAdapter.removeItem(position);
+        mainPagerAdapter.notifyDataSetChanged();
+        viewPager.invalidate();
     }
 
     private class MainPagerAdapter extends FragmentPagerAdapter
             implements ViewPager.OnPageChangeListener{
+        ArrayList<Fragment> fragments;
 
         public MainPagerAdapter(FragmentManager fm) {
             super(fm);
+            fragments = new ArrayList<Fragment>();
+            for (int i = 0; i < citys.size(); i++) {
+                Fragment fragment = new fiveidiot_main_fragment(citys.get(i));
+                fragments.add(fragment);
+            }
+        }
+
+        public void removeItem(int position) {
+            fragments.remove(position);
         }
 
         @Override
         public Fragment getItem(int i) {
-            Fragment fragment = new fiveidiot_main_fragment(citys.get(i));
-            return fragment;
+//            Fragment fragment = new fiveidiot_main_fragment(citys.get(i));
+//            fragments.add(fragment);
+            return fragments.get(i);
         }
 
         @Override
@@ -313,6 +328,14 @@ public class fiveidiot extends FragmentActivity {
         public int getItemPosition(Object object) {
             return PagerAdapter.POSITION_NONE;
         }
+
+//        @Override
+//        public void destroyItem (ViewGroup container, int position, Object object) {
+//                FragmentManager manager = ((Fragment)object).getFragmentManager();
+//                FragmentTransaction trans = manager.beginTransaction();
+//                trans.remove((Fragment) object);
+//                trans.commit();
+//        }
     }
 
     private void update_data() {
