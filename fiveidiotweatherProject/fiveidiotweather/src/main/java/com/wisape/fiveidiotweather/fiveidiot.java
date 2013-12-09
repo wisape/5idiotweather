@@ -55,11 +55,10 @@ public class fiveidiot extends FragmentActivity {
     private String[] menuItems;
     private FragmentManager fragmentManager;
     private MainPagerAdapter mainPagerAdapter;
+    private CityArrayAdapter cityArrayAdapter;
     private ViewPager viewPager;
     private fiveidiot_citys mCitys;
     private ArrayList<String> citys;
-
-    ImageButton discardButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +93,8 @@ public class fiveidiot extends FragmentActivity {
         menuList.setOnItemClickListener(new MenuItemClickListener());
 
         cityList = (ListView) findViewById(R.id.city_list);
-        cityList.setAdapter(new CityArrayAdapter(this,
-                R.layout.city_list_item, R.id.city_list_item, citys));
+        cityArrayAdapter = new CityArrayAdapter(this, R.layout.city_list_item, R.id.city_list_item, citys);
+        cityList.setAdapter(cityArrayAdapter);
         cityList.setOnItemClickListener(new CitysItemClickListener());
 //        cityList.setOnClickListener(new DiscardClickListener());
 //        discardButton = (ImageButton) findViewById(R.id.discard_city);
@@ -257,15 +256,24 @@ public class fiveidiot extends FragmentActivity {
     }
 
     private class DiscardClickListener implements View.OnClickListener {
-
         @Override
         public void onClick(View view) {
-            Toast.makeText(getApplicationContext(), "删除车概念时", Toast.LENGTH_SHORT).show();
+            int position = Integer.parseInt(view.getTag().toString());
+            deleteCity(position);
+            slideLayout.closeDrawers();
+            Toast.makeText(getApplicationContext(), "删除车概念时" + position, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void deleteCity(int position) {
+        citys.remove(position);
+        cityArrayAdapter.notifyDataSetChanged();
+        cityList.invalidate();
     }
 
     private class MainPagerAdapter extends FragmentPagerAdapter
             implements ViewPager.OnPageChangeListener{
+
         public MainPagerAdapter(FragmentManager fm) {
             super(fm);
         }
