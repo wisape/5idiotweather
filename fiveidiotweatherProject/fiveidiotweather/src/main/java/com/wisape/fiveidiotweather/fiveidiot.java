@@ -97,10 +97,6 @@ public class fiveidiot extends FragmentActivity {
         cityArrayAdapter = new CityArrayAdapter(this, R.layout.city_list_item, R.id.city_list_item, citys);
         cityList.setAdapter(cityArrayAdapter);
         cityList.setOnItemClickListener(new CitysItemClickListener());
-//        cityList.setOnClickListener(new DiscardClickListener());
-//        discardButton = (ImageButton) findViewById(R.id.discard_city);
-//        if (discardButton != null)
-//            discardButton.setOnClickListener(new DiscardClickListener());
 
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -270,33 +266,54 @@ public class fiveidiot extends FragmentActivity {
         citys.remove(position);
         cityArrayAdapter.notifyDataSetChanged();
         cityList.invalidate();
-        mainPagerAdapter.removeItem(position);
         mainPagerAdapter.notifyDataSetChanged();
         viewPager.invalidate();
     }
 
     private class MainPagerAdapter extends FragmentPagerAdapter
             implements ViewPager.OnPageChangeListener{
-        ArrayList<Fragment> fragments;
+
+        private final FragmentManager mFragmentManager;
+        private FragmentTransaction mCurTransaction = null;
+        private Fragment mCurrentPrimaryItem = null;
+
 
         public MainPagerAdapter(FragmentManager fm) {
             super(fm);
-            fragments = new ArrayList<Fragment>();
-            for (int i = 0; i < citys.size(); i++) {
-                Fragment fragment = new fiveidiot_main_fragment(citys.get(i));
-                fragments.add(fragment);
-            }
+            mFragmentManager = fm;
         }
 
-        public void removeItem(int position) {
-            fragments.remove(position);
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            if (mCurTransaction == null) {
+                mCurTransaction = mFragmentManager.beginTransaction();
+            }
+
+            // Do we already have this fragment?
+            String name = citys.get(position);
+            Fragment fragment = mFragmentManager.findFragmentByTag(name);
+            if (fragment != null) {
+                mCurTransaction.attach(fragment);
+            } else {
+                fragment = getItem(position);
+                mCurTransaction.add(container.getId(), fragment,
+                        citys.get(position));
+            }
+            if (fragment != mCurrentPrimaryItem) {
+                fragment.setMenuVisibility(false);
+                fragment.setUserVisibleHint(false);
+            }
+
+            return fragment;
+
         }
+
 
         @Override
         public Fragment getItem(int i) {
-//            Fragment fragment = new fiveidiot_main_fragment(citys.get(i));
-//            fragments.add(fragment);
-            return fragments.get(i);
+            Fragment fragment = new fiveidiot_main_fragment(citys.get(i));
+            return fragment;
         }
 
         @Override
@@ -329,13 +346,39 @@ public class fiveidiot extends FragmentActivity {
             return PagerAdapter.POSITION_NONE;
         }
 
-//        @Override
-//        public void destroyItem (ViewGroup container, int position, Object object) {
-//                FragmentManager manager = ((Fragment)object).getFragmentManager();
-//                FragmentTransaction trans = manager.beginTransaction();
-//                trans.remove((Fragment) object);
-//                trans.commit();
-//        }
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            if (mCurTransaction == null) {
+                mCurTransaction = mFragmentManager.beginTransaction();
+            }
+            mCurTransaction.detach((Fragment)object);
+        }
+
+        @Override
+        public void setPrimaryItem(ViewGroup container, int position, Object object) {
+            Fragment fragment = (Fragment)object;
+            if (fragment != mCurrentPrimaryItem) {
+                if (mCurrentPrimaryItem != null) {
+                    mCurrentPrimaryItem.setMenuVisibility(false);
+                    mCurrentPrimaryItem.setUserVisibleHint(false);
+                }
+                if (fragment != null) {
+                    fragment.setMenuVisibility(true);
+                    fragment.setUserVisibleHint(true);
+                }
+                mCurrentPrimaryItem = fragment;
+            }
+        }
+
+        @Override
+        public void finishUpdate(ViewGroup container) {
+            if (mCurTransaction != null) {
+                mCurTransaction.commitAllowingStateLoss();
+                mCurTransaction = null;
+                mFragmentManager.executePendingTransactions();
+            }
+        }
+
     }
 
     private void update_data() {
