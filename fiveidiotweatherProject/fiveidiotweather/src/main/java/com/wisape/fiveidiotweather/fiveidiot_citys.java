@@ -23,6 +23,7 @@ public class fiveidiot_citys {
 
     public boolean delete_city(String city) {
         if (citydb.delete(CITYS_TABLE, city) > 0) {
+            citydb.delete_table(city);
             return true;
         }
         return false;

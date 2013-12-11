@@ -132,14 +132,6 @@ public class fiveidiot extends FragmentActivity {
         receiver = new fiveidiot_receiver();
         IntentFilter update_filter = new IntentFilter(BROADCAST_UPDATE_UI);
         registerReceiver(receiver, update_filter);
-
-        update_citys();
-    }
-
-    private void update_citys() {
-        Intent intent = getIntent();
-        viewPager.setCurrentItem(citys.indexOf(intent.getStringExtra("addcity")));
-//        update_data();
     }
 
     @Override
@@ -185,6 +177,7 @@ public class fiveidiot extends FragmentActivity {
 //                add new city
                 Intent it = new Intent(this, fiveidiot_add_city.class);
                 startActivity(it);
+                slideLayout.closeDrawers();
                 return true;
             case R.id.havecitys:
                 if (cityList.isShown()) {
@@ -220,6 +213,7 @@ public class fiveidiot extends FragmentActivity {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Toast.makeText(getApplicationContext(), "position is " + i, Toast.LENGTH_LONG).show();
+            slideLayout.closeDrawers();
         }
     }
 
@@ -272,6 +266,7 @@ public class fiveidiot extends FragmentActivity {
         citys.add(city);
         update_ui();
         viewPager.setCurrentItem(citys.indexOf(city));
+        update_data();
     }
 
 
@@ -298,7 +293,6 @@ public class fiveidiot extends FragmentActivity {
             String addcity = intent.getStringExtra("addcity");
             if (addcity != null) {
                 addCity(addcity);
-                update_data();
             } else {
                 update_ui();
             }

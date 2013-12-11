@@ -67,12 +67,6 @@ public class fiveidiotreaddb {
         return false;
     }
 
-    private void delete_table(String table) {
-        SQLiteDatabase db = dbhelper.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + table);
-        db.close();
-    }
-
     public Map<String, Object> getTodayDetailMapData(String table) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         HashMap<String, Object> map = new HashMap<String, Object>();

@@ -77,6 +77,12 @@ public class fiveidiotdb {
         return rel;
     }
 
+    public void delete_table(String table) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + table);
+        db.close();
+    }
+
     public synchronized String getvalue(String table, String key) {
         String value = null;
         SQLiteDatabase db = dbhelper.getReadableDatabase();
