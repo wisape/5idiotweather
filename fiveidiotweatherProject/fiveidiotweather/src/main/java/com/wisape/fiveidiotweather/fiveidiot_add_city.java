@@ -70,12 +70,14 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
             String city = (String)adapterView.getItemAtPosition(i);
             String cityid = cityids_db.getCityid(city);
             //To do add the city
-            Toast.makeText(getApplicationContext(), "City is " +city + "id is" + cityid, Toast.LENGTH_SHORT).show();
+
             fiveidiot_citys city_box = new fiveidiot_citys(getApplicationContext());
-            city_box.set_city(city.replace(".", ""), cityid);
-            Intent intent = new Intent(fiveidiot_add_city.this, fiveidiot.class);
-            intent.putExtra("addcity", city);
-            startActivity(intent);
+            String city_b = city.replace(".", "");
+            city_box.set_city(city_b, cityid);
+            Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
+            it.putExtra("addcity", city_b);
+            Toast.makeText(getApplicationContext(), "添加城市：" +city_b , Toast.LENGTH_SHORT).show();
+            sendBroadcast(it);
             finish();
         }
     }

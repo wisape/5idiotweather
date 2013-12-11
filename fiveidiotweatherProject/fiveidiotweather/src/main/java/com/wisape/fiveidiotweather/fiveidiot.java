@@ -256,18 +256,53 @@ public class fiveidiot extends FragmentActivity {
         @Override
         public void onClick(View view) {
             int position = Integer.parseInt(view.getTag().toString());
+            Toast.makeText(getApplicationContext(), "删除城市:" + citys.get(position), Toast.LENGTH_SHORT).show();
             deleteCity(position);
             slideLayout.closeDrawers();
-            Toast.makeText(getApplicationContext(), "删除车概念时" + position, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void deleteCity(int position) {
+        mCitys.delete_city(citys.get(position));
         citys.remove(position);
+        update_ui();
+    }
+
+    private void addCity(String city) {
+        citys.add(city);
+        update_ui();
+        viewPager.setCurrentItem(citys.indexOf(city));
+    }
+
+
+    private void update_data() {
+        bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
+        if (!mservice.net_available()) {
+            Toast.makeText(getApplicationContext(), "网络不给力！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mservice.update_service();
+        unbindService(sconn);
+    }
+
+    private void update_ui() {
         cityArrayAdapter.notifyDataSetChanged();
         cityList.invalidate();
         mainPagerAdapter.notifyDataSetChanged();
         viewPager.invalidate();
+    }
+
+    private class fiveidiot_receiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String addcity = intent.getStringExtra("addcity");
+            if (addcity != null) {
+                addCity(addcity);
+                update_data();
+            } else {
+                update_ui();
+            }
+        }
     }
 
     private class MainPagerAdapter extends FragmentPagerAdapter
@@ -381,21 +416,4 @@ public class fiveidiot extends FragmentActivity {
 
     }
 
-    private void update_data() {
-        bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
-        mservice.update_service();
-        unbindService(sconn);
-    }
-
-    private void update_ui() {
-        mainPagerAdapter.notifyDataSetChanged();
-        viewPager.invalidate();
-    }
-
-    private class fiveidiot_receiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            update_ui();
-        }
-    }
 }

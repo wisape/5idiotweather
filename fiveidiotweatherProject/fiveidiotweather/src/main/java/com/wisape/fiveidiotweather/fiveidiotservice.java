@@ -200,7 +200,7 @@ public class fiveidiotservice extends Service {
         return myear + "年" + mmonth + "月" + mday + "日";
     }
 
-    private boolean net_available() {
+    public boolean net_available() {
         ConnectivityManager manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
         if (info != null && info.isAvailable()) {
