@@ -19,7 +19,7 @@ public class fiveidiot_widget_provider extends AppWidgetProvider {
             int appWidgetId = appWidgetIds[i];
             Intent intent = new Intent(context, fiveidiot.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.today_brief);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4x1);
             views.setOnClickPendingIntent(R.id.today_con, pendingIntent);
 
             // Tell the AppWidgetManager to perform an update on the current app widget
