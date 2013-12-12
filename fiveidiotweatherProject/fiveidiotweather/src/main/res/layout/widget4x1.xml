@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:background="@android:color/holo_blue_dark"
     android:id="@+id/today_con">
 
     <ImageView
@@ -9,19 +10,9 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:id="@+id/today_image"
+        android:scaleType="fitCenter"
         android:layout_gravity="center"
         android:src="@drawable/cloud"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="35dp"
-        android:text="30℃"
-        android:id="@+id/nowtemp"/>
 
     <LinearLayout
         android:orientation="vertical"
@@ -30,15 +21,31 @@
         android:layout_weight="1"
         android:gravity="center"
         android:layout_gravity="center">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="35dp"
+        android:text="30℃"
+        android:id="@+id/nowtemp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="@dimen/small_size"
             android:text="多云转晴"
             android:id="@+id/weather"/>
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,14 +54,7 @@
                 android:textSize="@dimen/small_size"
                 android:text="10℃~20℃"
                 android:id="@+id/temp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="@dimen/small_size"
-                android:text="西北风4级"
-                android:id="@+id/wind"/>
+
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -72,6 +72,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="上海"
         android:id="@id/city"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="@dimen/small_size"
+            android:text="西北风4级"
+            android:id="@+id/wind"/>
 </LinearLayout>
 
 </LinearLayout>
