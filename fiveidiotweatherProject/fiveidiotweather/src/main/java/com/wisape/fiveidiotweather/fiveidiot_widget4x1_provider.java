@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by wisape on 13-12-3.
  */
-public class fiveidiot_widget_provider extends AppWidgetProvider {
+public class fiveidiot_widget4x1_provider extends AppWidgetProvider {
     private fiveidiotreaddb readdb;
     private fiveidiot_citys citydb;
     private RemoteViews views;
