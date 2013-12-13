@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Created by wisape on 13-11-17.
