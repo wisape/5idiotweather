@@ -146,40 +146,40 @@
                 android:text="10℃~20℃"
                 android:id="@+id/temp_4"/>
     </LinearLayout>
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="星期一"
-                android:id="@+id/week_5"/>
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.4"
-                android:id="@+id/image_5"
-                android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="多云转晴"
-                android:id="@+id/weather_5"/>
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10℃~20℃"
-                android:id="@+id/temp5"/>
-    </LinearLayout>
+    <!--<LinearLayout-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1">-->
+        <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                <!--android:text="星期一"-->
+                <!--android:id="@+id/week_5"/>-->
+        <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="0.4"-->
+                <!--android:id="@+id/image_5"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:src="@drawable/cloud"/>-->
+        <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                <!--android:text="多云转晴"-->
+                <!--android:id="@+id/weather_5"/>-->
+        <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                <!--android:text="10℃~20℃"-->
+                <!--android:id="@+id/temp5"/>-->
+    <!--</LinearLayout>-->
     </LinearLayout>
     <!--<ListView-->
             <!--android:id="@id/android:list"-->

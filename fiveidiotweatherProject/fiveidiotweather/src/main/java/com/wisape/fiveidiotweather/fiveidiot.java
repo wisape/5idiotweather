@@ -44,6 +44,7 @@ import java.util.ArrayList;
 
 public class fiveidiot extends FragmentActivity {
     public final static String BROADCAST_UPDATE_UI = "com.wisape.fiveidiotweather.update_ui";
+    public final static String BROADCAST_UPDATE_WIDGET = "com.wisape.fiveidiotweather.update_widget";
     private fiveidiot_receiver receiver;
     private ServiceConnection sconn;
     private Intent service_intent;

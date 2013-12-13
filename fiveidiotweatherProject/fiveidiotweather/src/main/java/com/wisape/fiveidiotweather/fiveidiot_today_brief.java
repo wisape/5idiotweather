@@ -49,6 +49,7 @@ public class fiveidiot_today_brief extends Fragment {
         if (data_map.get("city") == null)
             return;
         ((TextView) view.findViewById(R.id.city)).setText(data_map.get("city").toString());
+        ((TextView) view.findViewById(R.id.updatetime)).setText("(更新时间：" + setDefault(data_map.get("todayupdatetime"), "1") + ")");
         ((TextView) view.findViewById(R.id.date)).setText(setDefault(data_map.get("date"), "1"));
         ((TextView) view.findViewById(R.id.week)).setText(setDefault(data_map.get("week0"),"1"));
         ((TextView) view.findViewById(R.id.temp)).setText(setDefault(data_map.get("temp0"),"1"));

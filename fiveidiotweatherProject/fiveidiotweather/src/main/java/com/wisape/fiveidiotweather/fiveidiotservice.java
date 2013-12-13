@@ -111,7 +111,9 @@ public class fiveidiotservice extends Service {
         other = unwrap_save_data(city, city_id);
         if (today || other) {
             Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
+            Intent widget_intent = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
             sendBroadcast(it);
+            sendBroadcast(widget_intent);
         }
     }
 
@@ -191,7 +193,7 @@ public class fiveidiotservice extends Service {
         return true;
     }
 
-    private String system_date() {
+    public String system_date() {
         Calendar calendar = Calendar.getInstance();
         int myear, mmonth, mday;
         myear = calendar.get(Calendar.YEAR);
