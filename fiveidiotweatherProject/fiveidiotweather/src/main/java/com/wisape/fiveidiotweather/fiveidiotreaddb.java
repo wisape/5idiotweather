@@ -109,4 +109,24 @@ public class fiveidiotreaddb {
         List<Map<String, Object>> list = getBriefAdapterData(table);
         return list.subList(1, list.size());
     }
+
+    public int getImageId(String image_title) {
+        if(image_title.equals("晴"))
+            return R.drawable.sun;
+        else if(image_title.equals("阴"))
+            return R.drawable.cloud;
+        else if(image_title.equals("多云"))
+            return R.drawable.cloud_sun;
+        else if(image_title.equals("阵雨"))
+            return R.drawable.rain_sun;
+        else if(image_title.equals("雾") || image_title.equals("霾"))
+            return R.drawable.fog;
+
+        if (image_title.contains("雨"))
+            return R.drawable.rain;
+        if (image_title.contains("雪"))
+            return R.drawable.snow;
+
+        return R.drawable.dust;
+    }
 }

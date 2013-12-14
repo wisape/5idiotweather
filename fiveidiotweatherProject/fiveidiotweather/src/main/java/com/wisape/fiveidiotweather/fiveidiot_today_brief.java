@@ -55,6 +55,6 @@ public class fiveidiot_today_brief extends Fragment {
         ((TextView) view.findViewById(R.id.weather)).setText(setDefault(data_map.get("weather0"),"1"));
         ((TextView) view.findViewById(R.id.wind)).setText(setDefault(data_map.get("wind"),"1"));
         ((TextView) view.findViewById(R.id.nowtemp)).setText(setDefault(data_map.get("nowtemp"),"1") + "℃");
-        ((ImageView) view.findViewById(R.id.today_image)).setImageResource(R.drawable.cloud);
+        ((ImageView) view.findViewById(R.id.today_image)).setImageResource(readdb.getImageId(data_map.get("image").toString()));
     }
 }
