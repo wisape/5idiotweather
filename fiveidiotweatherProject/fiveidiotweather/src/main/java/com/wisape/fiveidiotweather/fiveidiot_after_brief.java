@@ -52,16 +52,16 @@ public class fiveidiot_after_brief extends Fragment {
         ((TextView) view.findViewById(R.id.week_2)).setText(setDefault(data_map.get(1).get("week"),"1"));
         ((TextView) view.findViewById(R.id.temp_2)).setText(setDefault(data_map.get(1).get("temp"),"1"));
         ((TextView) view.findViewById(R.id.weather_2)).setText(setDefault(data_map.get(1).get("weather"),"1"));
-        ((ImageView) view.findViewById(R.id.image_2)).setImageResource(readdb.getImageId(data_map.get(0).get("image").toString()));
+        ((ImageView) view.findViewById(R.id.image_2)).setImageResource(readdb.getImageId(data_map.get(1).get("image").toString()));
 
         ((TextView) view.findViewById(R.id.week_3)).setText(setDefault(data_map.get(2).get("week"),"1"));
         ((TextView) view.findViewById(R.id.temp_3)).setText(setDefault(data_map.get(2).get("temp"),"1"));
         ((TextView) view.findViewById(R.id.weather_3)).setText(setDefault(data_map.get(2).get("weather"),"1"));
-        ((ImageView) view.findViewById(R.id.image_3)).setImageResource(readdb.getImageId(data_map.get(0).get("image").toString()));
+        ((ImageView) view.findViewById(R.id.image_3)).setImageResource(readdb.getImageId(data_map.get(2).get("image").toString()));
 
         ((TextView) view.findViewById(R.id.week_4)).setText(setDefault(data_map.get(3).get("week"),"1"));
         ((TextView) view.findViewById(R.id.temp_4)).setText(setDefault(data_map.get(3).get("temp"),"1"));
         ((TextView) view.findViewById(R.id.weather_4)).setText(setDefault(data_map.get(3).get("weather"),"1"));
-        ((ImageView) view.findViewById(R.id.image_4)).setImageResource(readdb.getImageId(data_map.get(0).get("image").toString()));
+        ((ImageView) view.findViewById(R.id.image_4)).setImageResource(readdb.getImageId(data_map.get(3).get("image").toString()));
     }
 }
