@@ -20,7 +20,7 @@
         android:id="@+id/discard_city"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#444"
+        android:background="@android:color/transparent"
         android:focusable="false"
         android:layout_marginRight="5dp"/>
 
