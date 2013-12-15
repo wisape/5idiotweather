@@ -1,10 +1,12 @@
 package com.wisape.fiveidiotweather;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -250,10 +252,28 @@ public class fiveidiot extends FragmentActivity {
     private class DiscardClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            int position = Integer.parseInt(view.getTag().toString());
-            Toast.makeText(getApplicationContext(), "删除城市:" + citys.get(position), Toast.LENGTH_SHORT).show();
-            deleteCity(position);
             slideLayout.closeDrawers();
+            final int position = Integer.parseInt(view.getTag().toString());
+            AlertDialog.Builder builder = new AlertDialog.Builder(fiveidiot.this);
+            builder.setMessage("确定删除城市：" + citys.get(position) + "?");
+            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(getApplicationContext(), "删除城市:" + citys.get(position), Toast.LENGTH_SHORT).show();
+                    deleteCity(position);
+                    slideLayout.closeDrawers();
+                    return;
+                }
+            });
+
+            builder.setNegativeButton("不删除", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    return;
+                }
+            });
+
+            builder.create().show();
         }
     }
 

@@ -20,7 +20,6 @@ import android.widget.Toast;
 public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTextListener {
     private fiveidiot_cityids_db cityids_db;
     private ListView listView;
-    private SearchView searchView;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_city_activity);
