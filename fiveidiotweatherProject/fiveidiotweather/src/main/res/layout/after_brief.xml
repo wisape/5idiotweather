@@ -14,11 +14,13 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            style="@style/after1"
             android:layout_weight="1">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+               style="@style/after1week"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="星期一"
                 android:id="@+id/week_1"/>
@@ -48,11 +50,13 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+        style="@style/after2"
             android:layout_weight="1">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+            style="@style/after2week"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="星期一"
                 android:id="@+id/week_2"/>
@@ -82,11 +86,13 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+        style="@style/after3"
             android:layout_weight="1">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+            style="@style/after3week"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="星期一"
                 android:id="@+id/week_3"/>
@@ -116,11 +122,13 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+        style="@style/after4"
             android:layout_weight="1">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+            style="@style/after4week"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="星期一"
                 android:id="@+id/week_4"/>

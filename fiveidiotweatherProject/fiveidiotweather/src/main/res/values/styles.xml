@@ -17,4 +17,41 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
+    <style name="main_background">
+        <item name="android:background">#2F7CBF</item>
+    </style>
+
+    <style name="today_fragment">
+        <item name="android:background">#4000</item>
+    </style>
+
+    <style name="after_fragment">
+        <item name="android:background">#4000</item>
+    </style>
+    <style name="after1">
+        <item name="android:background">#2000</item>
+    </style>
+    <style name="after2">
+        <item name="android:background">#5000</item>
+    </style>
+    <style name="after3">
+        <item name="android:background">#6000</item>
+    </style>
+    <style name="after4">
+        <item name="android:background">#1000</item>
+    </style>
+    <style name="after1week">
+        <item name="android:background">#4000</item>
+    </style>
+    <style name="after2week">
+        <item name="android:background">#2000</item>
+    </style>
+    <style name="after3week">
+        <item name="android:background">#3000</item>
+    </style>
+    <style name="after4week">
+        <item name="android:background">#2000</item>
+    </style>
+
+
 </resources>
