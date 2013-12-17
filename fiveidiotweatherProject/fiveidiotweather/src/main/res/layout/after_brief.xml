@@ -14,13 +14,14 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            style="@style/after1"
+            android:background="?attr/after1Color"
             android:layout_weight="1">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-               style="@style/after1week"
+                android:background="?attr/after1weekColor"
+                android:textColor="?attr/subtextColor"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="星期一"
                 android:id="@+id/week_1"/>
@@ -50,13 +51,14 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-        style="@style/after2"
+            android:background="?attr/after2Color"
             android:layout_weight="1">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-            style="@style/after2week"
+                android:background="?attr/after2weekColor"
+                android:textColor="?attr/subtextColor"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="星期一"
                 android:id="@+id/week_2"/>
@@ -86,13 +88,14 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-        style="@style/after3"
+            android:background="?attr/after3Color"
             android:layout_weight="1">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-            style="@style/after3week"
+                android:background="?attr/after3weekColor"
+                android:textColor="?attr/subtextColor"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="星期一"
                 android:id="@+id/week_3"/>
@@ -122,13 +125,14 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-        style="@style/after4"
+            android:background="?attr/after4Color"
             android:layout_weight="1">
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-            style="@style/after4week"
+                android:background="?attr/after4weekColor"
+                android:textColor="?attr/subtextColor"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="星期一"
                 android:id="@+id/week_4"/>
@@ -154,46 +158,6 @@
                 android:text="10℃~20℃"
                 android:id="@+id/temp_4"/>
     </LinearLayout>
-    <!--<LinearLayout-->
-            <!--android:orientation="vertical"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1">-->
-        <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:gravity="center"-->
-                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
-                <!--android:text="星期一"-->
-                <!--android:id="@+id/week_5"/>-->
-        <!--<ImageView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="0.4"-->
-                <!--android:id="@+id/image_5"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:src="@drawable/cloud"/>-->
-        <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:gravity="center"-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-                <!--android:text="多云转晴"-->
-                <!--android:id="@+id/weather_5"/>-->
-        <!--<TextView-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:gravity="center"-->
-                <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-                <!--android:text="10℃~20℃"-->
-                <!--android:id="@+id/temp5"/>-->
-    <!--</LinearLayout>-->
     </LinearLayout>
-    <!--<ListView-->
-            <!--android:id="@id/android:list"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:clickable="false">-->
-            <!--</ListView>-->
+
 </FrameLayout>

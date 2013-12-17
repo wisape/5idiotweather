@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="mainColor" format="color"/>
+    <attr name="todayColor" format="color"/>
+    <attr name="after1Color" format="color"/>
+    <attr name="after2Color" format="color"/>
+    <attr name="after3Color" format="color"/>
+    <attr name="after4Color" format="color"/>
+    <attr name="after1weekColor" format="color"/>
+    <attr name="after2weekColor" format="color"/>
+    <attr name="after3weekColor" format="color"/>
+    <attr name="after4weekColor" format="color"/>
+    <attr name="subtextColor" format="color"/>
+</resources>

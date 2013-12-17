@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/main_background"
+    android:background="?attr/mainColor"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
@@ -10,9 +10,9 @@
     <FrameLayout android:id="@+id/today_brief"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        style="@style/today_fragment"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="?attr/todayColor"
         android:layout_weight="0.5"/>
 
     <!--spin the base weather information-->
@@ -22,10 +22,8 @@
     <FrameLayout android:id="@+id/weather_other"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        style="@style/after_fragment"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
         android:layout_weight="1.2" />
 
 </LinearLayout>

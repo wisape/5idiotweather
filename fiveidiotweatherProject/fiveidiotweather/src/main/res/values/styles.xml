@@ -22,41 +22,19 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <style name="main_background">
-        <item name="android:background">#555</item>
+    <style name="DefaultTheme" parent="AppBaseTheme">
+        <item name="android:textColor">#eee</item>
+        <item name="mainColor">#555</item>
+        <item name="todayColor">#6000</item>
+        <item name="after1Color">#5000</item>
+        <item name="after2Color">#3000</item>
+        <item name="after3Color">#4000</item>
+        <item name="after4Color">#2000</item>
+        <item name="after1weekColor">#8000</item>
+        <item name="after2weekColor">#7000</item>
+        <item name="after3weekColor">#9000</item>
+        <item name="after4weekColor">#7000</item>
+        <item name="subtextColor">#555</item>
     </style>
-
-    <style name="today_fragment">
-        <item name="android:background">#4000</item>
-    </style>
-
-    <style name="after_fragment">
-        <item name="android:background">#4000</item>
-    </style>
-    <style name="after1">
-        <item name="android:background">#2000</item>
-    </style>
-    <style name="after2">
-        <item name="android:background">#5000</item>
-    </style>
-    <style name="after3">
-        <item name="android:background">#6000</item>
-    </style>
-    <style name="after4">
-        <item name="android:background">#1000</item>
-    </style>
-    <style name="after1week">
-        <item name="android:background">#4000</item>
-    </style>
-    <style name="after2week">
-        <item name="android:background">#2000</item>
-    </style>
-    <style name="after3week">
-        <item name="android:background">#3000</item>
-    </style>
-    <style name="after4week">
-        <item name="android:background">#2000</item>
-    </style>
-
 
 </resources>

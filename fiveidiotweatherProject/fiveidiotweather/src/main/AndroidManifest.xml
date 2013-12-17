@@ -14,7 +14,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/DefaultTheme" >
         <activity
             android:name="com.wisape.fiveidiotweather.fiveidiot"
             android:label="@string/app_name" >
