@@ -216,6 +216,14 @@ public class fiveidiot extends FragmentActivity {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Toast.makeText(getApplicationContext(), "position is " + i, Toast.LENGTH_LONG).show();
+            switch (i) {
+                case 0:
+                    Intent intent = new Intent(getApplicationContext(), fiveidiot_setting.class);
+                    startActivity(intent);
+                    break;
+                default:
+                    break;
+            }
             slideLayout.closeDrawers();
         }
     }
