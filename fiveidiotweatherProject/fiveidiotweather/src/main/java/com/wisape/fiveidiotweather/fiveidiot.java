@@ -218,8 +218,12 @@ public class fiveidiot extends FragmentActivity {
             Toast.makeText(getApplicationContext(), "position is " + i, Toast.LENGTH_LONG).show();
             switch (i) {
                 case 0:
-                    Intent intent = new Intent(getApplicationContext(), fiveidiot_setting.class);
-                    startActivity(intent);
+                    Intent setting_intent = new Intent(getApplicationContext(), fiveidiot_setting.class);
+                    startActivity(setting_intent);
+                    break;
+                case 1:
+                    Intent about_intent = new Intent(getApplicationContext(), fiveidiot_about.class);
+                    startActivity(about_intent);
                     break;
                 default:
                     break;

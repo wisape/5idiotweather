@@ -25,7 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".fiveidiot_add_city" android:theme="@style/AddCityTheme"/>
-        <activity android:name=".fiveidiot_setting" />
+        <activity android:name=".fiveidiot_setting" android:theme="@style/AddCityTheme"/>
+        <activity android:name=".fiveidiot_about" android:theme="@style/AddCityTheme"/>
 
         <receiver android:name=".fiveidiot_widget4x1_provider"
             android:icon="@drawable/ic_launcher">
