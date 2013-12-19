@@ -2,22 +2,40 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="abc"
-        android:key="pref_key_storage_settings">
-        <CheckBoxPreference
-            android:key="pref_key_auto_delete"
-            android:summary="ced"
-            android:title="abc"
-            android:defaultValue="false"/>
+        android:title="@string/setting_widget"
+        android:key="setting_widget">
         <Preference
-            android:key="pref_key_sms_delete_limit"
-            android:dependency="pref_key_auto_delete"
-            android:summary="efd"
-            android:title="sdfa" />
+            android:key="setting_widget_color"
+            android:summary="@string/setting_widget_color_detail"
+            android:title="@string/setting_widget_color" />
         <Preference
-            android:key="pref_key_mms_delete_limit"
-            android:dependency="pref_key_auto_delete"
-            android:summary="asdfasdf"
-            android:title="adfaf"/>
+            android:key="setting_widget_trans"
+            android:summary="@string/setting_widget_trans_detail"
+            android:title="@string/setting_widget_trans"/>
+        <SwitchPreference
+            android:key="setting_widget_trans"
+            android:summary="@string/setting_widget_trans_detail"
+            android:title="@string/setting_widget_trans"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/setting_main"
+        android:key="setting_main">
+        <ListPreference
+            android:key="setting_main_theme"
+            android:title="@string/setting_main_theme"
+            android:summary="@string/setting_main_theme_detail"
+            android:dialogTitle="@string/setting_main_theme_detail"
+            android:entries="@array/setting_main_theme_list"
+            android:entryValues="@array/setting_main_theme_list_value"
+            android:defaultValue="1" />
+        <com.wisape.fiveidiotweather.TimePreference
+            android:key="setting_main_period"
+            android:summary="@string/setting_main_period_detail"
+            android:title="@string/setting_main_period"/>
+        <Preference
+            android:key="setting_main_period"
+            android:summary="@string/setting_main_period_detail"
+            android:title="@string/setting_main_period"/>
+
     </PreferenceCategory>
 </PreferenceScreen>

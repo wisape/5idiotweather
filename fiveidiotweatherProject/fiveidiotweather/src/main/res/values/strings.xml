@@ -14,5 +14,25 @@
         <item>关于</item>
     </string-array>
 
+    <string name="setting_widget">插件</string>
+    <string name="setting_widget_color">颜色</string>
+    <string name="setting_widget_color_detail">更改插件颜色</string>
+    <string name="setting_widget_trans">透明度</string>
+    <string name="setting_widget_trans_detail">更改插件透明度</string>
+    <string name="setting_main">主界面</string>
+    <string name="setting_main_theme">主题</string>
+    <string name="setting_main_theme_detail">设置主界面主题</string>
+    <string name="setting_main_period">更新周期</string>
+    <string name="setting_main_period_detail">设置天气更新周期</string>
+    <string-array name="setting_main_theme_list">
+        <item>酷黑(默认)</item>
+        <item>深蓝</item>
+    </string-array>
+
+    <string-array name="setting_main_theme_list_value">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
 
 </resources>

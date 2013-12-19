@@ -27,6 +27,7 @@
         <activity android:name=".fiveidiot_add_city" android:theme="@style/AddCityTheme"/>
         <activity android:name=".fiveidiot_setting" android:theme="@style/AddCityTheme"/>
         <activity android:name=".fiveidiot_about" android:theme="@style/AddCityTheme"/>
+        <activity android:name=".TimePreference" />
 
         <receiver android:name=".fiveidiot_widget4x1_provider"
             android:icon="@drawable/ic_launcher">
