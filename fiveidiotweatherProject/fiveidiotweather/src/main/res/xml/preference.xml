@@ -12,10 +12,6 @@
             android:key="setting_widget_trans"
             android:summary="@string/setting_widget_trans_detail"
             android:title="@string/setting_widget_trans"/>
-        <SwitchPreference
-            android:key="setting_widget_trans"
-            android:summary="@string/setting_widget_trans_detail"
-            android:title="@string/setting_widget_trans"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/setting_main"
