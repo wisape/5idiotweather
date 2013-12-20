@@ -4,11 +4,11 @@
     <PreferenceCategory
         android:title="@string/setting_widget"
         android:key="setting_widget">
-        <Preference
+        <com.wisape.fiveidiotweather.ColorPickerPreference
             android:key="setting_widget_color"
             android:summary="@string/setting_widget_color_detail"
             android:title="@string/setting_widget_color" />
-        <Preference
+        <com.wisape.fiveidiotweather.SeekBarPreference
             android:key="setting_widget_trans"
             android:summary="@string/setting_widget_trans_detail"
             android:title="@string/setting_widget_trans"/>
