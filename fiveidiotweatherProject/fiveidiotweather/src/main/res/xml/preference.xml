@@ -28,10 +28,6 @@
             android:key="setting_main_period"
             android:summary="@string/setting_main_period_detail"
             android:title="@string/setting_main_period"/>
-        <Preference
-            android:key="setting_main_period"
-            android:summary="@string/setting_main_period_detail"
-            android:title="@string/setting_main_period"/>
 
     </PreferenceCategory>
 </PreferenceScreen>

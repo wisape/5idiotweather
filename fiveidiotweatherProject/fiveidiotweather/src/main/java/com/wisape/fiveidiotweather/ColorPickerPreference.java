@@ -10,6 +10,7 @@ import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -22,7 +23,7 @@ public class ColorPickerPreference extends DialogPreference {
     private final static int mHeight = 600;
     private final static int mWidth = 400;
     private ColorPickerView colorPickerView;
-    private int mInitialColor;
+    private int mInitialColor = 0xFF000000;
     public ColorPickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setPositiveButtonText("设置");
@@ -31,19 +32,49 @@ public class ColorPickerPreference extends DialogPreference {
 
     @Override
     protected View onCreateDialogView() {
-//        Window window = getDialog().getWindow();
-//        WindowManager.LayoutParams params = window.getAttributes();
-//        params.height = 600;
-//        params.width = 400;
-//        window.setAttributes(params);
-        colorPickerView = new ColorPickerView(getContext(), 600, 400);
+        colorPickerView = new ColorPickerView(getContext(), 500, 500);
         return(colorPickerView);
     }
 
+    @Override
+    protected void onBindDialogView(View v) {
+        super.onBindDialogView(v);
+        colorPickerView.setColor(mInitialColor);
+    }
 
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//    }
+    @Override
+    protected void onDialogClosed(boolean positiveResult) {
+        super.onDialogClosed(positiveResult);
+        if (positiveResult) {
+            mInitialColor = colorPickerView.getColor();
+            String value = "#" + Integer.toHexString(mInitialColor);
+            if (callChangeListener(value)) {
+                Log.d("5sha", "add value " + value);
+
+                persistString(value);
+            }
+        }
+    }
+
+    @Override
+    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
+        String value = null;
+
+        if (restoreValue ) {
+            if (defaultValue == null) {
+                value = getPersistedString("#FF000000");
+            }
+            else {
+                value = getPersistedString(defaultValue.toString());
+            }
+        }
+        else {
+            value=defaultValue.toString();
+        }
+
+        mInitialColor = Color.parseColor(value);
+        Log.d("5sha", "get value " + Integer.toHexString(mInitialColor));
+    }
 
     private class ColorPickerView extends View {
         private Paint mPaint;//渐变色环画笔
@@ -70,11 +101,13 @@ public class ColorPickerPreference extends DialogPreference {
         private boolean highlightCenter;//高亮
         private boolean highlightCenterLittle;//微亮
 
+        private int centerColor;
+
         public ColorPickerView(Context context, int height, int width) {
             super(context);
-            this.mHeight = height - 36;
+            this.mHeight = height;
             this.mWidth = width;
-            setMinimumHeight(height - 36);
+            setMinimumHeight(height);
             setMinimumWidth(width);
 
             //渐变色环参数
@@ -210,6 +243,7 @@ public class ColorPickerPreference extends DialogPreference {
                     invalidate();
                     break;
             }
+            centerColor = mCenterPaint.getColor();
             return true;
         }
 
@@ -324,6 +358,13 @@ public class ColorPickerPreference extends DialogPreference {
 
         private int ave(int s, int d, float p) {
             return s + Math.round(p * (d - s));
+        }
+
+        public void setColor(int color) {
+            mCenterPaint.setColor(color);
+        }
+        public int getColor() {
+            return centerColor;
         }
     }
 }

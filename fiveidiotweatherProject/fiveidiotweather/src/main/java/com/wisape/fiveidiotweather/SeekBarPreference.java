@@ -53,8 +53,6 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
             mValue = seekBar.getProgress();
             String value = String.valueOf(mValue);
             if (callChangeListener(value)) {
-                Log.d("5sha", "add value " + value);
-
                 persistString(value);
             }
         }
@@ -82,7 +80,6 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
         }
 
         mValue = Integer.parseInt(value);
-        Log.d("5sha", "get value " + mValue);
     }
 
     @Override
