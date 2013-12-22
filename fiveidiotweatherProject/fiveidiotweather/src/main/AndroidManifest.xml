@@ -28,6 +28,15 @@
         <activity android:name=".fiveidiot_setting" android:theme="@style/AddCityTheme"/>
         <activity android:name=".fiveidiot_about" android:theme="@style/AddCityTheme"/>
 
+        <receiver android:name=".fiveidiot_clock_widget4x1_provider"
+            android:icon="@drawable/ic_launcher">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/fiveidiot_clock_widget4x1_info" />
+        </receiver>
+
         <receiver android:name=".fiveidiot_widget4x1_provider"
             android:icon="@drawable/ic_launcher">
             <intent-filter>
