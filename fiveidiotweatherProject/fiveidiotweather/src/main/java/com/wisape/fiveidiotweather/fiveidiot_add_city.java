@@ -1,5 +1,6 @@
 package com.wisape.fiveidiotweather;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,7 @@ import android.widget.Toast;
  * Created by wisape on 13-12-2.
  */
 public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTextListener {
+    private ActionBar actionBar;
     private fiveidiot_cityids_db cityids_db;
     private ListView listView;
     public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,20 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
         listView = (ListView) findViewById(R.id.add_city);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cityids_db.getProvinces()));
         listView.setOnItemClickListener(new onProvinceItemClick());
+        actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("添加城市");
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

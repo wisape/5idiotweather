@@ -1,8 +1,10 @@
 package com.wisape.fiveidiotweather;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -10,6 +12,7 @@ import android.webkit.WebViewClient;
  * Created by wisape on 13-12-18.
  */
 public class fiveidiot_about extends Activity {
+    private ActionBar actionBar;
     private WebView webView;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +21,20 @@ public class fiveidiot_about extends Activity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("http://www.baidu.com");
         super.setContentView(webView);
+        actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("关于");
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
