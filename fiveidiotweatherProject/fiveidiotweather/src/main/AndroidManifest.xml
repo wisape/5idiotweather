@@ -46,6 +46,15 @@
                 android:resource="@xml/fiveidiot_widget4x1_info" />
         </receiver>
 
+        <receiver android:name=".fiveidiot_clock_widget4x2_provider"
+            android:icon="@drawable/ic_launcher">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/fiveidiot_clock_widget4x2_info" />
+        </receiver>
+
         <receiver android:name=".fiveidiot_widget4x2_provider"
             android:icon="@drawable/ic_launcher">
             <intent-filter>
