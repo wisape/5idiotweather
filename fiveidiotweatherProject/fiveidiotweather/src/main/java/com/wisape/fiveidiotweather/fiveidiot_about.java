@@ -19,7 +19,7 @@ public class fiveidiot_about extends Activity {
         webView = new WebView(this);
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("http://www.baidu.com");
+        webView.loadUrl("http://5idiot.duapp.com");
         super.setContentView(webView);
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
