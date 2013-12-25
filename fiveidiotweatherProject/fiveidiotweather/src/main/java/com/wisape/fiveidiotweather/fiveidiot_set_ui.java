@@ -76,29 +76,30 @@ public class fiveidiot_set_ui {
         views.setTextViewText(R.id.week_1, setDefault(data_map.get(0).get("week"), "1"));
         views.setTextViewText(R.id.temp_1, setDefault(data_map.get(0).get("temp"), "1"));
         views.setTextViewText(R.id.weather_1, setDefault(data_map.get(0).get("weather"), "1"));
-        views.setImageViewResource(R.id.image_1, setDefaultImage(readdb.getImageId(data_map.get(0).get("image").toString()),
+        views.setImageViewResource(R.id.image_1, setDefaultImage(readdb.getImageId(setDefault(data_map.get(0).get("image"), "1")),
                 R.drawable.download));
 
         views.setTextViewText(R.id.week_2, setDefault(data_map.get(1).get("week"), "1"));
         views.setTextViewText(R.id.temp_2, setDefault(data_map.get(1).get("temp"), "1"));
         views.setTextViewText(R.id.weather_2, setDefault(data_map.get(1).get("weather"), "1"));
-        views.setImageViewResource(R.id.image_2, setDefaultImage(readdb.getImageId(data_map.get(1).get("image").toString()),
+        views.setImageViewResource(R.id.image_2, setDefaultImage(readdb.getImageId(setDefault(data_map.get(1).get("image"), "1")),
                 R.drawable.download));
 
         views.setTextViewText(R.id.week_3, setDefault(data_map.get(2).get("week"), "1"));
         views.setTextViewText(R.id.temp_3, setDefault(data_map.get(2).get("temp"), "1"));
         views.setTextViewText(R.id.weather_3, setDefault(data_map.get(2).get("weather"), "1"));
-        views.setImageViewResource(R.id.image_3, setDefaultImage(readdb.getImageId(data_map.get(2).get("image").toString()),
+        views.setImageViewResource(R.id.image_3, setDefaultImage(readdb.getImageId(setDefault(data_map.get(2).get("image"), "1")),
                 R.drawable.download));
 
         views.setTextViewText(R.id.week_4, setDefault(data_map.get(3).get("week"), "1"));
         views.setTextViewText(R.id.temp_4, setDefault(data_map.get(3).get("temp"), "1"));
         views.setTextViewText(R.id.weather_4, setDefault(data_map.get(3).get("weather"), "1"));
-        views.setImageViewResource(R.id.image_4, setDefaultImage(readdb.getImageId(data_map.get(3).get("image").toString()),
+        views.setImageViewResource(R.id.image_4, setDefaultImage(readdb.getImageId(setDefault(data_map.get(3).get("image"), "1")),
                 R.drawable.download));
     }
 
     public void setTodayUi(View view, String mcity) {
+        ((TextView) view.findViewById(R.id.city)).setText(mcity);
         Map<String, Object> data_map = readdb.getTodayBriefMapData(mcity);
         if (data_map.get("city") == null)
             return;
@@ -116,29 +117,30 @@ public class fiveidiot_set_ui {
 
     public void setAfterUi(View view, String mcity) {
         List<Map<String, Object>> data_map = readdb.getAfterBriefAdapterData(mcity);
-
+        if (data_map == null)
+            return;
         ((TextView) view.findViewById(R.id.week_1)).setText(setDefault(data_map.get(0).get("week"), "1"));
         ((TextView) view.findViewById(R.id.temp_1)).setText(setDefault(data_map.get(0).get("temp"),"1"));
         ((TextView) view.findViewById(R.id.weather_1)).setText(setDefault(data_map.get(0).get("weather"),"1"));
-        ((ImageView) view.findViewById(R.id.image_1)).setImageResource(setDefaultImage(readdb.getImageId(data_map.get(0).get("image").toString()),
+        ((ImageView) view.findViewById(R.id.image_1)).setImageResource(setDefaultImage(readdb.getImageId(setDefault(data_map.get(0).get("image"), "1")),
                 R.drawable.download));
 
         ((TextView) view.findViewById(R.id.week_2)).setText(setDefault(data_map.get(1).get("week"), "1"));
         ((TextView) view.findViewById(R.id.temp_2)).setText(setDefault(data_map.get(1).get("temp"),"1"));
         ((TextView) view.findViewById(R.id.weather_2)).setText(setDefault(data_map.get(1).get("weather"),"1"));
-        ((ImageView) view.findViewById(R.id.image_2)).setImageResource(setDefaultImage(readdb.getImageId(data_map.get(1).get("image").toString()),
+        ((ImageView) view.findViewById(R.id.image_2)).setImageResource(setDefaultImage(readdb.getImageId(setDefault(data_map.get(1).get("image"), "1")),
                 R.drawable.download));
 
         ((TextView) view.findViewById(R.id.week_3)).setText(setDefault(data_map.get(2).get("week"),"1"));
         ((TextView) view.findViewById(R.id.temp_3)).setText(setDefault(data_map.get(2).get("temp"),"1"));
         ((TextView) view.findViewById(R.id.weather_3)).setText(setDefault(data_map.get(2).get("weather"),"1"));
-        ((ImageView) view.findViewById(R.id.image_3)).setImageResource(setDefaultImage(readdb.getImageId(data_map.get(2).get("image").toString()),
+        ((ImageView) view.findViewById(R.id.image_3)).setImageResource(setDefaultImage(readdb.getImageId(setDefault(data_map.get(2).get("image"), "1")),
                 R.drawable.download));
 
         ((TextView) view.findViewById(R.id.week_4)).setText(setDefault(data_map.get(3).get("week"),"1"));
         ((TextView) view.findViewById(R.id.temp_4)).setText(setDefault(data_map.get(3).get("temp"),"1"));
         ((TextView) view.findViewById(R.id.weather_4)).setText(setDefault(data_map.get(3).get("weather"),"1"));
-        ((ImageView) view.findViewById(R.id.image_4)).setImageResource(setDefaultImage(readdb.getImageId(data_map.get(3).get("image").toString()),
+        ((ImageView) view.findViewById(R.id.image_4)).setImageResource(setDefaultImage(readdb.getImageId(setDefault(data_map.get(3).get("image"), "1")),
                 R.drawable.download));
     }
 }
