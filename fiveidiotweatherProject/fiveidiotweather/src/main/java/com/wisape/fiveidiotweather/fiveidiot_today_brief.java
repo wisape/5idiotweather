@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by wisape on 13-11-17.
  */
 public class fiveidiot_today_brief extends Fragment {
-    private fiveidiotreaddb readdb;
+    private fiveidiot_set_ui set_ui;
     private String mcity;
 
     public fiveidiot_today_brief(String city) {
@@ -25,7 +25,7 @@ public class fiveidiot_today_brief extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        readdb = new fiveidiotreaddb(getActivity());
+        set_ui = new fiveidiot_set_ui(getActivity());
     }
 
     @Override
@@ -33,28 +33,7 @@ public class fiveidiot_today_brief extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.today_brief, container, false);
-        Map<String, Object> brief_map = readdb.getTodayBriefMapData(mcity);
-        setViewData(rootView, brief_map);
+        set_ui.setTodayUi(rootView, mcity);
         return rootView;
-    }
-
-    private String setDefault(Object str1, String str2) {
-        if (str1 == null)
-            return str2;
-        return str1.toString();
-    }
-
-    private void setViewData(View view, Map<String, Object> data_map) {
-        if (data_map.get("city") == null)
-            return;
-        ((TextView) view.findViewById(R.id.city)).setText(data_map.get("city").toString());
-        ((TextView) view.findViewById(R.id.updatetime)).setText("(更新时间：" + setDefault(data_map.get("todayupdatetime"), "1") + ")");
-        ((TextView) view.findViewById(R.id.date)).setText(setDefault(data_map.get("date"), "1"));
-        ((TextView) view.findViewById(R.id.week)).setText(setDefault(data_map.get("week0"),"1"));
-        ((TextView) view.findViewById(R.id.temp)).setText(setDefault(data_map.get("temp0"),"1"));
-        ((TextView) view.findViewById(R.id.weather)).setText(setDefault(data_map.get("weather0"),"1"));
-        ((TextView) view.findViewById(R.id.wind)).setText(setDefault(data_map.get("wind"),"1"));
-        ((TextView) view.findViewById(R.id.nowtemp)).setText(setDefault(data_map.get("nowtemp"),"1") + "℃");
-        ((ImageView) view.findViewById(R.id.today_image)).setImageResource(readdb.getImageId(data_map.get("image").toString()));
     }
 }

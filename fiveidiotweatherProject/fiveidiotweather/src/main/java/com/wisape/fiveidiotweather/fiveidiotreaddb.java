@@ -111,6 +111,8 @@ public class fiveidiotreaddb {
     }
 
     public int getImageId(String image_title) {
+        if (image_title == null)
+            return 0;
         if(image_title.equals("晴"))
             return R.drawable.sun;
         else if(image_title.equals("阴"))

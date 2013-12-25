@@ -120,8 +120,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|top"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10℃~20℃"
+                android:textSize="@dimen/much_small_size"                android:text="10℃~20℃"
                 android:id="@+id/temp_1"/>
         </LinearLayout>
         <LinearLayout
@@ -142,8 +141,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|top"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10℃~20℃"
+                android:textSize="@dimen/much_small_size"                android:text="10℃~20℃"
                 android:id="@+id/temp_2"/>
         </LinearLayout>
         <LinearLayout
@@ -164,8 +162,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|top"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10℃~20℃"
+                android:textSize="@dimen/much_small_size"                android:text="10℃~20℃"
                 android:id="@+id/temp_3"/>
         </LinearLayout>
         <LinearLayout
@@ -186,8 +183,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|top"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10℃~20℃"
+                android:textSize="@dimen/much_small_size"                android:text="10℃~20℃"
                 android:id="@+id/temp_4"/>
         </LinearLayout>
     </LinearLayout>
