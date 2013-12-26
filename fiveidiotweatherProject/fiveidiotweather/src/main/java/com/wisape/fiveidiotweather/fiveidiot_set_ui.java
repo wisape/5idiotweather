@@ -17,13 +17,11 @@ import java.util.Map;
 public class fiveidiot_set_ui {
     private fiveidiotreaddb readdb;
     private fiveidiot_citys citydb;
-    private ArrayList<String> mCitys;
+
     public fiveidiot_set_ui(Context context) {
         readdb = new fiveidiotreaddb(context);
         citydb = new fiveidiot_citys(context);
-        mCitys = citydb.get_citys();
     }
-
 
     private String setDefault(Object str1, String str2) {
         if (str1 == null)
@@ -37,7 +35,7 @@ public class fiveidiot_set_ui {
         return id1;
     }
 
-    public String getTime() {
+    public static String getTime() {
         final Calendar date = Calendar.getInstance();
         int hour = date.get(Calendar.HOUR_OF_DAY);
         int minute = date.get(Calendar.MINUTE);
@@ -46,6 +44,7 @@ public class fiveidiot_set_ui {
     }
 
     public void setWidgetTodayUi(RemoteViews views, int city_index, boolean has_after) {
+        ArrayList<String> mCitys = citydb.get_citys();
         int index = city_index % mCitys.size();
         String city = mCitys.get(index);
 
@@ -111,7 +110,7 @@ public class fiveidiot_set_ui {
         ((TextView) view.findViewById(R.id.weather)).setText(setDefault(data_map.get("weather0"),"1"));
         ((TextView) view.findViewById(R.id.wind)).setText(setDefault(data_map.get("wind"),"1"));
         ((TextView) view.findViewById(R.id.nowtemp)).setText(setDefault(data_map.get("nowtemp"),"1") + "℃");
-        ((ImageView) view.findViewById(R.id.today_image)).setImageResource(setDefaultImage(readdb.getImageId(data_map.get("image").toString()),
+        ((ImageView) view.findViewById(R.id.today_image)).setImageResource(setDefaultImage(readdb.getImageId(setDefault(data_map.get("image"), "1")),
                 R.drawable.download));
     }
 

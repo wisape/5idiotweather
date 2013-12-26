@@ -10,13 +10,12 @@ import android.view.MenuItem;
  * Created by wisape on 13-12-18.
  */
 public class fiveidiot_setting extends Activity {
-    private ActionBar actionBar;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new setting_fragment()).commit();
-        actionBar = getActionBar();
+        ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("设置");
     }

@@ -19,7 +19,6 @@ import java.util.Map;
  * Created by wisape on 13-12-22.
  */
 public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
-    private fiveidiot_set_ui set_ui = null;
     private IntentFilter intentFilter = null;
     private RemoteViews views;
 
@@ -28,7 +27,7 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
         super.onReceive(context, intent);
         String action = intent.getAction();
         if (action.equals(Intent.ACTION_TIME_TICK) || action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-            views.setTextViewText(R.id.clock_time, set_ui.getTime());
+            views.setTextViewText(R.id.clock_time, fiveidiot_set_ui.getTime());
             ComponentName wd = new ComponentName(context, fiveidiot_clock_widget4x1_provider.class);
             AppWidgetManager.getInstance(context).updateAppWidget(wd, views);
         }
@@ -36,10 +35,6 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         final int N = appWidgetIds.length;
-
-        if (set_ui == null) {
-            set_ui = new fiveidiot_set_ui(context);
-        }
 
 //        add clock update reciver
         if (intentFilter == null) {
@@ -56,14 +51,15 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
             Intent intent = new Intent(context, fiveidiot.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
             views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x1);
-            updateViews(views, 0);
+            updateViews(context, views, 0);
             views.setOnClickPendingIntent(R.id.today_con, pendingIntent);
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
 
-    private void updateViews(RemoteViews views, int index) {
+    private void updateViews(Context context, RemoteViews views, int index) {
+        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
         set_ui.setWidgetTodayUi(views, index, true);
     }
 }

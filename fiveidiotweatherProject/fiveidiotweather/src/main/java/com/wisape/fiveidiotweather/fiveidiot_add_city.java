@@ -20,7 +20,6 @@ import android.widget.Toast;
  * Created by wisape on 13-12-2.
  */
 public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTextListener {
-    private ActionBar actionBar;
     private fiveidiot_cityids_db cityids_db;
     private ListView listView;
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
         listView = (ListView) findViewById(R.id.add_city);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cityids_db.getProvinces()));
         listView.setOnItemClickListener(new onProvinceItemClick());
-        actionBar = getActionBar();
+        ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("添加城市");
 

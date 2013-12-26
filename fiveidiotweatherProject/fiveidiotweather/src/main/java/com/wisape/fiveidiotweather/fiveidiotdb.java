@@ -49,10 +49,11 @@ public class fiveidiotdb {
             cv.put(VALUE, vlaue);
             db.insert(table, null, cv);
         }
+        cursor.close();
         db.close();
     }
 
-    public synchronized int update(SQLiteDatabase db, String table, String key, String value) {
+    private synchronized int update(SQLiteDatabase db, String table, String key, String value) {
         ContentValues cv = new ContentValues();
         cv.put(VALUE, value);
         return db.update(table, cv,  NAME +" = ?", new String[]{key});
@@ -74,6 +75,7 @@ public class fiveidiotdb {
         int rel;
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         rel = db.delete(table, NAME + " = ?", new String[]{key});
+        db.close();
         return rel;
     }
 

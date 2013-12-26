@@ -7,7 +7,6 @@ import org.json.JSONObject;
  * Created by wisape on 13-11-27.
  */
 public class fiveidiot_today_analyze {
-    private String weather_info = null;
     private JSONObject json_object = null;
 
     /**
@@ -17,7 +16,7 @@ public class fiveidiot_today_analyze {
      */
 
     public fiveidiot_today_analyze(String info){
-        weather_info = info;
+        String weather_info = info;
         init_info(weather_info);
     }
 

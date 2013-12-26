@@ -26,7 +26,7 @@ public class fiveidiot_cityids_db {
     private final static String CITYS_ID = "city_num";
     private final static String NAME = "name";
     private SQLiteOpenHelper dbhelper;
-    private SQLiteDatabase citydb;
+
     public fiveidiot_cityids_db(Context context) {
         try {
             copyCityDb(context);
@@ -45,9 +45,6 @@ public class fiveidiot_cityids_db {
 
             }
         };
-
-        citydb = dbhelper.getReadableDatabase();
-        citydb.close();
     }
 
     private void copyCityDb(Context context) throws IOException {
@@ -70,7 +67,7 @@ public class fiveidiot_cityids_db {
 
     public ArrayList<String> getProvinces() {
         ArrayList<String> provinces = new ArrayList<String>();
-        citydb = dbhelper.getReadableDatabase();
+        SQLiteDatabase citydb = dbhelper.getReadableDatabase();
         Cursor cursor = citydb.rawQuery("select * from " + PROVINCES_TABLE, null);
         while (cursor.moveToNext()) {
             provinces.add(cursor.getString(cursor.getColumnIndexOrThrow(NAME)));
@@ -82,7 +79,7 @@ public class fiveidiot_cityids_db {
 
     public ArrayList<String> getCitys(int province_id) {
         ArrayList<String> citys = new ArrayList<String>();
-        citydb = dbhelper.getReadableDatabase();
+        SQLiteDatabase citydb = dbhelper.getReadableDatabase();
         Cursor cursor = citydb.rawQuery("select * from " + CITYS_TABLE + " where "
                 + CITYS_PROVINCES_ID + " = ?", new String[]{String.valueOf(province_id)});
         while (cursor.moveToNext()) {
@@ -96,7 +93,7 @@ public class fiveidiot_cityids_db {
 
     public ArrayList<String> findCitys(String part) {
         ArrayList<String> citys = new ArrayList<String>();
-        citydb = dbhelper.getReadableDatabase();
+        SQLiteDatabase citydb = dbhelper.getReadableDatabase();
         Cursor cursor = citydb.rawQuery("select * from " + CITYS_TABLE, null);
         while (cursor.moveToNext()) {
             String city = cursor.getString(cursor.getColumnIndexOrThrow(NAME));
@@ -111,7 +108,7 @@ public class fiveidiot_cityids_db {
 
     public String getCityid(String city) {
         String cityid = null;
-        citydb = dbhelper.getReadableDatabase();
+        SQLiteDatabase citydb = dbhelper.getReadableDatabase();
         Cursor cursor = citydb.rawQuery("select * from " + CITYS_TABLE + " where "
                 + NAME + " = ?", new String[]{city});
         if (cursor.moveToNext()) {

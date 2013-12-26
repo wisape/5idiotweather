@@ -1,7 +1,6 @@
 package com.wisape.fiveidiotweather;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -103,7 +102,6 @@ public class fiveidiot extends FragmentActivity {
 
         actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this, slideLayout, R.drawable.ic_drawer,

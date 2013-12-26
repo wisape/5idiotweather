@@ -12,7 +12,6 @@ import android.webkit.WebViewClient;
  * Created by wisape on 13-12-18.
  */
 public class fiveidiot_about extends Activity {
-    private ActionBar actionBar;
     private WebView webView;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +20,7 @@ public class fiveidiot_about extends Activity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("http://5idiot.duapp.com");
         super.setContentView(webView);
-        actionBar = getActionBar();
+        ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("关于");
 

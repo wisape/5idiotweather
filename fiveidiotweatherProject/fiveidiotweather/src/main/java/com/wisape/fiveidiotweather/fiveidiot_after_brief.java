@@ -16,7 +16,6 @@ import java.util.Map;
  */
 public class fiveidiot_after_brief extends Fragment {
     private String mcity;
-    private fiveidiot_set_ui set_ui;
 
     public fiveidiot_after_brief(String city) {
         mcity = city;
@@ -25,13 +24,13 @@ public class fiveidiot_after_brief extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        set_ui = new fiveidiot_set_ui(getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.after_brief, container, false);
+        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(getActivity());
         set_ui.setAfterUi(rootView, mcity);
         return rootView;
     }
