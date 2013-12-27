@@ -74,4 +74,14 @@
         android:id="@id/city"/>
     </LinearLayout>
 
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.25"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_action_next_item"
+        android:id="@+id/next_city"
+        android:background="@android:color/transparent"/>
+
 </LinearLayout>
