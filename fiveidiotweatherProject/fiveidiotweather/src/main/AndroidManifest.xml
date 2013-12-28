@@ -64,6 +64,12 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/fiveidiot_widget4x2_info" />
         </receiver>
+        <receiver android:name=".fiveidiot_receiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.wisape.fiveidiotweather.fiveidiotservice"/>
+            </intent-filter>
+        </receiver>
 
         <service android:name=".fiveidiotservice">
             <intent-filter>

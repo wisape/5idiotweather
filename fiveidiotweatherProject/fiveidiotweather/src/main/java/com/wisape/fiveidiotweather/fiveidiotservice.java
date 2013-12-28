@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -63,7 +64,6 @@ public class fiveidiotservice extends Service {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
                 ArrayList<String> citys = mCitys.get_citys();
                 for (int i = 0; i < citys.size(); i++) {
