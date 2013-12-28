@@ -32,6 +32,7 @@
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="clock_next_city4x1" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/fiveidiot_clock_widget4x1_info" />
@@ -41,7 +42,7 @@
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="next_city" />
+                <action android:name="next_city4x1" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/fiveidiot_widget4x1_info" />
@@ -51,6 +52,7 @@
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="clock_next_city4x2" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/fiveidiot_clock_widget4x2_info" />
@@ -60,6 +62,7 @@
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="next_city4x2" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/fiveidiot_widget4x2_info" />
