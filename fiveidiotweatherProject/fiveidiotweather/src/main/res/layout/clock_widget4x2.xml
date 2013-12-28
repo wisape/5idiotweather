@@ -23,7 +23,7 @@
                 android:layout_gravity="center"
                 android:id="@+id/clock_time"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="22:22"
+                android:text="00:00"
                 android:textSize="45dp"
                 />
         </LinearLayout>
@@ -43,7 +43,7 @@
                 android:id="@+id/today_image"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
+                android:src="@drawable/download"/>
         </LinearLayout>
 
         <LinearLayout
@@ -60,7 +60,7 @@
                 android:layout_gravity="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="@dimen/meida_size"
-                android:text="30℃"
+                android:text="@string/default_info"
                 android:id="@+id/nowtemp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                 android:layout_gravity="center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="@dimen/much_small_size"
-                android:text="10℃~20℃"
+                android:text="@string/default_info"
                 android:id="@+id/temp"/>
 
         </LinearLayout>
@@ -86,13 +86,13 @@
                 android:gravity="center"
                 android:textSize="@dimen/meida_size"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="上海"
+                android:text="@string/default_city"
                 android:id="@+id/city"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/much_small_size"
-                android:text="多云转晴"
+                android:text="@string/default_info"
                 android:id="@+id/weather"/>
         </LinearLayout>
         <ImageButton
@@ -122,13 +122,14 @@
                 android:layout_weight="0.4"
                 android:id="@+id/image_1"
                 android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
+                android:src="@drawable/download"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|top"
-                android:textSize="@dimen/much_small_size"                android:text="10℃~20℃"
+                android:textSize="@dimen/much_small_size"
+                android:text="@string/default_info"
                 android:id="@+id/temp_1"/>
         </LinearLayout>
         <LinearLayout
@@ -143,13 +144,14 @@
                 android:layout_weight="0.4"
                 android:id="@+id/image_2"
                 android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
+                android:src="@drawable/download"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|top"
-                android:textSize="@dimen/much_small_size"                android:text="10℃~20℃"
+                android:textSize="@dimen/much_small_size"
+                android:text="@string/default_info"
                 android:id="@+id/temp_2"/>
         </LinearLayout>
         <LinearLayout
@@ -164,13 +166,14 @@
                 android:layout_weight="0.4"
                 android:id="@+id/image_3"
                 android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
+                android:src="@drawable/download"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|top"
-                android:textSize="@dimen/much_small_size"                android:text="10℃~20℃"
+                android:textSize="@dimen/much_small_size"
+                android:text="@string/default_info"
                 android:id="@+id/temp_3"/>
         </LinearLayout>
         <LinearLayout
@@ -185,13 +188,14 @@
                 android:layout_weight="0.4"
                 android:id="@+id/image_4"
                 android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
+                android:src="@drawable/download"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center|top"
-                android:textSize="@dimen/much_small_size"                android:text="10℃~20℃"
+                android:textSize="@dimen/much_small_size"
+                android:text="@string/default_info"
                 android:id="@+id/temp_4"/>
         </LinearLayout>
     </LinearLayout>

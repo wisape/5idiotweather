@@ -23,7 +23,7 @@
                 android:background="?attr/after1weekColor"
                 android:textColor="?attr/subtextColor"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="星期一"
+                android:text="@string/default_week"
                 android:id="@+id/week_1"/>
         <ImageView
                 android:layout_width="match_parent"
@@ -31,20 +31,20 @@
                 android:layout_weight="0.4"
                 android:id="@+id/image_1"
                 android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
+                android:src="@drawable/download"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="多云转晴"
+                android:text="@string/default_info"
                 android:id="@+id/weather_1"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10℃~20℃"
+                android:text="@string/default_info"
                 android:id="@+id/temp_1"/>
     </LinearLayout>
     <LinearLayout
@@ -60,7 +60,7 @@
                 android:background="?attr/after2weekColor"
                 android:textColor="?attr/subtextColor"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="星期一"
+                android:text="@string/default_week"
                 android:id="@+id/week_2"/>
         <ImageView
                 android:layout_width="match_parent"
@@ -68,20 +68,20 @@
                 android:layout_weight="0.4"
                 android:id="@+id/image_2"
                 android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
+                android:src="@drawable/download"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="多云转晴"
+                android:text="@string/default_info"
                 android:id="@+id/weather_2"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10℃~20℃"
+                android:text="@string/default_info"
                 android:id="@+id/temp_2"/>
     </LinearLayout>
     <LinearLayout
@@ -97,7 +97,7 @@
                 android:background="?attr/after3weekColor"
                 android:textColor="?attr/subtextColor"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="星期一"
+                android:text="@string/default_week"
                 android:id="@+id/week_3"/>
         <ImageView
                 android:layout_width="match_parent"
@@ -105,20 +105,20 @@
                 android:layout_weight="0.4"
                 android:id="@+id/image_3"
                 android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
+                android:src="@drawable/download"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="多云转晴"
+                android:text="@string/default_info"
                 android:id="@+id/weather_3"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10℃~20℃"
+                android:text="@string/default_info"
                 android:id="@+id/temp_3"/>
     </LinearLayout>
     <LinearLayout
@@ -134,7 +134,7 @@
                 android:background="?attr/after4weekColor"
                 android:textColor="?attr/subtextColor"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="星期一"
+                android:text="@string/default_week"
                 android:id="@+id/week_4"/>
         <ImageView
                 android:layout_width="match_parent"
@@ -142,20 +142,20 @@
                 android:layout_weight="0.4"
                 android:id="@+id/image_4"
                 android:layout_gravity="center"
-                android:src="@drawable/cloud"/>
+                android:src="@drawable/download"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="多云转晴"
+                android:text="@string/default_info"
                 android:id="@+id/weather_4"/>
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="10℃~20℃"
+                android:text="@string/default_info"
                 android:id="@+id/temp_4"/>
     </LinearLayout>
     </LinearLayout>

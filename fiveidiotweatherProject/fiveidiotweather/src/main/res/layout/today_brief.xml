@@ -48,7 +48,7 @@
                     android:textSize="@dimen/small_size"
                     android:textColor="?attr/subtextColor"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="(更新:14:00)"
+                    android:text="@string/default_info"
                     android:id="@+id/updatetime"/>
                 </LinearLayout>
 
@@ -58,7 +58,7 @@
                         android:layout_weight="0.3"
                         android:id="@+id/today_image"
                         android:layout_gravity="center"
-                        android:src="@drawable/cloud"/>
+                        android:src="@drawable/download"/>
             </LinearLayout>
 
             <LinearLayout
@@ -76,7 +76,7 @@
                         android:layout_gravity="center"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textSize="45dp"
-                        android:text="30℃"
+                        android:text="@string/default_info"
                         android:id="@+id/nowtemp"/>
                 <TextView
                         android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
                         android:layout_marginTop="25dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textSize="@dimen/meida_size"
-                        android:text="多云转晴"
+                        android:text="@string/default_info"
                         android:id="@+id/weather"/>
                 <TextView
                         android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                         android:layout_gravity="center"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="@dimen/meida_size"
-                        android:text="10℃~20℃"
+                        android:text="@string/default_info"
                         android:id="@+id/temp"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                     android:layout_gravity="center"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textSize="@dimen/small_size"
-                    android:text="西北风4级"
+                    android:text="@string/default_info"
                     android:id="@+id/wind"/>
 
             </LinearLayout>
@@ -121,7 +121,7 @@
                     android:layout_weight="0.7"
                     android:textColor="?attr/subtextColor"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="2013年11月20日"
+                    android:text="@string/default_info"
                     android:id="@+id/date"/>
 
             <TextView
@@ -131,7 +131,7 @@
                     android:layout_weight="1"
                     android:textColor="?attr/subtextColor"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="星期一"
+                    android:text="@string/default_week"
                     android:id="@+id/week"/>
         </LinearLayout>
 

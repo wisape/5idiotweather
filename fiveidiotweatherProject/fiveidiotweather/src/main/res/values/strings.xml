@@ -24,6 +24,9 @@
     <string name="setting_main_theme_detail">设置主界面主题</string>
     <string name="setting_main_period">更新周期</string>
     <string name="setting_main_period_detail">设置天气更新周期</string>
+    <string name="default_city">城市</string>
+    <string name="default_info">更新..</string>
+    <string name="default_week">星期?</string>
     <string-array name="setting_main_theme_list">
         <item>酷黑(默认)</item>
         <item>深蓝</item>

@@ -111,7 +111,7 @@ public class fiveidiotreaddb {
     }
 
     public int getImageId(String image_title) {
-        if (image_title == null)
+        if (image_title.equals("1"))
             return 0;
         if(image_title.equals("晴"))
             return R.drawable.sun;
@@ -129,6 +129,7 @@ public class fiveidiotreaddb {
         if (image_title.contains("雪"))
             return R.drawable.snow;
 
+        Log.d("5sha", "Image title = " + image_title);
         return R.drawable.dust;
     }
 }
