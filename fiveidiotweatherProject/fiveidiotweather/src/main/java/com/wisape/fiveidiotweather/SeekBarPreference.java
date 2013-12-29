@@ -1,6 +1,7 @@
 package com.wisape.fiveidiotweather;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
@@ -55,6 +56,8 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
             if (callChangeListener(value)) {
                 persistString(value);
             }
+            Intent intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
+            getContext().sendBroadcast(intent);
         }
     }
 

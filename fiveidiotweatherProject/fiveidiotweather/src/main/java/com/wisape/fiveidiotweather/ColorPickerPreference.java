@@ -1,6 +1,7 @@
 package com.wisape.fiveidiotweather;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
@@ -47,12 +48,12 @@ public class ColorPickerPreference extends DialogPreference {
         super.onDialogClosed(positiveResult);
         if (positiveResult) {
             mInitialColor = colorPickerView.getColor();
-            String value = "#" + Integer.toHexString(mInitialColor);
+            String value = Integer.toHexString(mInitialColor).substring(2);
             if (callChangeListener(value)) {
-                Log.d("5sha", "add value " + value);
-
                 persistString(value);
             }
+            Intent intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
+            getContext().sendBroadcast(intent);
         }
     }
 
@@ -62,7 +63,7 @@ public class ColorPickerPreference extends DialogPreference {
 
         if (restoreValue ) {
             if (defaultValue == null) {
-                value = getPersistedString("#FF000000");
+                value = getPersistedString("000000");
             }
             else {
                 value = getPersistedString(defaultValue.toString());
@@ -71,9 +72,7 @@ public class ColorPickerPreference extends DialogPreference {
         else {
             value=defaultValue.toString();
         }
-
-        mInitialColor = Color.parseColor(value);
-        Log.d("5sha", "get value " + Integer.toHexString(mInitialColor));
+        mInitialColor = Color.parseColor("#" + value);
     }
 
     private class ColorPickerView extends View {

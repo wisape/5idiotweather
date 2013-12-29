@@ -32,6 +32,7 @@
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.wisape.fiveidiotweather.widget_update"/>
                 <action android:name="clock_next_city4x1" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
@@ -42,6 +43,7 @@
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.wisape.fiveidiotweather.widget_update"/>
                 <action android:name="next_city4x1" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
@@ -52,6 +54,7 @@
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.wisape.fiveidiotweather.widget_update"/>
                 <action android:name="clock_next_city4x2" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
@@ -62,11 +65,13 @@
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.wisape.fiveidiotweather.widget_update"/>
                 <action android:name="next_city4x2" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/fiveidiot_widget4x2_info" />
         </receiver>
+
         <receiver android:name=".fiveidiot_receiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

@@ -104,7 +104,7 @@ public class fiveidiotservice extends Service {
         other = unwrap_save_data(city, city_id);
         if (today || other) {
             Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
-            Intent widget_intent = new Intent("android.appwidget.action.APPWIDGET_UPDATE");
+            Intent widget_intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
             sendBroadcast(it);
             sendBroadcast(widget_intent);
         }

@@ -1,6 +1,10 @@
 package com.wisape.fiveidiotweather;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
@@ -15,14 +19,17 @@ import java.util.Map;
  * Created by wisape on 13-12-25.
  */
 public class fiveidiot_set_ui {
+    public static final String WIDGET_UPDATE = "com.wisape.fiveidiotweather.widget_update";
     private static final String DEFAULT = "更新..";
     private static final String DEFAULT_WEEK = "星期？";
     private fiveidiotreaddb readdb;
     private fiveidiot_citys citydb;
+    private Context con;
 
     public fiveidiot_set_ui(Context context) {
         readdb = new fiveidiotreaddb(context);
         citydb = new fiveidiot_citys(context);
+        con = context;
     }
 
     private String setDefault(Object str1, String str2) {
@@ -37,7 +44,7 @@ public class fiveidiot_set_ui {
         return id1;
     }
 
-    public static String getTime() {
+    public String getTime() {
         final Calendar date = Calendar.getInstance();
         int hour = date.get(Calendar.HOUR_OF_DAY);
         int minute = date.get(Calendar.MINUTE);
@@ -45,12 +52,29 @@ public class fiveidiot_set_ui {
                 ":").append(minute < 10 ? "0" + minute : minute).toString();
     }
 
+    private int getWidgetColor() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(con);
+        String scolor = preferences.getString("setting_widget_color", "bbbbbb");
+        int salpha = (100 - Integer.valueOf(preferences.getString("setting_widget_trans", "0"))) * 255 / 100;
+        String color;
+        if (salpha > 15)
+            color = "#" + Integer.toHexString(salpha) + scolor;
+        else
+            color = "#0" + Integer.toHexString(salpha) + scolor;
+        return Color.parseColor(color);
+    }
+
+    public void setWidgetClock(RemoteViews views) {
+        views.setInt(R.id.today_con, "setBackgroundColor", getWidgetColor());
+        views.setTextViewText(R.id.clock_time, getTime());
+    }
+
     public void setWidgetTodayUi(RemoteViews views, int city_index, boolean has_after) {
         ArrayList<String> mCitys = citydb.get_citys();
         int index = city_index % mCitys.size();
         String city = mCitys.get(index);
 
-        views.setTextViewText(R.id.clock_time, getTime());
+        setWidgetClock(views);
 
         Map<String, Object> data_map = readdb.getTodayBriefMapData(city);
         if (data_map.get("city") == null)

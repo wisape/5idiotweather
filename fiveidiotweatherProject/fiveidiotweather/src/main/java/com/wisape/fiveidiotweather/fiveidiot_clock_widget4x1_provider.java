@@ -24,12 +24,14 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
     private IntentFilter intentFilter = null;
     private RemoteViews views;
 
-
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         String action = intent.getAction();
         if (action.equals(Intent.ACTION_TIME_TICK) || action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-            views.setTextViewText(R.id.clock_time, fiveidiot_set_ui.getTime());
+            fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
+            if (views == null)
+                views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x1);
+            set_ui.setWidgetClock(views);
             ComponentName wd = new ComponentName(context, fiveidiot_clock_widget4x1_provider.class);
             AppWidgetManager.getInstance(context).updateAppWidget(wd, views);
         }
@@ -45,6 +47,9 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
                 updateWidgetView(context, appWidgetManager, mAppWidgetId, city_index);
             }
         }
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName wd = new ComponentName(context, fiveidiot_clock_widget4x1_provider.class);
+        onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
     }
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {

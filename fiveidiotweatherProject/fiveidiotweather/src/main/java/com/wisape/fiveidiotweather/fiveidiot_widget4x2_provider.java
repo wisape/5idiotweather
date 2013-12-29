@@ -3,6 +3,7 @@ package com.wisape.fiveidiotweather;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +38,11 @@ public class fiveidiot_widget4x2_provider extends AppWidgetProvider {
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                 updateWidgetView(context, appWidgetManager, mAppWidgetId, city_index);
             }
+        }
+        if (intent.getAction().equals(fiveidiot_set_ui.WIDGET_UPDATE)) {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName wd = new ComponentName(context, fiveidiot_widget4x2_provider.class);
+            onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
         }
     }
 
