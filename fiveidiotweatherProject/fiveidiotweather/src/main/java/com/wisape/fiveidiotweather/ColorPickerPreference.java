@@ -12,17 +12,18 @@ import android.graphics.SweepGradient;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.LinearLayout;
+
 
 /**
  * Created by wisape on 13-12-20.
  */
 public class ColorPickerPreference extends DialogPreference {
-    private final static int mHeight = 600;
-    private final static int mWidth = 400;
+    private final static int mHeight = 450;
+    private final static int mWidth = 450;
     private ColorPickerView colorPickerView;
     private int mInitialColor = 0xFF000000;
     public ColorPickerPreference(Context context, AttributeSet attrs) {
@@ -33,8 +34,11 @@ public class ColorPickerPreference extends DialogPreference {
 
     @Override
     protected View onCreateDialogView() {
-        colorPickerView = new ColorPickerView(getContext(), 500, 500);
-        return(colorPickerView);
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setGravity(Gravity.CENTER);
+        colorPickerView = new ColorPickerView(getContext(), mHeight, mWidth);
+        layout.addView(colorPickerView);
+        return(layout);
     }
 
     @Override
@@ -106,8 +110,9 @@ public class ColorPickerPreference extends DialogPreference {
             super(context);
             this.mHeight = height;
             this.mWidth = width;
-            setMinimumHeight(height);
-            setMinimumWidth(width);
+            Log.d("5sha", "width = " + mWidth);
+            setMinimumHeight(mHeight);
+            setMinimumWidth(mWidth);
 
             //渐变色环参数
             mCircleColors = new int[] {0xFFFF0000, 0xFFFF00FF, 0xFF0000FF,
