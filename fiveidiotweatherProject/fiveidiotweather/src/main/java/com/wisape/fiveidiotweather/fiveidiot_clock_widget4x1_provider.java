@@ -47,9 +47,11 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
                 updateWidgetView(context, appWidgetManager, mAppWidgetId, city_index);
             }
         }
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ComponentName wd = new ComponentName(context, fiveidiot_clock_widget4x1_provider.class);
-        onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
+        if (intent.getAction().equals(fiveidiot_set_ui.WIDGET_UPDATE)) {
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            ComponentName wd = new ComponentName(context, fiveidiot_clock_widget4x1_provider.class);
+            onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
+        }
     }
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
