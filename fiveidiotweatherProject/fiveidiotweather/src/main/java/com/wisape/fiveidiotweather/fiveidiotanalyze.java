@@ -112,7 +112,7 @@ public class fiveidiotanalyze {
         if (null != json_object) {
             try {
                 for (int i = 0; i < 6; i++) {
-                    temp[i] = json_object.getString("temp" + (i + 1));
+                    temp[i] = json_object.getString("temp" + (i + 1)).replace("℃~", "/");
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
