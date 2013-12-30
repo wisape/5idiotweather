@@ -60,7 +60,7 @@ public class fiveidiotservice extends Service {
         public void run() {
             while (true) {
                 try {
-                    Thread.sleep(6000);
+                    Thread.sleep(900000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
