@@ -12,8 +12,9 @@
         android:gravity="left|center"
         android:layout_gravity="left"
         android:id="@+id/city_list_item"
-        android:textColor="#fff"
-        android:textSize="@dimen/meida_large_size"
+        android:height="36dp"
+        android:textColor="#222"
+        android:textSize="@dimen/meida_size"
         android:layout_marginLeft="3dp" />
     <ImageButton
         android:src="@drawable/ic_action_discard"

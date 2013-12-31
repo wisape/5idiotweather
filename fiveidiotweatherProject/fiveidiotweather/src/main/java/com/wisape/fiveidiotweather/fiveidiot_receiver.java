@@ -3,7 +3,6 @@ package com.wisape.fiveidiotweather;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 /**
  * Created by wisape on 13-12-28.

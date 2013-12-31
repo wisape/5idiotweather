@@ -2,8 +2,10 @@
     android:id="@android:id/text1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="left|center"
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:textSize="@dimen/meida_large_size"
+    android:height="38dp"
     android:paddingLeft="10dp"
     android:paddingRight="16dp"
-    android:textColor="#fff"/>
+    android:textColor="#222"/>

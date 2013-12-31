@@ -16,12 +16,12 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:background="#444"/>
+        android:background="#eee"/>
     <ListView
         android:id="@+id/city_list"
         android:layout_width="175dp"
         android:layout_height="match_parent"
         android:layout_gravity="end"
         android:choiceMode="singleChoice"
-        android:background="#444"/>
+        android:background="#eee"/>
 </android.support.v4.widget.DrawerLayout>
