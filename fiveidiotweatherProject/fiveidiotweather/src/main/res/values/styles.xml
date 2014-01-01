@@ -15,7 +15,7 @@
     </style>
     
     <style name="fiveidiot_textstyle" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/titlecolor</item>
+        <item name="android:textColor">@color/textcolor</item>
     </style>
 
     <style name="DefaultTheme" parent="AppBaseTheme">
