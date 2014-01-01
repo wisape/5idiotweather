@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -46,7 +47,6 @@ import java.util.ArrayList;
 
 public class fiveidiot extends FragmentActivity {
     public final static String BROADCAST_UPDATE_UI = "com.wisape.fiveidiotweather.update_ui";
-    public final static String BROADCAST_UPDATE_WIDGET = "com.wisape.fiveidiotweather.update_widget";
     private fiveidiot_receiver receiver;
     private ServiceConnection sconn;
     private Intent service_intent;
@@ -63,7 +63,7 @@ public class fiveidiot extends FragmentActivity {
     private ViewPager viewPager;
     private fiveidiot_citys mCitys;
     private ArrayList<String> citys;
-    TextView menuTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,12 +93,26 @@ public class fiveidiot extends FragmentActivity {
         slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         menuList = (ListView) findViewById(R.id.menu_list);
         menuItems = getResources().getStringArray(R.array.menu_array);
+        TextView menuTitle = new TextView(this);
+        menuTitle.setTextColor(getResources().getColor(R.color.textcolor));
+        menuTitle.setGravity(Gravity.CENTER);
+        menuTitle.setTextSize(23);
+        menuTitle.setBackgroundColor(getResources().getColor(R.color.titlecolor));
+        menuTitle.setText(R.string.setting);
+        menuList.addHeaderView(menuTitle, null, false);
         menuList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.menu_list_item, menuItems));
         menuList.setOnItemClickListener(new MenuItemClickListener());
 
         cityList = (ListView) findViewById(R.id.city_list);
         cityArrayAdapter = new CityArrayAdapter(this, R.layout.city_list_item, R.id.city_list_item, citys);
+        TextView cityTitle = new TextView(this);
+        cityTitle.setTextColor(getResources().getColor(R.color.textcolor));
+        cityTitle.setGravity(Gravity.CENTER);
+        cityTitle.setTextSize(23);
+        cityTitle.setBackgroundColor(getResources().getColor(R.color.titlecolor));
+        cityTitle.setText(R.string.citylist);
+        cityList.addHeaderView(cityTitle, null, false);
         cityList.setAdapter(cityArrayAdapter);
         cityList.setOnItemClickListener(new CitysItemClickListener());
 
@@ -107,7 +121,7 @@ public class fiveidiot extends FragmentActivity {
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this, slideLayout, R.drawable.ic_drawer,
-                R.string.slide_open, R.string.slide_close) {
+                R.string.setting, R.string.app_name) {
             public void onDrawerClosed(View view) {
                 getActionBar().setTitle(R.string.app_name);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -116,10 +130,10 @@ public class fiveidiot extends FragmentActivity {
             public void onDrawerOpened(View View) {
                 switch (View.getId()) {
                     case R.id.city_list:
-                        getActionBar().setTitle("城市列表");
+                        getActionBar().setTitle(R.string.citylist);
                         break;
                     case R.id.menu_list:
-                        getActionBar().setTitle("设置");
+                        getActionBar().setTitle(R.string.setting);
                         break;
                 }
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
@@ -217,11 +231,11 @@ public class fiveidiot extends FragmentActivity {
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Toast.makeText(getApplicationContext(), "position is " + i, Toast.LENGTH_LONG).show();
             switch (i) {
-                case 0:
+                case 1:
                     Intent setting_intent = new Intent(getApplicationContext(), fiveidiot_setting.class);
                     startActivity(setting_intent);
                     break;
-                case 1:
+                case 2:
                     Intent about_intent = new Intent(getApplicationContext(), fiveidiot_about.class);
                     startActivity(about_intent);
                     break;

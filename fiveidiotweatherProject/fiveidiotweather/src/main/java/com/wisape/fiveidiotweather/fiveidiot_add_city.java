@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,7 +30,7 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
         listView.setOnItemClickListener(new onProvinceItemClick());
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("添加城市");
+        actionBar.setTitle(R.string.addcity);
 
     }
 

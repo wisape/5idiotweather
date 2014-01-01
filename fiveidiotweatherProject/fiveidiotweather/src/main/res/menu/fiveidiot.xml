@@ -1,14 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/newcity"
         android:icon="@drawable/ic_action_new"
-        android:title="newcity"
+        android:title="@string/addcity"
         android:showAsAction="always" />
     <item android:id="@+id/havecitys"
         android:icon="@drawable/ic_action_place"
-        android:title="citys"
+        android:title="@string/citylist"
         android:showAsAction="always" />
     <item android:id="@+id/update"
         android:icon="@drawable/ic_action_refresh"
-        android:title="update"
+        android:title="@string/update"
         android:showAsAction="always" />
 </menu>
