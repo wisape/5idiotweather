@@ -35,4 +35,5 @@ public class fiveidiot_main_fragment extends Fragment {
         View rootView = inflater.inflate(R.layout.main_fragment, container, false);
         return rootView;
     }
+
 }

@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -52,7 +51,6 @@ public class fiveidiot extends FragmentActivity {
     private Intent service_intent;
     private fiveidiotservice mservice;
     private DrawerLayout slideLayout;
-    private ActionBar actionBar;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menuList;
     private ListView cityList;
@@ -116,7 +114,7 @@ public class fiveidiot extends FragmentActivity {
         cityList.setAdapter(cityArrayAdapter);
         cityList.setOnItemClickListener(new CitysItemClickListener());
 
-        actionBar = getActionBar();
+        ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(
@@ -225,6 +223,7 @@ public class fiveidiot extends FragmentActivity {
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
 
     private class MenuItemClickListener implements ListView.OnItemClickListener {
         @Override
