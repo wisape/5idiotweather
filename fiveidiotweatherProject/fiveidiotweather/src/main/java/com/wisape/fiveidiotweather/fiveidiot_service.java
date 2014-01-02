@@ -113,7 +113,6 @@ public class fiveidiot_service extends Service {
         if (city_code == null)
             return false;
 
-        int gap_date = 0;
         String weather_path = per_address + city_code + suf_address;
         fiveidiot_net net = new fiveidiot_net(weather_path);
         fiveidiot_analyze analyzer = new fiveidiot_analyze(net.getContext());
@@ -130,9 +129,7 @@ public class fiveidiot_service extends Service {
                 return false;
             }
         }
-        if (!date.equals(system_date)) {
-            gap_date = 1;
-        }
+
         db.insert(city, "date", system_date);
         db.insert(city, "dress", analyzer.get_dress()[0]);
         db.insert(city, "dress_d", analyzer.get_dress()[1]);
@@ -149,14 +146,13 @@ public class fiveidiot_service extends Service {
         String[] image = analyzer.get_images();
         String[] weeks = analyzer.get_week();
 
-        for (int i = 0; i < weather.length - gap_date; i++) {
-            int j = i + gap_date;
-            db.insert(city, "week" + i, weeks[j]);
-            db.insert(city, "weather" + i, weather[j]);
-            db.insert(city, "temp" + i, temp[j]);
-            db.insert(city, "wind" + i, wind[j]);
-            db.insert(city, "image" + i, image[j * 2]);
-            db.insert(city, "image_n" + i, image[j * 2 + 1]);
+        for (int i = 0; i < weather.length; i++) {
+            db.insert(city, "week" + i, weeks[i]);
+            db.insert(city, "weather" + i, weather[i]);
+            db.insert(city, "temp" + i, temp[i]);
+            db.insert(city, "wind" + i, wind[i]);
+            db.insert(city, "image" + i, image[i * 2]);
+            db.insert(city, "image_n" + i, image[i * 2 + 1]);
         }
         return true;
     }
@@ -187,7 +183,7 @@ public class fiveidiot_service extends Service {
         return true;
     }
 
-    public String system_date() {
+    public static String system_date() {
         Calendar calendar = Calendar.getInstance();
         int myear, mmonth, mday;
         myear = calendar.get(Calendar.YEAR);

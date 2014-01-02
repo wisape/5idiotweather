@@ -1,7 +1,6 @@
 package com.wisape.fiveidiotweather;
 
 import android.content.Context;
-import android.database.AbstractWindowedCursor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -23,6 +22,7 @@ public class fiveidiot_readdb {
     private static final String DB_NAME = "fiveidiot";
     private static final String NAME = "name";
     private static final String VALUE = "value";
+    List<Map<String, Object>> info_list = null;
 
     public fiveidiot_readdb(Context context) {
         dbhelper = new SQLiteOpenHelper(context, DB_NAME, null, 1) {
@@ -66,22 +66,23 @@ public class fiveidiot_readdb {
         cursor.close();
         return false;
     }
-
-    public Map<String, Object> getTodayDetailMapData(String table) {
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
-        HashMap<String, Object> map = new HashMap<String, Object>();
-
-        for (int i = 0; i < DEF_PROPS.length; i++) {
-            map.put(DEF_PROPS[i], getvalue(db, table, DEF_PROPS[i]));
-        }
-        db.close();
-        return map;
-    }
+//
+//    public Map<String, Object> getTodayDetailMapData(String table) {
+//        SQLiteDatabase db = dbhelper.getReadableDatabase();
+//        HashMap<String, Object> map = new HashMap<String, Object>();
+//
+//        for (int i = 0; i < DEF_PROPS.length; i++) {
+//            map.put(DEF_PROPS[i], getvalue(db, table, DEF_PROPS[i]));
+//        }
+//        db.close();
+//        return map;
+//    }
 
     private List<Map<String, Object>> getBriefAdapterData(String table) {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         HashMap<String, Object> map = null;
+
         for (int i = 0; i < 6; i++) {
             map = new HashMap<String, Object>();
             for (int j = 0; j < SMP_PROPS.length; j++) {
@@ -89,15 +90,25 @@ public class fiveidiot_readdb {
             }
             list.add(map);
         }
+
         db.close();
-        return  list;
+        return list;
     }
 
     public Map<String, Object> getTodayBriefMapData(String table) {
-        Map<String, Object> map = getBriefAdapterData(table).get(0);
+        info_list = getBriefAdapterData(table);
         SQLiteDatabase db = dbhelper.getReadableDatabase();
+        String date = fiveidiot_service.system_date();
 
+        if (!date.equals(getvalue(db, table, "date"))) {
+            info_list.remove(0);
+        }
+        Map<String, Object> map = info_list.get(0);
         for (int i = 0; i < TODAY_PROPS.length; i++) {
+            if (TODAY_PROPS[i].equals("date")) {
+                map.put("date", date);
+                continue;
+            }
             map.put(TODAY_PROPS[i], getvalue(db, table, TODAY_PROPS[i]));
         }
 
@@ -106,8 +117,10 @@ public class fiveidiot_readdb {
     }
 
     public List<Map<String, Object>> getAfterBriefAdapterData(String table) {
-        List<Map<String, Object>> list = getBriefAdapterData(table);
-        return list.subList(1, list.size());
+        if (info_list == null) {
+            info_list = getBriefAdapterData(table);
+        }
+        return info_list.subList(1, info_list.size());
     }
 
     public int getImageId(String image_title) {
