@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Created by wisape on 13-11-10.
  */
-public class fiveidiotreaddb {
+public class fiveidiot_readdb {
     private SQLiteOpenHelper dbhelper = null;
     public static final String[] TODAY_PROPS = {"city", "todayupdatetime", "date","week0", "weather0", "nowtemp", "temp0", "wind", "humidity"};
     public static final String[] DEF_PROPS = {"uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
@@ -24,7 +24,7 @@ public class fiveidiotreaddb {
     private static final String NAME = "name";
     private static final String VALUE = "value";
 
-    public fiveidiotreaddb(Context context) {
+    public fiveidiot_readdb(Context context) {
         dbhelper = new SQLiteOpenHelper(context, DB_NAME, null, 1) {
             @Override
             public void onCreate(SQLiteDatabase sqLiteDatabase) {

@@ -82,14 +82,22 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             String city = (String)adapterView.getItemAtPosition(i);
             String cityid = cityids_db.getCityid(city);
+            int city_index = -1;
             //To do add the city
 
             fiveidiot_citys city_box = new fiveidiot_citys(getApplicationContext());
             String city_b = city.replace(".", "");
-            city_box.set_city(city_b, cityid);
             Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
-            it.putExtra("addcity", city_b);
-            Toast.makeText(getApplicationContext(), "添加城市：" +city_b , Toast.LENGTH_SHORT).show();
+            city_index = city_box.has_city(city_b);
+            if (city_index < 0) {
+                city_box.set_city(city_b, cityid);
+                it.putExtra("addcity", city_b);
+                Toast.makeText(getApplicationContext(), "添加城市：" +city_b , Toast.LENGTH_SHORT).show();
+            } else {
+                it.putExtra("tocity", city_index);
+                Toast.makeText(getApplicationContext(), "已添加城市：" +city_b , Toast.LENGTH_SHORT).show();
+            }
+
             sendBroadcast(it);
             finish();
         }

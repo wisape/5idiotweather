@@ -3,19 +3,13 @@ package com.wisape.fiveidiotweather;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.provider.AlarmClock;
-import android.util.Log;
 import android.widget.RemoteViews;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Map;
 
 /**
  * Created by wisape on 13-12-22.

@@ -9,7 +9,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import java.util.Calendar;
 /**
  * Created by wisape on 13-9-21.
  */
-public class fiveidiotservice extends Service {
+public class fiveidiot_service extends Service {
     private final static String per_address = "http://m.weather.com.cn/data/";
     private final static String today_per_address = "http://www.weather.com.cn/data/sk/";
     private final static String suf_address = ".html";
@@ -29,8 +28,8 @@ public class fiveidiotservice extends Service {
     }
 
     public class fiBinder extends Binder {
-        fiveidiotservice getService() {
-            return fiveidiotservice.this;
+        fiveidiot_service getService() {
+            return fiveidiot_service.this;
         }
     }
 
@@ -116,9 +115,9 @@ public class fiveidiotservice extends Service {
 
         int gap_date = 0;
         String weather_path = per_address + city_code + suf_address;
-        fiveidiotnet net = new fiveidiotnet(weather_path);
-        fiveidiotanalyze analyzer = new fiveidiotanalyze(net.getContext());
-        fiveidiotdb db = new fiveidiotdb(this);
+        fiveidiot_net net = new fiveidiot_net(weather_path);
+        fiveidiot_analyze analyzer = new fiveidiot_analyze(net.getContext());
+        fiveidiot_db db = new fiveidiot_db(this);
         String date = analyzer.get_date();
         String system_date = system_date();
 
@@ -166,9 +165,9 @@ public class fiveidiotservice extends Service {
         if (city_code == null)
             return false;
         String today_weather_path = today_per_address + city_code + suf_address;
-        fiveidiotnet net = new fiveidiotnet(today_weather_path);
+        fiveidiot_net net = new fiveidiot_net(today_weather_path);
         fiveidiot_today_analyze analyzer = new fiveidiot_today_analyze(net.getContext());
-        fiveidiotdb db = new fiveidiotdb(this);
+        fiveidiot_db db = new fiveidiot_db(this);
 
         db.create_table(city);
 

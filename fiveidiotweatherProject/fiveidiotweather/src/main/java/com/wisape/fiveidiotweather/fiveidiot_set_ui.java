@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
@@ -22,12 +21,12 @@ public class fiveidiot_set_ui {
     public static final String WIDGET_UPDATE = "com.wisape.fiveidiotweather.widget_update";
     private static final String DEFAULT = "更新..";
     private static final String DEFAULT_WEEK = "星期？";
-    private fiveidiotreaddb readdb;
+    private fiveidiot_readdb readdb;
     private fiveidiot_citys citydb;
     private Context con;
 
     public fiveidiot_set_ui(Context context) {
-        readdb = new fiveidiotreaddb(context);
+        readdb = new fiveidiot_readdb(context);
         citydb = new fiveidiot_citys(context);
         con = context;
     }
@@ -54,7 +53,7 @@ public class fiveidiot_set_ui {
 
     private int getWidgetColor() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(con);
-        String scolor = preferences.getString("setting_widget_color", "bbbbbb");
+        String scolor = preferences.getString("setting_widget_color", "222222");
         int salpha = (100 - Integer.valueOf(preferences.getString("setting_widget_trans", "0"))) * 255 / 100;
         String color;
         if (salpha > 15)

@@ -79,7 +79,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".fiveidiotservice">
+        <service android:name=".fiveidiot_service">
             <intent-filter>
                 <action android:name="com.wisape.fiveidiotweather.fiveidiotservice"/>
             </intent-filter>

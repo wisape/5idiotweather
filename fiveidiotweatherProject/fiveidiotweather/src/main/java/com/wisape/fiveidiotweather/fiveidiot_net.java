@@ -13,10 +13,10 @@ import java.net.URL;
  * Created by wisape on 13-9-21.
  */
 
-public class fiveidiotnet {
+public class fiveidiot_net {
     private static String weatherAddress = "http://m.weather.com.cn/data/101110101.html";
 
-    public fiveidiotnet(String address) {
+    public fiveidiot_net(String address) {
         weatherAddress = address;
 
     }

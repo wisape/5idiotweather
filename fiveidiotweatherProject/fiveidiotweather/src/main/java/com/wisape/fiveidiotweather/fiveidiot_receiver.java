@@ -9,7 +9,7 @@ import android.content.Intent;
  */
 public class fiveidiot_receiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
-        Intent intent_service = new Intent(context, fiveidiotservice.class);
+        Intent intent_service = new Intent(context, fiveidiot_service.class);
         context.startService(intent_service);
     }
 }

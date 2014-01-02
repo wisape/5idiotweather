@@ -12,13 +12,13 @@ import java.util.ArrayList;
  * Created by wisape on 13-10-27.
  */
 
-public class fiveidiotdb {
+public class fiveidiot_db {
     private SQLiteOpenHelper dbhelper = null;
     private static final String DB_NAME = "fiveidiot";
     private static final String NAME = "name";
     private static final String VALUE = "value";
 
-    public fiveidiotdb(Context context) {
+    public fiveidiot_db(Context context) {
         dbhelper = new SQLiteOpenHelper(context, DB_NAME, null, 1) {
             @Override
             public void onCreate(SQLiteDatabase sqLiteDatabase) {

@@ -9,7 +9,7 @@ import org.json.JSONObject;
 /**
  * Created by wispae on 13-9-21.
  */
-public class fiveidiotanalyze {
+public class fiveidiot_analyze {
     private JSONObject json_object = null;
     private String[] WEEKS = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日",};
     /**
@@ -36,7 +36,7 @@ public class fiveidiotanalyze {
      * "index_ls":"适宜","index_ag":"较易发"}}
      */
 
-    public fiveidiotanalyze(String info){
+    public fiveidiot_analyze(String info){
         String weather_info = info;
         init_info(weather_info);
     }

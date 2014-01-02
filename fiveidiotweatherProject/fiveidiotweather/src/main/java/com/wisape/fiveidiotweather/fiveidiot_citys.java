@@ -8,10 +8,10 @@ import java.util.ArrayList;
  */
 public class fiveidiot_citys {
     private final static String CITYS_TABLE = "citys";
-    private fiveidiotdb citydb;
+    private fiveidiot_db citydb;
 
     public fiveidiot_citys(Context context) {
-        citydb = new fiveidiotdb(context);
+        citydb = new fiveidiot_db(context);
         citydb.create_table(CITYS_TABLE);
     }
 
@@ -28,11 +28,20 @@ public class fiveidiot_citys {
         return false;
     }
 
+    public int has_city(String city) {
+        ArrayList<String> citys = get_citys();
+        if (citys.contains(city)) {
+            return citys.indexOf(city);
+        }
+
+        return -1;
+    }
+
     public ArrayList<String> get_citys() {
         return citydb.getnames(CITYS_TABLE);
     }
 
     public String find_cityid(String city) {
-            return citydb.getvalue(CITYS_TABLE, city);
+        return citydb.getvalue(CITYS_TABLE, city);
     }
 }

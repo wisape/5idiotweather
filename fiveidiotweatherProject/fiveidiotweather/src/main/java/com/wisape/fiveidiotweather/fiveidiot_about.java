@@ -2,6 +2,7 @@ package com.wisape.fiveidiotweather;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -15,14 +16,17 @@ public class fiveidiot_about extends Activity {
     private WebView webView;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("title");
+        String url = intent.getStringExtra("url");
         webView = new WebView(this);
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("http://5idiot.duapp.com");
+        webView.loadUrl(url);
         super.setContentView(webView);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("关于");
+        actionBar.setTitle(title);
 
     }
 

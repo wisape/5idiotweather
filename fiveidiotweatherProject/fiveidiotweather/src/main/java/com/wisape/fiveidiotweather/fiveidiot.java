@@ -49,7 +49,7 @@ public class fiveidiot extends FragmentActivity {
     private fiveidiot_receiver receiver;
     private ServiceConnection sconn;
     private Intent service_intent;
-    private fiveidiotservice mservice;
+    private fiveidiot_service mservice;
     private DrawerLayout slideLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menuList;
@@ -76,7 +76,7 @@ public class fiveidiot extends FragmentActivity {
         sconn = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                mservice = ((fiveidiotservice.fiBinder)iBinder).getService();
+                mservice = ((fiveidiot_service.fiBinder)iBinder).getService();
             }
 
             @Override
@@ -84,7 +84,7 @@ public class fiveidiot extends FragmentActivity {
 
             }
         };
-        service_intent = new Intent(this, fiveidiotservice.class);
+        service_intent = new Intent(this, fiveidiot_service.class);
         bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
 
         slideLayout = (DrawerLayout) findViewById(R.id.slide_layout);
@@ -94,7 +94,7 @@ public class fiveidiot extends FragmentActivity {
         TextView menuTitle = new TextView(this);
         menuTitle.setTextColor(getResources().getColor(R.color.textcolor));
         menuTitle.setGravity(Gravity.CENTER);
-        menuTitle.setTextSize(23);
+        menuTitle.setTextSize(20);
         menuTitle.setBackgroundColor(getResources().getColor(R.color.titlecolor));
         menuTitle.setText(R.string.setting);
         menuList.addHeaderView(menuTitle, null, false);
@@ -107,7 +107,7 @@ public class fiveidiot extends FragmentActivity {
         TextView cityTitle = new TextView(this);
         cityTitle.setTextColor(getResources().getColor(R.color.textcolor));
         cityTitle.setGravity(Gravity.CENTER);
-        cityTitle.setTextSize(23);
+        cityTitle.setTextSize(20);
         cityTitle.setBackgroundColor(getResources().getColor(R.color.titlecolor));
         cityTitle.setText(R.string.citylist);
         cityList.addHeaderView(cityTitle, null, false);
@@ -236,6 +236,10 @@ public class fiveidiot extends FragmentActivity {
                     break;
                 case 2:
                     Intent about_intent = new Intent(getApplicationContext(), fiveidiot_about.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title", "关于");
+                    bundle.putString("url", "http://5idiot.duapp.com");
+                    about_intent.putExtras(bundle);
                     startActivity(about_intent);
                     break;
                 default:
@@ -340,6 +344,11 @@ public class fiveidiot extends FragmentActivity {
             if (addcity != null) {
                 addCity(addcity);
             } else {
+                int city_index = intent.getIntExtra("tocity", -1);
+                if (city_index >= 0) {
+                    viewPager.setCurrentItem(city_index);
+                    return;
+                }
                 update_ui();
             }
         }
@@ -453,7 +462,6 @@ public class fiveidiot extends FragmentActivity {
                 mFragmentManager.executePendingTransactions();
             }
         }
-
     }
 
 }

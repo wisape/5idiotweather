@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="#2f7cbf"
+    android:background="#222222"
     android:id="@+id/today_con">
     <LinearLayout
         android:orientation="vertical"
