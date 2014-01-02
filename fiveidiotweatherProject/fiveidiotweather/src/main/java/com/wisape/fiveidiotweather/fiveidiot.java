@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -241,6 +242,24 @@ public class fiveidiot extends FragmentActivity {
                     bundle.putString("url", "http://5idiot.duapp.com");
                     about_intent.putExtras(bundle);
                     startActivity(about_intent);
+                    break;
+                case 3:
+                    Intent data=new Intent(Intent.ACTION_SENDTO);
+                    data.setData(Uri.parse("mailto:wisape@gmail.com"));
+                    data.putExtra(Intent.EXTRA_SUBJECT, "5傻天气建议");
+                    startActivity(data);
+                    break;
+                case 4:
+                    /*for score*/
+//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+//                            Uri.parse("https://play.google.com/store/apps/details?id=com.imangi.templerun"));
+////                    browserIntent.setClassName("com.android.vending", "com.android.vending.AssetBrowserActivity");
+//                    browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(browserIntent);
+                    break;
+                case 5:
+                    break;
+                case 6:
                     break;
                 default:
                     break;

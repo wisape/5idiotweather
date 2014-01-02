@@ -5,7 +5,11 @@
     <string name="default_state">适宜</string>
     <string-array name="menu_array">
         <item>设置</item>
-        <item>关于</item>
+        <item>介绍</item>
+        <item>建议</item>
+        <item>评分</item>
+        <item>捐助</item>
+        <item>公益</item>
     </string-array>
 
     <string name="addcity">添加城市</string>
