@@ -250,7 +250,7 @@ public class fiveidiot extends FragmentActivity {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             slideLayout.closeDrawers();
-            viewPager.setCurrentItem(i, true);
+            viewPager.setCurrentItem(i - 1, true);
         }
     }
 
