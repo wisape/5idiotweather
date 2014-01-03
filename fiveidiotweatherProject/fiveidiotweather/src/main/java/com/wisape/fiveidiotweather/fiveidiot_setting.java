@@ -37,6 +37,5 @@ public class fiveidiot_setting extends Activity {
 
             addPreferencesFromResource(R.xml.preference);
         }
-
     }
 }

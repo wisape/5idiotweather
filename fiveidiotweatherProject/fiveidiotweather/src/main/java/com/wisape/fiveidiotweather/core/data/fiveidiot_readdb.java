@@ -1,10 +1,13 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.core.data;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.wisape.fiveidiotweather.R;
+import com.wisape.fiveidiotweather.core.fiveidiot_service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +19,12 @@ import java.util.Map;
  */
 public class fiveidiot_readdb {
     private SQLiteOpenHelper dbhelper = null;
-    public static final String[] TODAY_PROPS = {"city", "todayupdatetime", "date","week0", "weather0", "nowtemp", "temp0", "wind", "humidity"};
-    public static final String[] DEF_PROPS = {"uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
-    public static final String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
-    private static final String DB_NAME = "fiveidiot";
-    private static final String NAME = "name";
-    private static final String VALUE = "value";
+    public String[] TODAY_PROPS = {"city", "todayupdatetime", "date","week0", "weather0", "nowtemp", "temp0", "wind", "humidity"};
+//    public static final String[] DEF_PROPS = {"uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
+    public String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
+    private String DB_NAME = "fiveidiot";
+    private String NAME = "name";
+    private String VALUE = "value";
     List<Map<String, Object>> info_list = null;
 
     public fiveidiot_readdb(Context context) {

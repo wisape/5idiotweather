@@ -1,15 +1,17 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.ui;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.wisape.fiveidiotweather.R;
+import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
 
 /**
  * Created by wisape on 13-12-20.

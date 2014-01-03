@@ -4,11 +4,11 @@
     <PreferenceCategory
         android:title="@string/setting_widget"
         android:key="setting_widget">
-        <com.wisape.fiveidiotweather.ColorPickerPreference
+        <com.wisape.fiveidiotweather.ui.ColorPickerPreference
             android:key="setting_widget_color"
             android:summary="@string/setting_widget_color_detail"
             android:title="@string/setting_widget_color" />
-        <com.wisape.fiveidiotweather.SeekBarPreference
+        <com.wisape.fiveidiotweather.ui.SeekBarPreference
             android:key="setting_widget_trans"
             android:summary="@string/setting_widget_trans_detail"
             android:title="@string/setting_widget_trans"/>
@@ -24,7 +24,7 @@
             android:entries="@array/setting_main_theme_list"
             android:entryValues="@array/setting_main_theme_list_value"
             android:defaultValue="1" />
-        <com.wisape.fiveidiotweather.TimePreference
+        <com.wisape.fiveidiotweather.ui.TimePreference
             android:key="setting_main_period"
             android:summary="@string/setting_main_period_detail"
             android:title="@string/setting_main_period"/>

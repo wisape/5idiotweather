@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 /**
  * Created by wisape on 13-12-18.
  */
-public class fiveidiot_about extends Activity {
+public class fiveidiot_web extends Activity {
     private WebView webView;
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

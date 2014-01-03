@@ -26,9 +26,9 @@
         </activity>
         <activity android:name=".fiveidiot_add_city" android:theme="@style/AddCityTheme"/>
         <activity android:name=".fiveidiot_setting" android:theme="@style/AddCityTheme"/>
-        <activity android:name=".fiveidiot_about" android:theme="@style/AddCityTheme"/>
+        <activity android:name=".fiveidiot_web" android:theme="@style/AddCityTheme"/>
 
-        <receiver android:name=".fiveidiot_clock_widget4x1_provider"
+        <receiver android:name=".widget.fiveidiot_clock_widget4x1_provider"
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -39,7 +39,7 @@
                 android:resource="@xml/fiveidiot_clock_widget4x1_info" />
         </receiver>
 
-        <receiver android:name=".fiveidiot_widget4x1_provider"
+        <receiver android:name=".widget.fiveidiot_widget4x1_provider"
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -50,7 +50,7 @@
                 android:resource="@xml/fiveidiot_widget4x1_info" />
         </receiver>
 
-        <receiver android:name=".fiveidiot_clock_widget4x2_provider"
+        <receiver android:name=".widget.fiveidiot_clock_widget4x2_provider"
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -61,7 +61,7 @@
                 android:resource="@xml/fiveidiot_clock_widget4x2_info" />
         </receiver>
 
-        <receiver android:name=".fiveidiot_widget4x2_provider"
+        <receiver android:name=".widget.fiveidiot_widget4x2_provider"
             android:icon="@drawable/ic_launcher">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -72,14 +72,14 @@
                 android:resource="@xml/fiveidiot_widget4x2_info" />
         </receiver>
 
-        <receiver android:name=".fiveidiot_receiver">
+        <receiver android:name=".core.fiveidiot_receiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="com.wisape.fiveidiotweather.fiveidiotservice"/>
             </intent-filter>
         </receiver>
 
-        <service android:name=".fiveidiot_service">
+        <service android:name=".core.fiveidiot_service">
             <intent-filter>
                 <action android:name="com.wisape.fiveidiotweather.fiveidiotservice"/>
             </intent-filter>

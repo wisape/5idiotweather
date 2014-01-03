@@ -1,13 +1,14 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.core.data;
 
 import android.content.Context;
+
 import java.util.ArrayList;
 
 /**
  * Created by wisape on 13-11-24.
  */
 public class fiveidiot_citys {
-    private final static String CITYS_TABLE = "citys";
+    private String CITYS_TABLE = "citys";
     private fiveidiot_db citydb;
 
     public fiveidiot_citys(Context context) {

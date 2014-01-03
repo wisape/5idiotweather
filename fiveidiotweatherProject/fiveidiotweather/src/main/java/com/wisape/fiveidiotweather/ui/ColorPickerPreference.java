@@ -1,4 +1,4 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,8 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
 
 
 /**

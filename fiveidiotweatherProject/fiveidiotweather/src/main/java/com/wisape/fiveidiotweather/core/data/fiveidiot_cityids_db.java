@@ -1,13 +1,13 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.core.data;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+import com.wisape.fiveidiotweather.R;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,14 +17,13 @@ import java.util.ArrayList;
  * Created by wisape on 13-12-1.
  */
 public class fiveidiot_cityids_db {
-    private final static String DB_PATH = "/data/data/com.wisape.fiveidiotweather/databases/";
-    private final static String DB_NAME = "cityids";
-    private final static String PROVINCES_TABLE = "provinces";
-    private final static String PROVINCES_ID = "id";
-    private final static String CITYS_PROVINCES_ID = "province_id";
-    private final static String CITYS_TABLE = "citys";
-    private final static String CITYS_ID = "city_num";
-    private final static String NAME = "name";
+    private String DB_PATH = "/data/data/com.wisape.fiveidiotweather/databases/";
+    private String DB_NAME = "cityids";
+    private String PROVINCES_TABLE = "provinces";
+    private String CITYS_PROVINCES_ID = "province_id";
+    private String CITYS_TABLE = "citys";
+    private String CITYS_ID = "city_num";
+    private String NAME = "name";
     private SQLiteOpenHelper dbhelper;
 
     public fiveidiot_cityids_db(Context context) {

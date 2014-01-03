@@ -1,4 +1,4 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.wisape.fiveidiotweather.R;
+import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
 
 /**
  * Created by wisape on 13-11-17.
@@ -15,11 +18,6 @@ public class fiveidiot_today_brief extends Fragment {
 
     public fiveidiot_today_brief(String city) {
         mcity = city;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override

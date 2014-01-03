@@ -1,4 +1,4 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.core;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -10,6 +10,13 @@ import android.net.NetworkInfo;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.wisape.fiveidiotweather.core.data.fiveidiot_analyze;
+import com.wisape.fiveidiotweather.core.data.fiveidiot_db;
+import com.wisape.fiveidiotweather.core.data.fiveidiot_today_analyze;
+import com.wisape.fiveidiotweather.fiveidiot;
+import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
+import com.wisape.fiveidiotweather.net.fiveidiot_net;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,9 +25,9 @@ import java.util.Calendar;
  * Created by wisape on 13-9-21.
  */
 public class fiveidiot_service extends Service {
-    private final static String per_address = "http://m.weather.com.cn/data/";
-    private final static String today_per_address = "http://www.weather.com.cn/data/sk/";
-    private final static String suf_address = ".html";
+    private String per_address = "http://m.weather.com.cn/data/";
+    private String today_per_address = "http://www.weather.com.cn/data/sk/";
+    private String suf_address = ".html";
     private fiveidiot_net_receiver net_receiver;
 
     public IBinder onBind(Intent intent) {
@@ -28,7 +35,7 @@ public class fiveidiot_service extends Service {
     }
 
     public class fiBinder extends Binder {
-        fiveidiot_service getService() {
+        public fiveidiot_service getService() {
             return fiveidiot_service.this;
         }
     }
@@ -133,12 +140,12 @@ public class fiveidiot_service extends Service {
         db.insert(city, "date", system_date);
         db.insert(city, "dress", analyzer.get_dress()[0]);
         db.insert(city, "dress_d", analyzer.get_dress()[1]);
-        db.insert(city, "chenlian", analyzer.get_cl());
-        db.insert(city, "washcar", analyzer.get_xc());
-        db.insert(city, "suncure", analyzer.get_ls());
+//        db.insert(city, "chenlian", analyzer.get_cl());
+//        db.insert(city, "washcar", analyzer.get_xc());
+//        db.insert(city, "suncure", analyzer.get_ls());
         db.insert(city, "uv", analyzer.get_uv());
-        db.insert(city, "travel", analyzer.get_tr());
-        db.insert(city, "allergy", analyzer.get_gm());
+//        db.insert(city, "travel", analyzer.get_tr());
+//        db.insert(city, "allergy", analyzer.get_gm());
         db.insert(city, "updatetime", analyzer.get_update_time());
         String[] weather = analyzer.get_weathers();
         String[] temp = analyzer.get_temps();

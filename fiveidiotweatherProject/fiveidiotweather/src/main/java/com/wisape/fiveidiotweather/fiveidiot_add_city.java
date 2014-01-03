@@ -15,6 +15,9 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.wisape.fiveidiotweather.core.data.fiveidiot_cityids_db;
+import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
+
 /**
  * Created by wisape on 13-12-2.
  */

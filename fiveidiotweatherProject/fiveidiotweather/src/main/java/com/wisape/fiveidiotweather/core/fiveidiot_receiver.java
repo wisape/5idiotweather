@@ -1,8 +1,10 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.core;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import com.wisape.fiveidiotweather.core.fiveidiot_service;
 
 /**
  * Created by wisape on 13-12-28.

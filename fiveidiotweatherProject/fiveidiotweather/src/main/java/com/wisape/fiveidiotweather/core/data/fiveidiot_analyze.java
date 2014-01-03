@@ -1,7 +1,5 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.core.data;
 
-
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -188,64 +186,64 @@ public class fiveidiot_analyze {
         }
         return uv;
     }
-
-    public String get_tr() {
-        String tr = null;
-        if (null != json_object) {
-            try {
-                tr = json_object.getString("index_tr");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return tr;
-    }
-
-    public String get_cl() {
-        String tr = null;
-        if (null != json_object) {
-            try {
-                tr = json_object.getString("index_cl");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return tr;
-    }
-
-    public String get_ls() {
-        String tr = null;
-        if (null != json_object) {
-            try {
-                tr = json_object.getString("index_ls");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return tr;
-    }
-
-    public String get_xc() {
-        String tr = null;
-        if (null != json_object) {
-            try {
-                tr = json_object.getString("index_xc");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return tr;
-    }
-
-    public String get_gm() {
-        String gm = null;
-        if (null != json_object) {
-            try {
-                gm = json_object.getString("index_ag");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return gm;
-    }
+//
+//    public String get_tr() {
+//        String tr = null;
+//        if (null != json_object) {
+//            try {
+//                tr = json_object.getString("index_tr");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return tr;
+//    }
+//
+//    public String get_cl() {
+//        String tr = null;
+//        if (null != json_object) {
+//            try {
+//                tr = json_object.getString("index_cl");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return tr;
+//    }
+//
+//    public String get_ls() {
+//        String tr = null;
+//        if (null != json_object) {
+//            try {
+//                tr = json_object.getString("index_ls");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return tr;
+//    }
+//
+//    public String get_xc() {
+//        String tr = null;
+//        if (null != json_object) {
+//            try {
+//                tr = json_object.getString("index_xc");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return tr;
+//    }
+//
+//    public String get_gm() {
+//        String gm = null;
+//        if (null != json_object) {
+//            try {
+//                gm = json_object.getString("index_ag");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return gm;
+//    }
 }

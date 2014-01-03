@@ -1,4 +1,4 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,6 +10,7 @@ import android.widget.TimePicker;
 /**
  * Created by wisape on 13-12-19.
  */
+
 public class TimePreference extends DialogPreference {
     private int lastHour=0;
     private int lastMinute=0;
@@ -17,7 +18,6 @@ public class TimePreference extends DialogPreference {
 
     public static int getHour(String time) {
         String[] pieces=time.split(":");
-
         return(Integer.parseInt(pieces[0]));
     }
 
@@ -29,7 +29,6 @@ public class TimePreference extends DialogPreference {
 
     public TimePreference(Context ctxt, AttributeSet attrs) {
         super(ctxt, attrs);
-
         setPositiveButtonText("设置");
         setNegativeButtonText("取消");
     }

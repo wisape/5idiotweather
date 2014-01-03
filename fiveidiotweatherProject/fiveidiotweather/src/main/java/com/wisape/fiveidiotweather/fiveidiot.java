@@ -39,6 +39,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wisape.fiveidiotweather.core.fiveidiot_service;
+import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
+import com.wisape.fiveidiotweather.ui.fiveidiot_main_fragment;
+
 import java.util.ArrayList;
 
 /**
@@ -190,7 +194,7 @@ public class fiveidiot extends FragmentActivity {
         }
         switch (item.getItemId()) {
             case R.id.newcity:
-//                add new city
+//              add new city
                 Intent it = new Intent(this, fiveidiot_add_city.class);
                 startActivity(it);
                 slideLayout.closeDrawers();
@@ -225,23 +229,25 @@ public class fiveidiot extends FragmentActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    private void startWebview(String title, String url) {
+        Intent intent = new Intent(getApplicationContext(), fiveidiot_web.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        bundle.putString("url", url);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
     private class MenuItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Toast.makeText(getApplicationContext(), "position is " + i, Toast.LENGTH_LONG).show();
             switch (i) {
                 case 1:
                     Intent setting_intent = new Intent(getApplicationContext(), fiveidiot_setting.class);
                     startActivity(setting_intent);
                     break;
                 case 2:
-                    Intent about_intent = new Intent(getApplicationContext(), fiveidiot_about.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("title", "关于");
-                    bundle.putString("url", "http://5idiot.duapp.com");
-                    about_intent.putExtras(bundle);
-                    startActivity(about_intent);
+                    startWebview("介绍", "http://5idiot.duapp.com/weather");
                     break;
                 case 3:
                     Intent data=new Intent(Intent.ACTION_SENDTO);
@@ -258,8 +264,7 @@ public class fiveidiot extends FragmentActivity {
 //                    startActivity(browserIntent);
                     break;
                 case 5:
-                    break;
-                case 6:
+                    startWebview("公益", "http://5idiot.duapp.com/pb");
                     break;
                 default:
                     break;

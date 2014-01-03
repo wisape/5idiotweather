@@ -1,4 +1,4 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,6 +9,10 @@ import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
+import com.wisape.fiveidiotweather.R;
+import com.wisape.fiveidiotweather.core.data.fiveidiot_readdb;
+import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -18,16 +22,12 @@ import java.util.Map;
  * Created by wisape on 13-12-25.
  */
 public class fiveidiot_set_ui {
-    public static final String WIDGET_UPDATE = "com.wisape.fiveidiotweather.widget_update";
-    private static final String DEFAULT = "更新..";
-    private static final String DEFAULT_WEEK = "星期？";
-    private fiveidiot_readdb readdb;
-    private fiveidiot_citys citydb;
+    public final static String WIDGET_UPDATE = "com.wisape.fiveidiotweather.widget_update";
+    private String DEFAULT = "更新..";
+    private String DEFAULT_WEEK = "星期？";
     private Context con;
 
     public fiveidiot_set_ui(Context context) {
-        readdb = new fiveidiot_readdb(context);
-        citydb = new fiveidiot_citys(context);
         con = context;
     }
 
@@ -69,6 +69,8 @@ public class fiveidiot_set_ui {
     }
 
     public void setWidgetTodayUi(RemoteViews views, int city_index, boolean has_after) {
+        fiveidiot_citys citydb = new fiveidiot_citys(con);
+        fiveidiot_readdb readdb = new fiveidiot_readdb(con);
         ArrayList<String> mCitys = citydb.get_citys();
         int index = city_index % mCitys.size();
         String city = mCitys.get(index);
@@ -88,11 +90,11 @@ public class fiveidiot_set_ui {
                         R.drawable.download));
 
         if (has_after) {
-            setWidgetAfterUi(views, city);
+            setWidgetAfterUi(readdb, views, city);
         }
     }
 
-    private void setWidgetAfterUi(RemoteViews views, String mcity) {
+    private void setWidgetAfterUi(fiveidiot_readdb readdb, RemoteViews views, String mcity) {
         List<Map<String, Object>> data_map = readdb.getAfterBriefAdapterData(mcity);
         if (data_map == null)
             return;
@@ -124,6 +126,7 @@ public class fiveidiot_set_ui {
 
     public void setTodayUi(View view, String mcity) {
         ((TextView) view.findViewById(R.id.city)).setText(mcity);
+        fiveidiot_readdb readdb = new fiveidiot_readdb(con);
         Map<String, Object> data_map = readdb.getTodayBriefMapData(mcity);
         if (data_map.get("city") == null)
             return;
@@ -140,6 +143,7 @@ public class fiveidiot_set_ui {
     }
 
     public void setAfterUi(View view, String mcity) {
+        fiveidiot_readdb readdb = new fiveidiot_readdb(con);
         List<Map<String, Object>> data_map = readdb.getAfterBriefAdapterData(mcity);
         if (data_map == null)
             return;

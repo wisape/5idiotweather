@@ -1,4 +1,4 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.core.data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class fiveidiot_db {
     private SQLiteOpenHelper dbhelper = null;
-    private static final String DB_NAME = "fiveidiot";
-    private static final String NAME = "name";
-    private static final String VALUE = "value";
+    private String DB_NAME = "fiveidiot";
+    private String NAME = "name";
+    private String VALUE = "value";
 
     public fiveidiot_db(Context context) {
         dbhelper = new SQLiteOpenHelper(context, DB_NAME, null, 1) {
@@ -90,7 +90,6 @@ public class fiveidiot_db {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
-
         if (cursor.getCount() > 0) {
             for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
                 value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));

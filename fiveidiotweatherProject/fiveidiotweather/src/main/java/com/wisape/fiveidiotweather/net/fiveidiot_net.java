@@ -1,4 +1,4 @@
-package com.wisape.fiveidiotweather;
+package com.wisape.fiveidiotweather.net;
 
 
 import java.io.BufferedInputStream;
@@ -14,8 +14,7 @@ import java.net.URL;
  */
 
 public class fiveidiot_net {
-    private static String weatherAddress = "http://m.weather.com.cn/data/101110101.html";
-
+    private String weatherAddress;
     public fiveidiot_net(String address) {
         weatherAddress = address;
 
@@ -34,9 +33,7 @@ public class fiveidiot_net {
             while ((line = br.readLine()) != null) {
                 buffer.append(line);
             }
-
             context = buffer.toString();
-
         } finally {
             conn.disconnect();
         }
