@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class fiveidiot_readdb {
     private SQLiteOpenHelper dbhelper = null;
-    public String[] TODAY_PROPS = {"city", "todayupdatetime", "date","week0", "weather0", "nowtemp", "temp0", "wind", "humidity"};
+    public String[] TODAY_PROPS = {"city", "todayupdatetime", "date", "nowtemp",  "wind", "humidity"};
 //    public static final String[] DEF_PROPS = {"uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
     public String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
     private String DB_NAME = "fiveidiot";
@@ -94,18 +94,21 @@ public class fiveidiot_readdb {
             list.add(map);
         }
 
+        String date = fiveidiot_service.system_date();
+        if (!date.equals(getvalue(db, table, "date"))) {
+            list.remove(0);
+        }
         db.close();
         return list;
     }
 
     public Map<String, Object> getTodayBriefMapData(String table) {
-        info_list = getBriefAdapterData(table);
+        if (info_list == null) {
+            info_list = getBriefAdapterData(table);
+        }
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String date = fiveidiot_service.system_date();
 
-        if (!date.equals(getvalue(db, table, "date"))) {
-            info_list.remove(0);
-        }
         Map<String, Object> map = info_list.get(0);
         for (int i = 0; i < TODAY_PROPS.length; i++) {
             if (TODAY_PROPS[i].equals("date")) {
@@ -145,7 +148,6 @@ public class fiveidiot_readdb {
         if (image_title.contains("雪"))
             return R.drawable.snow;
 
-        Log.d("5sha", "Image title = " + image_title);
         return R.drawable.dust;
     }
 }

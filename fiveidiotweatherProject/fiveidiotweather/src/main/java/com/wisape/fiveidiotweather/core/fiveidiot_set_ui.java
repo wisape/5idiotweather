@@ -81,8 +81,8 @@ public class fiveidiot_set_ui {
         if (data_map.get("city") == null)
             return;
         views.setTextViewText(R.id.city, data_map.get("city").toString());
-        views.setTextViewText(R.id.temp,setDefault(data_map.get("temp0"),DEFAULT));
-        views.setTextViewText(R.id.weather,setDefault(data_map.get("weather0"),DEFAULT));
+        views.setTextViewText(R.id.temp,setDefault(data_map.get("temp"),DEFAULT));
+        views.setTextViewText(R.id.weather,setDefault(data_map.get("weather"),DEFAULT));
         views.setTextViewText(R.id.wind,setDefault(data_map.get("wind"),DEFAULT));
         views.setTextViewText(R.id.nowtemp,setDefault(data_map.get("nowtemp") + "℃",DEFAULT));
         views.setImageViewResource(R.id.today_image,
@@ -133,9 +133,9 @@ public class fiveidiot_set_ui {
         ((TextView) view.findViewById(R.id.city)).setText(setDefault(data_map.get("city").toString(), mcity));
         ((TextView) view.findViewById(R.id.updatetime)).setText("(更新时间：" + setDefault(data_map.get("todayupdatetime"), DEFAULT) + ")");
         ((TextView) view.findViewById(R.id.date)).setText(setDefault(data_map.get("date"), DEFAULT));
-        ((TextView) view.findViewById(R.id.week)).setText(setDefault(data_map.get("week0"),DEFAULT_WEEK));
-        ((TextView) view.findViewById(R.id.temp)).setText(setDefault(data_map.get("temp0"),DEFAULT));
-        ((TextView) view.findViewById(R.id.weather)).setText(setDefault(data_map.get("weather0"),DEFAULT));
+        ((TextView) view.findViewById(R.id.week)).setText(setDefault(data_map.get("week"),DEFAULT_WEEK));
+        ((TextView) view.findViewById(R.id.temp)).setText(setDefault(data_map.get("temp"),DEFAULT));
+        ((TextView) view.findViewById(R.id.weather)).setText(setDefault(data_map.get("weather"),DEFAULT));
         ((TextView) view.findViewById(R.id.wind)).setText(setDefault(data_map.get("wind"),DEFAULT));
         ((TextView) view.findViewById(R.id.nowtemp)).setText(setDefault(data_map.get("nowtemp") + "℃",DEFAULT));
         ((ImageView) view.findViewById(R.id.today_image)).setImageResource(setDefaultImage(readdb.getImageId(setDefault(data_map.get("image"), "1")),
