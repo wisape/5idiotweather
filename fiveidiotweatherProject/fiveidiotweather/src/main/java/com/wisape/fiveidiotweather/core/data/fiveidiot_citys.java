@@ -34,7 +34,6 @@ public class fiveidiot_citys {
         if (citys.contains(city)) {
             return citys.indexOf(city);
         }
-
         return -1;
     }
 

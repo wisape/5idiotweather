@@ -12,7 +12,6 @@ import android.os.IBinder;
 
 import com.wisape.fiveidiotweather.core.data.fiveidiot_analyze;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_db;
-import com.wisape.fiveidiotweather.core.data.fiveidiot_today_analyze;
 import com.wisape.fiveidiotweather.fiveidiot;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
 import com.wisape.fiveidiotweather.net.fiveidiot_net;
@@ -20,6 +19,7 @@ import com.wisape.fiveidiotweather.net.fiveidiot_net;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by wisape on 13-9-21.
@@ -106,23 +106,25 @@ public class fiveidiot_service extends Service {
         boolean today, other;
         if (!net_available())
             return;
-        today = unwrap_save_now_data(city, city_id);
-        other = unwrap_save_data(city, city_id);
+        fiveidiot_analyze analyzer = new fiveidiot_analyze();
+        today = unwrap_save_now_data(analyzer, city, city_id);
+        other = unwrap_save_data(analyzer, city, city_id);
         if (today || other) {
             Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
             Intent widget_intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
             sendBroadcast(it);
             sendBroadcast(widget_intent);
         }
+        analyzer.clear();
     }
 
-    private synchronized boolean unwrap_save_data(String city, String city_code) throws IOException {
+    private synchronized boolean unwrap_save_data(fiveidiot_analyze analyzer, String city, String city_code) throws IOException {
         if (city_code == null)
             return false;
 
         String weather_path = per_address + city_code + suf_address;
         fiveidiot_net net = new fiveidiot_net(weather_path);
-        fiveidiot_analyze analyzer = new fiveidiot_analyze(net.getContext());
+        analyzer.init_brief_info(net.getContext());
         fiveidiot_db db = new fiveidiot_db(this);
         String date = analyzer.get_date();
         String system_date = system_date();
@@ -132,60 +134,59 @@ public class fiveidiot_service extends Service {
         String saved_date = db.getvalue(city, "date");
         String saved_update_time = db.getvalue(city, "updatetime");
         if (saved_date != null && saved_update_time != null) {
-            if (saved_date.equals(date) && saved_update_time.equals(analyzer.get_update_time())) {
+            if (saved_date.equals(date) && saved_update_time.equals(analyzer.get_brief_update_time())) {
                 return false;
             }
         }
 
         db.insert(city, "date", system_date);
-        db.insert(city, "dress", analyzer.get_dress()[0]);
-        db.insert(city, "dress_d", analyzer.get_dress()[1]);
+//        db.insert(city, "dress", analyzer.get_dress()[0]);
+//        db.insert(city, "dress_d", analyzer.get_dress()[1]);
 //        db.insert(city, "chenlian", analyzer.get_cl());
 //        db.insert(city, "washcar", analyzer.get_xc());
 //        db.insert(city, "suncure", analyzer.get_ls());
         db.insert(city, "uv", analyzer.get_uv());
 //        db.insert(city, "travel", analyzer.get_tr());
 //        db.insert(city, "allergy", analyzer.get_gm());
-        db.insert(city, "updatetime", analyzer.get_update_time());
-        String[] weather = analyzer.get_weathers();
-        String[] temp = analyzer.get_temps();
-        String[] wind = analyzer.get_winds();
-        String[] image = analyzer.get_images();
-        String[] weeks = analyzer.get_week();
+        db.insert(city, "updatetime", analyzer.get_brief_update_time());
+        List<String> weather = analyzer.get_weathers();
+        List<String> temp = analyzer.get_temps();
+        List<String> wind = analyzer.get_winds();
+        List<String> image = analyzer.get_images();
+        List<String> weeks = analyzer.get_week();
 
-        for (int i = 0; i < weather.length; i++) {
-            db.insert(city, "week" + i, weeks[i]);
-            db.insert(city, "weather" + i, weather[i]);
-            db.insert(city, "temp" + i, temp[i]);
-            db.insert(city, "wind" + i, wind[i]);
-            db.insert(city, "image" + i, image[i * 2]);
-            db.insert(city, "image_n" + i, image[i * 2 + 1]);
+        for (int i = 0; i < weather.size(); i++) {
+            db.insert(city, "week" + i, weeks.get(i));
+            db.insert(city, "weather" + i, weather.get(i));
+            db.insert(city, "temp" + i, temp.get(i));
+            db.insert(city, "wind" + i, wind.get(i));
+            db.insert(city, "image" + i, image.get(i));
         }
         return true;
     }
 
-    private synchronized boolean unwrap_save_now_data(String city, String city_code) throws IOException {
+    private synchronized boolean unwrap_save_now_data(fiveidiot_analyze analyzer, String city, String city_code) throws IOException {
         if (city_code == null)
             return false;
         String today_weather_path = today_per_address + city_code + suf_address;
         fiveidiot_net net = new fiveidiot_net(today_weather_path);
-        fiveidiot_today_analyze analyzer = new fiveidiot_today_analyze(net.getContext());
+        analyzer.init_today_info(net.getContext());
         fiveidiot_db db = new fiveidiot_db(this);
 
         db.create_table(city);
 
         String saved_update_time = db.getvalue(city, "todayupdatetime");
         if (saved_update_time != null) {
-            if (saved_update_time.equals(analyzer.get_update_time())) {
+            if (saved_update_time.equals(analyzer.get_today_update_time())) {
                 return false;
             }
         }
 
         db.insert(city, "city", analyzer.get_city());
         db.insert(city, "nowtemp", analyzer.get_now_temp());
-        db.insert(city, "todayupdatetime", analyzer.get_update_time());
-        db.insert(city, "wind", analyzer.get_wind());
-        db.insert(city, "humidity", analyzer.get_hum());
+        db.insert(city, "todayupdatetime", analyzer.get_today_update_time());
+        db.insert(city, "wind", analyzer.get_today_wind());
+        db.insert(city, "humidity", analyzer.get_today_hum());
 
         return true;
     }
