@@ -53,18 +53,15 @@ public class fiveidiot extends FragmentActivity {
     public final static String BROADCAST_UPDATE_UI = "com.wisape.fiveidiotweather.update_ui";
     private fiveidiot_receiver receiver;
     private ServiceConnection sconn;
-    private Intent service_intent;
     private fiveidiot_service mservice;
     private DrawerLayout slideLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menuList;
     private ListView cityList;
     private String[] menuItems;
-    private FragmentManager fragmentManager;
-    private MainPagerAdapter mainPagerAdapter;
+//    private MainPagerAdapter mainPagerAdapter;
     private CityArrayAdapter cityArrayAdapter;
     private ViewPager viewPager;
-    private fiveidiot_citys mCitys;
     private ArrayList<String> citys;
 
 
@@ -76,7 +73,7 @@ public class fiveidiot extends FragmentActivity {
          * Start the Service which get the weather information
          */
 
-        mCitys = new fiveidiot_citys(getApplicationContext());
+        fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
         citys = mCitys.get_citys();
         sconn = new ServiceConnection() {
             @Override
@@ -89,7 +86,7 @@ public class fiveidiot extends FragmentActivity {
 
             }
         };
-        service_intent = new Intent(this, fiveidiot_service.class);
+        Intent service_intent = new Intent(this, fiveidiot_service.class);
         bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
 
         slideLayout = (DrawerLayout) findViewById(R.id.slide_layout);
@@ -144,8 +141,8 @@ public class fiveidiot extends FragmentActivity {
         };
         slideLayout.setDrawerListener(mDrawerToggle);
 
-        fragmentManager = getSupportFragmentManager();
-        mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.main_activity);
         viewPager.setAdapter(mainPagerAdapter);
 
@@ -331,6 +328,7 @@ public class fiveidiot extends FragmentActivity {
     }
 
     private void deleteCity(int position) {
+        fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
         mCitys.delete_city(citys.get(position));
         citys.remove(position);
         update_ui();
@@ -345,6 +343,7 @@ public class fiveidiot extends FragmentActivity {
 
 
     private void update_data() {
+        Intent service_intent = new Intent(this, fiveidiot_service.class);
         bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
         if (!mservice.net_available()) {
             Toast.makeText(getApplicationContext(), "网络不给力！", Toast.LENGTH_SHORT).show();
@@ -357,7 +356,8 @@ public class fiveidiot extends FragmentActivity {
     private void update_ui() {
         cityArrayAdapter.notifyDataSetChanged();
         cityList.invalidate();
-        mainPagerAdapter.notifyDataSetChanged();
+        viewPager.getAdapter().notifyDataSetChanged();
+//        mainPagerAdapter.notifyDataSetChanged();
         viewPager.invalidate();
     }
 

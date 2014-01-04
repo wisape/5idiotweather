@@ -72,9 +72,10 @@ public class fiveidiot_service extends Service {
                 }
                 fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
                 ArrayList<String> citys = mCitys.get_citys();
+                String city;
                 for (int i = 0; i < citys.size(); i++) {
                     try {
-                        String city = citys.get(i);
+                        city = citys.get(i);
                         manage_data(city, mCitys.find_cityid(city));
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -90,9 +91,10 @@ public class fiveidiot_service extends Service {
             public void run() {
                 fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
                 ArrayList<String> citys = mCitys.get_citys();
+                String city;
                 for (int i = 0; i < citys.size(); i++) {
                     try {
-                        String city = citys.get(i);
+                        city = citys.get(i);
                         manage_data(city, mCitys.find_cityid(city));
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -107,8 +109,9 @@ public class fiveidiot_service extends Service {
         if (!net_available())
             return;
         fiveidiot_analyze analyzer = new fiveidiot_analyze();
-        today = unwrap_save_now_data(analyzer, city, city_id);
-        other = unwrap_save_data(analyzer, city, city_id);
+        fiveidiot_db db = new fiveidiot_db(this);
+        today = unwrap_save_now_data(db, analyzer, city, city_id);
+        other = unwrap_save_data(db, analyzer, city, city_id);
         if (today || other) {
             Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
             Intent widget_intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
@@ -118,14 +121,13 @@ public class fiveidiot_service extends Service {
         analyzer.clear();
     }
 
-    private synchronized boolean unwrap_save_data(fiveidiot_analyze analyzer, String city, String city_code) throws IOException {
+    private synchronized boolean unwrap_save_data(fiveidiot_db db, fiveidiot_analyze analyzer, String city, String city_code) throws IOException {
         if (city_code == null)
             return false;
 
         String weather_path = per_address + city_code + suf_address;
         fiveidiot_net net = new fiveidiot_net(weather_path);
         analyzer.init_brief_info(net.getContext());
-        fiveidiot_db db = new fiveidiot_db(this);
         String date = analyzer.get_date();
         String system_date = system_date();
 
@@ -165,13 +167,12 @@ public class fiveidiot_service extends Service {
         return true;
     }
 
-    private synchronized boolean unwrap_save_now_data(fiveidiot_analyze analyzer, String city, String city_code) throws IOException {
+    private synchronized boolean unwrap_save_now_data(fiveidiot_db db, fiveidiot_analyze analyzer, String city, String city_code) throws IOException {
         if (city_code == null)
             return false;
         String today_weather_path = today_per_address + city_code + suf_address;
         fiveidiot_net net = new fiveidiot_net(today_weather_path);
         analyzer.init_today_info(net.getContext());
-        fiveidiot_db db = new fiveidiot_db(this);
 
         db.create_table(city);
 
