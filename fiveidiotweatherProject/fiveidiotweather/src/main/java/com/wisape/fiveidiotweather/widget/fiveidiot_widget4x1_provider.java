@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import com.wisape.fiveidiotweather.R;
-import com.wisape.fiveidiotweather.fiveidiot;
 import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
+import com.wisape.fiveidiotweather.fiveidiot_splash;
 
 /**
  * Created by wisape on 13-12-3.
@@ -49,7 +49,7 @@ public class fiveidiot_widget4x1_provider extends AppWidgetProvider {
 
     private void updateWidgetView(Context context, AppWidgetManager appWidgetManager, int appWidgetId, int city_index) {
         fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
-        Intent intent = new Intent(context, fiveidiot.class);
+        Intent intent = new Intent(context, fiveidiot_splash.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4x1);
         set_ui.setWidgetTodayUi(views, city_index, false);

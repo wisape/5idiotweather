@@ -12,8 +12,8 @@ import android.provider.AlarmClock;
 import android.widget.RemoteViews;
 
 import com.wisape.fiveidiotweather.R;
-import com.wisape.fiveidiotweather.fiveidiot;
 import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
+import com.wisape.fiveidiotweather.fiveidiot_splash;
 
 /**
  * Created by wisape on 13-12-22.
@@ -74,7 +74,7 @@ public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
 
     private void updateWidgetView(Context context, AppWidgetManager appWidgetManager, int appWidgetId, int city_index) {
         fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
-        Intent intent = new Intent(context, fiveidiot.class);
+        Intent intent = new Intent(context, fiveidiot_splash.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         Intent clock = new Intent(AlarmClock.ACTION_SET_ALARM);
         PendingIntent clockpendIntent = PendingIntent.getActivity(context, 0, clock, 0);

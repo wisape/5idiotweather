@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">5傻天气</string>
+    <string name="splash_text">心有阳光 便是晴天</string>
     <string name="default_state">适宜</string>
     <string-array name="menu_array">
         <item>设置</item>

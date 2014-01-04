@@ -18,15 +18,16 @@
         <activity
             android:name="com.wisape.fiveidiotweather.fiveidiot"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".fiveidiot_add_city" android:theme="@style/AddCityTheme"/>
         <activity android:name=".fiveidiot_setting" android:theme="@style/AddCityTheme"/>
         <activity android:name=".fiveidiot_web" android:theme="@style/AddCityTheme"/>
+        <activity android:name=".fiveidiot_splash" android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".widget.fiveidiot_clock_widget4x1_provider"
             android:icon="@drawable/ic_launcher">
