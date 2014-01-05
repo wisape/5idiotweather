@@ -15,7 +15,7 @@
             android:title="@string/setting_widget_trans"/>
     </PreferenceCategory>
     <PreferenceCategory
-        android:title="@string/setting_main"
+        android:title="@string/setting_other"
         android:key="setting_main">
         <!--<com.wisape.fiveidiotweather.ui.ColorPickerPreference-->
             <!--android:key="setting_main_background"-->
@@ -27,6 +27,12 @@
             <!--android:key="setting_main_period"-->
             <!--android:summary="@string/setting_main_period_detail"-->
             <!--android:title="@string/setting_main_period"/>-->
+        <Preference
+            android:title="@string/setting_author"
+            android:summary="@string/setting_author_detail"/>
+        <Preference
+            android:title="@string/setting_donate"
+            android:summary="@string/setting_donate_detail"/>
 
     </PreferenceCategory>
 </PreferenceScreen>
