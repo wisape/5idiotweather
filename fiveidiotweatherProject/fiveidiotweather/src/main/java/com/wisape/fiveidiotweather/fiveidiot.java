@@ -59,6 +59,7 @@ public class fiveidiot extends FragmentActivity {
     private ListView menuList;
     private ListView cityList;
     private String[] menuItems;
+    private fiveidiot_citys mCitys;
 //    private MainPagerAdapter mainPagerAdapter;
     private CityArrayAdapter cityArrayAdapter;
     private ViewPager viewPager;
@@ -73,7 +74,7 @@ public class fiveidiot extends FragmentActivity {
          * Start the Service which get the weather information
          */
 
-        fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
+        mCitys = new fiveidiot_citys(getApplicationContext());
         citys = mCitys.get_citys();
         sconn = new ServiceConnection() {
             @Override
@@ -141,7 +142,6 @@ public class fiveidiot extends FragmentActivity {
         };
         slideLayout.setDrawerListener(mDrawerToggle);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
         MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
         viewPager = (ViewPager) findViewById(R.id.main_activity);
         viewPager.setAdapter(mainPagerAdapter);
@@ -328,7 +328,6 @@ public class fiveidiot extends FragmentActivity {
     }
 
     private void deleteCity(int position) {
-        fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
         mCitys.delete_city(citys.get(position));
         citys.remove(position);
         update_ui();

@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_gravity="center"
+        android:id="@+id/splash_text"
         android:textSize="@dimen/large_size"
         android:textColor="@color/textcolor"
         android:text="@string/splash_text"/>

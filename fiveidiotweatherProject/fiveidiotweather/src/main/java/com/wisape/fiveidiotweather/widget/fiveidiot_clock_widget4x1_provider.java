@@ -20,20 +20,10 @@ import com.wisape.fiveidiotweather.fiveidiot_splash;
  */
 public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
     private IntentFilter intentFilter = null;
-    private RemoteViews views;
 
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         String action = intent.getAction();
-        if (action.equals(Intent.ACTION_TIME_TICK) || action.equals(Intent.ACTION_TIME_CHANGED) || action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-            fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
-            if (views == null)
-                views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x1);
-            set_ui.setWidgetClock(views);
-            ComponentName wd = new ComponentName(context, fiveidiot_clock_widget4x1_provider.class);
-            AppWidgetManager.getInstance(context).updateAppWidget(wd, views);
-        }
-
         if (action.equals("clock_next_city4x1")) {
             Bundle extras = intent.getExtras();
             if (extras != null) {
@@ -45,7 +35,9 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
                 updateWidgetView(context, appWidgetManager, mAppWidgetId, city_index);
             }
         }
-        if (intent.getAction().equals(fiveidiot_set_ui.WIDGET_UPDATE)) {
+        if (intent.getAction().equals(fiveidiot_set_ui.WIDGET_UPDATE) ||
+                action.equals(Intent.ACTION_TIME_TICK) || action.equals(Intent.ACTION_TIME_CHANGED) ||
+                action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             ComponentName wd = new ComponentName(context, fiveidiot_clock_widget4x1_provider.class);
             onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
@@ -67,7 +59,6 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
         // Perform this loop procedure for each App Widget that belongs to this provider
         for (int i=0; i<N; i++) {
             int appWidgetId = appWidgetIds[i];
-            views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x1);
             updateWidgetView(context, appWidgetManager, appWidgetId, 0);
         }
     }
@@ -79,8 +70,7 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         Intent clock = new Intent(AlarmClock.ACTION_SET_ALARM);
         PendingIntent clockpendIntent = PendingIntent.getActivity(context, 0, clock, 0);
-        if (views == null)
-            views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x1);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x1);
         set_ui.setWidgetTodayUi(views, city_index, true);
         Intent nextIntent = new Intent("clock_next_city4x1");
         Bundle bundle = new Bundle();
