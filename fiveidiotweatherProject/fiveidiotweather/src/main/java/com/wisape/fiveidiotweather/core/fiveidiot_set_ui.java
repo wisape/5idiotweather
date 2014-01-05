@@ -1,9 +1,14 @@
 package com.wisape.fiveidiotweather.core;
 
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.AlarmClock;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
@@ -12,6 +17,7 @@ import android.widget.TextView;
 import com.wisape.fiveidiotweather.R;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_db;
+import com.wisape.fiveidiotweather.fiveidiot_splash;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,10 +31,37 @@ public class fiveidiot_set_ui {
     public final static String WIDGET_UPDATE = "com.wisape.fiveidiotweather.widget_update";
     private String DEFAULT = "更新..";
     private String DEFAULT_WEEK = "星期？";
+    private fiveidiot_db readdb;
     private Context con;
+    private Intent intent;
+    private PendingIntent mainIntent;
+    private PendingIntent clockIntent;
+    private PendingIntent nextIntent;
+    private List<Map<String, Object>> data_map;
+    private Map<String, Object> today_data_map;
+    private fiveidiot_citys citydb;
+    private ArrayList<String> mCitys;
 
     public fiveidiot_set_ui(Context context) {
         con = context;
+        readdb = new fiveidiot_db(con);
+    }
+
+    public fiveidiot_set_ui(Context context, String broadtext, int id, int index) {
+        con = context;
+        readdb = new fiveidiot_db(con);
+        citydb = new fiveidiot_citys(con);
+        intent = new Intent(context, fiveidiot_splash.class);
+        mainIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+        clockIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        intent = new Intent(broadtext);
+        Bundle bundle = new Bundle();
+        bundle.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, id);
+        bundle.putInt("CityIndex", index);
+        intent.putExtras(bundle);
+        nextIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
     }
 
     private String setDefault(Object str1, String str2) {
@@ -76,24 +109,26 @@ public class fiveidiot_set_ui {
     }
 
     public void setWidgetTodayUi(RemoteViews views, int city_index, boolean has_after) {
-        fiveidiot_citys citydb = new fiveidiot_citys(con);
-        fiveidiot_db readdb = new fiveidiot_db(con);
-        ArrayList<String> mCitys = citydb.get_citys();
+        mCitys = citydb.get_citys();
         int index = city_index % mCitys.size();
         String city = mCitys.get(index);
 
+        views.setOnClickPendingIntent(R.id.today_con, mainIntent);
+        views.setOnClickPendingIntent(R.id.clock_time, clockIntent);
+        views.setOnClickPendingIntent(R.id.next_city, nextIntent);
+
         setWidgetClock(views);
 
-        Map<String, Object> data_map = readdb.getTodayBriefMapData(city);
-        if (data_map.get("city") == null)
+        today_data_map = readdb.getTodayBriefMapData(city);
+        if (today_data_map.get("city") == null)
             return;
-        views.setTextViewText(R.id.city, data_map.get("city").toString());
-        views.setTextViewText(R.id.temp,setDefault(data_map.get("temp"),DEFAULT));
-        views.setTextViewText(R.id.weather,setDefault(data_map.get("weather"),DEFAULT));
+        views.setTextViewText(R.id.city, today_data_map.get("city").toString());
+        views.setTextViewText(R.id.temp,setDefault(today_data_map.get("temp"),DEFAULT));
+        views.setTextViewText(R.id.weather,setDefault(today_data_map.get("weather"),DEFAULT));
 //        views.setTextViewText(R.id.wind,setDefault(data_map.get("wind"),DEFAULT));
-        views.setTextViewText(R.id.nowtemp,setDefault(data_map.get("nowtemp") + "℃",DEFAULT));
+        views.setTextViewText(R.id.nowtemp,setDefault(today_data_map.get("nowtemp") + "℃",DEFAULT));
         views.setImageViewResource(R.id.today_image,
-                setDefaultImage(readdb.getImageId(data_map.get("image").toString()),
+                setDefaultImage(readdb.getImageId(today_data_map.get("image").toString()),
                         R.drawable.download));
 
         if (has_after) {
@@ -102,7 +137,7 @@ public class fiveidiot_set_ui {
     }
 
     private void setWidgetAfterUi(fiveidiot_db readdb, RemoteViews views, String mcity) {
-        List<Map<String, Object>> data_map = readdb.getAfterBriefAdapterData(mcity);
+        data_map = readdb.getAfterBriefAdapterData(mcity);
         if (data_map == null)
             return;
 
@@ -133,25 +168,23 @@ public class fiveidiot_set_ui {
 
     public void setTodayUi(View view, String mcity) {
         ((TextView) view.findViewById(R.id.city)).setText(mcity);
-        fiveidiot_db readdb = new fiveidiot_db(con);
-        Map<String, Object> data_map = readdb.getTodayBriefMapData(mcity);
-        if (data_map.get("city") == null)
+        today_data_map = readdb.getTodayBriefMapData(mcity);
+        if (today_data_map.get("city") == null)
             return;
-        ((TextView) view.findViewById(R.id.city)).setText(setDefault(data_map.get("city").toString(), mcity));
-        ((TextView) view.findViewById(R.id.updatetime)).setText("(更新时间：" + setDefault(data_map.get("todayupdatetime"), DEFAULT) + ")");
-        ((TextView) view.findViewById(R.id.date)).setText(setDefault(data_map.get("date"), DEFAULT));
-        ((TextView) view.findViewById(R.id.week)).setText(setDefault(data_map.get("week"),DEFAULT_WEEK));
-        ((TextView) view.findViewById(R.id.temp)).setText(setDefault(data_map.get("temp"),DEFAULT));
-        ((TextView) view.findViewById(R.id.weather)).setText(setDefault(data_map.get("weather"),DEFAULT));
-        ((TextView) view.findViewById(R.id.wind)).setText(setDefault(data_map.get("wind"),DEFAULT));
-        ((TextView) view.findViewById(R.id.nowtemp)).setText(setDefault(data_map.get("nowtemp") + "℃",DEFAULT));
-        ((ImageView) view.findViewById(R.id.today_image)).setImageResource(setDefaultImage(readdb.getImageId(setDefault(data_map.get("image"), "1")),
+        ((TextView) view.findViewById(R.id.city)).setText(setDefault(today_data_map.get("city").toString(), mcity));
+        ((TextView) view.findViewById(R.id.updatetime)).setText("(更新时间：" + setDefault(today_data_map.get("todayupdatetime"), DEFAULT) + ")");
+        ((TextView) view.findViewById(R.id.date)).setText(setDefault(today_data_map.get("date"), DEFAULT));
+        ((TextView) view.findViewById(R.id.week)).setText(setDefault(today_data_map.get("week"),DEFAULT_WEEK));
+        ((TextView) view.findViewById(R.id.temp)).setText(setDefault(today_data_map.get("temp"),DEFAULT));
+        ((TextView) view.findViewById(R.id.weather)).setText(setDefault(today_data_map.get("weather"),DEFAULT));
+        ((TextView) view.findViewById(R.id.wind)).setText(setDefault(today_data_map.get("wind"),DEFAULT));
+        ((TextView) view.findViewById(R.id.nowtemp)).setText(setDefault(today_data_map.get("nowtemp") + "℃",DEFAULT));
+        ((ImageView) view.findViewById(R.id.today_image)).setImageResource(setDefaultImage(readdb.getImageId(setDefault(today_data_map.get("image"), "1")),
                 R.drawable.download));
     }
 
     public void setAfterUi(View view, String mcity) {
-        fiveidiot_db readdb = new fiveidiot_db(con);
-        List<Map<String, Object>> data_map = readdb.getAfterBriefAdapterData(mcity);
+        data_map = readdb.getAfterBriefAdapterData(mcity);
         if (data_map == null)
             return;
         ((TextView) view.findViewById(R.id.week_1)).setText(setDefault(data_map.get(0).get("week"), DEFAULT_WEEK));

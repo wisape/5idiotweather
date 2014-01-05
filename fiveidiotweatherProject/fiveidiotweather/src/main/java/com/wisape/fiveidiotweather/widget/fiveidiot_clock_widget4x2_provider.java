@@ -64,22 +64,9 @@ public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
     }
 
     private void updateWidgetView(Context context, AppWidgetManager appWidgetManager, int appWidgetId, int city_index) {
-        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
-        Intent intent = new Intent(context, fiveidiot_splash.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
-        Intent clock = new Intent(AlarmClock.ACTION_SET_ALARM);
-        PendingIntent clockpendIntent = PendingIntent.getActivity(context, 0, clock, 0);
+        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context, "clock_next_city4x2", appWidgetId, city_index);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x2);
         set_ui.setWidgetTodayUi(views, city_index, true);
-        Intent nextIntent = new Intent("clock_next_city4x2");
-        Bundle bundle = new Bundle();
-        bundle.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        bundle.putInt("CityIndex", city_index);
-        nextIntent.putExtras(bundle);
-        PendingIntent nextpendIntent = PendingIntent.getBroadcast(context, appWidgetId, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.today_con, pendingIntent);
-        views.setOnClickPendingIntent(R.id.clock_time, clockpendIntent);
-        views.setOnClickPendingIntent(R.id.next_city, nextpendIntent);
         // Tell the AppWidgetManager to perform an update on the current app widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

@@ -48,19 +48,9 @@ public class fiveidiot_widget4x1_provider extends AppWidgetProvider {
     }
 
     private void updateWidgetView(Context context, AppWidgetManager appWidgetManager, int appWidgetId, int city_index) {
-        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
-        Intent intent = new Intent(context, fiveidiot_splash.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context, "next_city4x1", appWidgetId, city_index);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4x1);
         set_ui.setWidgetTodayUi(views, city_index, false);
-        Intent nextIntent = new Intent("next_city4x1");
-        Bundle bundle = new Bundle();
-        bundle.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        bundle.putInt("CityIndex", city_index);
-        nextIntent.putExtras(bundle);
-        PendingIntent nextpendIntent = PendingIntent.getBroadcast(context, appWidgetId, nextIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.today_con, pendingIntent);
-        views.setOnClickPendingIntent(R.id.next_city, nextpendIntent);
         // Tell the AppWidgetManager to perform an update on the current app widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

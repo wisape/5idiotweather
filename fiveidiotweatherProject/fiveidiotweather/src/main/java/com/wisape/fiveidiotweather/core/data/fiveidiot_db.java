@@ -23,6 +23,10 @@ public class fiveidiot_db {
     private String DB_NAME = "fiveidiot";
     private String NAME = "name";
     private String VALUE = "value";
+    private List<Map<String, Object>> list;
+    private SQLiteDatabase db;
+    private Cursor cursor;
+    private ContentValues cv;
 
 //    public String[] TODAY_PROPS = {"city", "todayupdatetime", "date", "nowtemp",  "wind", "humidity"};
 //    public static final String[] DEF_PROPS = {"uv", "allergy", "suncure", "washcar", "chenlian", "travel", "dress", "dress_d"};
@@ -40,18 +44,19 @@ public class fiveidiot_db {
 
             }
         };
+        cv = new ContentValues();
+        list = new ArrayList<Map<String, Object>>();
     }
 
     public synchronized void create_table(String table) {
-        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        db = dbhelper.getWritableDatabase();
         db.execSQL("create table if not exists "+ table +" ( "+ NAME +" TEXT, "+ VALUE +"  TEXT);");
         db.close();
     }
 
     public synchronized void insert(String table, String key, String vlaue) {
-        ContentValues cv = new ContentValues();
-        SQLiteDatabase db = dbhelper.getWritableDatabase();
-        Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
+        db = dbhelper.getWritableDatabase();
+        cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
 
         if (cursor.getCount() > 0) {
             update(db, table, key, vlaue);
@@ -65,15 +70,14 @@ public class fiveidiot_db {
     }
 
     private synchronized int update(SQLiteDatabase db, String table, String key, String value) {
-        ContentValues cv = new ContentValues();
         cv.put(VALUE, value);
         return db.update(table, cv,  NAME +" = ?", new String[]{key});
     }
 
     public synchronized ArrayList<String> getnames(String table) {
         ArrayList<String> names = new ArrayList<String>();
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + table, null);
+        db = dbhelper.getReadableDatabase();
+        cursor = db.rawQuery("select * from " + table, null);
         while (cursor.moveToNext()) {
             names.add(cursor.getString(cursor.getColumnIndexOrThrow(NAME)));
         }
@@ -84,23 +88,23 @@ public class fiveidiot_db {
 
     public synchronized int delete(String table, String key) {
         int rel;
-        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        db = dbhelper.getWritableDatabase();
         rel = db.delete(table, NAME + " = ?", new String[]{key});
         db.close();
         return rel;
     }
 
     public void delete_table(String table) {
-        SQLiteDatabase db = dbhelper.getWritableDatabase();
+        db = dbhelper.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + table);
         db.close();
     }
 
     public synchronized String getvalue(String table, String key) {
         String value = null;
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        db = dbhelper.getReadableDatabase();
 
-        Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
+        cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
         if (cursor.getCount() > 0) {
             for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
                 value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));
@@ -118,7 +122,7 @@ public class fiveidiot_db {
         if (!has_table(db, table)) {
             return value;
         }
-        Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
+        cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
 
         if (cursor.getCount() > 0) {
             for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
@@ -130,7 +134,7 @@ public class fiveidiot_db {
     }
 
     private boolean has_table(SQLiteDatabase db, String table) {
-        Cursor cursor = db.rawQuery("select name from sqlite_master where type='table' order by name", null);
+        cursor = db.rawQuery("select name from sqlite_master where type='table' order by name", null);
         while(cursor.moveToNext()) {
             if (table.equals(cursor.getString(0))) {
                 cursor.close();
@@ -154,8 +158,7 @@ public class fiveidiot_db {
 
     private List<Map<String, Object>> getBriefAdapterData(String table) {
         String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
-        SQLiteDatabase db = dbhelper.getReadableDatabase();
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        db = dbhelper.getReadableDatabase();
         HashMap<String, Object> map = null;
 
         for (int i = 0; i < 6; i++) {
