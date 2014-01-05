@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
+import com.wisape.fiveidiotweather.fiveidiot;
 
 
 /**
@@ -58,7 +59,10 @@ public class ColorPickerPreference extends DialogPreference {
             if (callChangeListener(value)) {
                 persistString(value);
             }
+//            Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
+//            it.putExtra("changebackground", "update");
             Intent intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
+//            getContext().sendBroadcast(it);
             getContext().sendBroadcast(intent);
         }
     }
@@ -112,7 +116,6 @@ public class ColorPickerPreference extends DialogPreference {
             super(context);
             this.mHeight = height;
             this.mWidth = width;
-            Log.d("5sha", "width = " + mWidth);
             setMinimumHeight(mHeight);
             setMinimumWidth(mWidth);
 
@@ -146,6 +149,8 @@ public class ColorPickerPreference extends DialogPreference {
                     mLinePaint.getStrokeMiter() * 0.5f + 15;
             rectRight = r + mPaint.getStrokeWidth() * 0.5f;
             rectBottom = rectTop + 50;
+
+            centerColor = mInitialColor;
         }
 
         @Override

@@ -7,6 +7,7 @@
         <com.wisape.fiveidiotweather.ui.ColorPickerPreference
             android:key="setting_widget_color"
             android:summary="@string/setting_widget_color_detail"
+            android:dialogTitle="@string/setting_widget_color_detail"
             android:title="@string/setting_widget_color" />
         <com.wisape.fiveidiotweather.ui.SeekBarPreference
             android:key="setting_widget_trans"
@@ -16,18 +17,16 @@
     <PreferenceCategory
         android:title="@string/setting_main"
         android:key="setting_main">
-        <ListPreference
-            android:key="setting_main_theme"
-            android:title="@string/setting_main_theme"
-            android:summary="@string/setting_main_theme_detail"
-            android:dialogTitle="@string/setting_main_theme_detail"
-            android:entries="@array/setting_main_theme_list"
-            android:entryValues="@array/setting_main_theme_list_value"
-            android:defaultValue="1" />
-        <com.wisape.fiveidiotweather.ui.TimePreference
-            android:key="setting_main_period"
-            android:summary="@string/setting_main_period_detail"
-            android:title="@string/setting_main_period"/>
+        <!--<com.wisape.fiveidiotweather.ui.ColorPickerPreference-->
+            <!--android:key="setting_main_background"-->
+            <!--android:title="@string/setting_main_background"-->
+            <!--android:summary="@string/setting_main_background_detail"-->
+            <!--android:dialogTitle="@string/setting_main_background_detail"-->
+            <!--android:defaultValue="333333" />-->
+        <!--<com.wisape.fiveidiotweather.ui.TimePreference-->
+            <!--android:key="setting_main_period"-->
+            <!--android:summary="@string/setting_main_period_detail"-->
+            <!--android:title="@string/setting_main_period"/>-->
 
     </PreferenceCategory>
 </PreferenceScreen>

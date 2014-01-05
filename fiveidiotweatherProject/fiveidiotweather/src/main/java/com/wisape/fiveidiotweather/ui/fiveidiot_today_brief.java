@@ -15,9 +15,11 @@ import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
  */
 public class fiveidiot_today_brief extends Fragment {
     private String mcity;
+    private fiveidiot_set_ui set_ui;
 
-    public fiveidiot_today_brief(String city) {
+    public fiveidiot_today_brief(String city, fiveidiot_set_ui setui) {
         mcity = city;
+        set_ui = setui;
     }
 
     @Override
@@ -25,7 +27,6 @@ public class fiveidiot_today_brief extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.today_brief, container, false);
-        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(getActivity());
         set_ui.setTodayUi(rootView, mcity);
         return rootView;
     }

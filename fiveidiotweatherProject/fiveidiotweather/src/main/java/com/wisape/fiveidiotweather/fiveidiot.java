@@ -360,6 +360,7 @@ public class fiveidiot extends FragmentActivity {
         viewPager.invalidate();
     }
 
+
     private class fiveidiot_receiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {

@@ -63,6 +63,13 @@ public class fiveidiot_set_ui {
         return Color.parseColor(color);
     }
 
+//    public int getMainColor() {
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(con);
+//        String scolor = preferences.getString("setting_main_background", "333333");
+//        return Color.parseColor("#" + scolor);
+//    }
+
+
     public void setWidgetClock(RemoteViews views) {
         views.setInt(R.id.today_con, "setBackgroundColor", getWidgetColor());
         views.setTextViewText(R.id.clock_time, getTime());

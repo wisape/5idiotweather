@@ -21,17 +21,17 @@
     <style name="DefaultTheme" parent="AppBaseTheme">
         <item name="android:actionBarStyle">@style/fiveidiot_actionbar</item>
         <item name="android:textColor">#eee</item>
-        <item name="mainColor">#555</item>
-        <item name="todayColor">#6000</item>
-        <item name="after1Color">#5000</item>
-        <item name="after2Color">#3000</item>
-        <item name="after3Color">#4000</item>
-        <item name="after4Color">#2000</item>
-        <item name="after1weekColor">#8000</item>
-        <item name="after2weekColor">#7000</item>
-        <item name="after3weekColor">#9000</item>
-        <item name="after4weekColor">#7000</item>
-        <item name="subtextColor">#555</item>
+        <item name="mainColor">#333333</item>
+        <item name="todayColor">#09ffffff</item>
+        <item name="after1Color">#22ffffff</item>
+        <item name="after2Color">#33ffffff</item>
+        <item name="after3Color">#22ffffff</item>
+        <item name="after4Color">#33ffffff</item>
+        <item name="after1weekColor">#22000000</item>
+        <item name="after2weekColor">#33000000</item>
+        <item name="after3weekColor">#22000000</item>
+        <item name="after4weekColor">#33000000</item>
+        <item name="subtextColor">#55ffffff</item>
     </style>
 
 </resources>
