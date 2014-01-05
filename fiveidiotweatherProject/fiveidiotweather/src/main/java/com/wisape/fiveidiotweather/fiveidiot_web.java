@@ -23,7 +23,7 @@ public class fiveidiot_web extends Activity {
         webView = new WebView(this);
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         webView.loadUrl(url);
         super.setContentView(webView);
         ActionBar actionBar = getActionBar();
