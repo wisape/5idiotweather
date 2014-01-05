@@ -12,10 +12,6 @@ import java.util.List;
  * Created by wispae on 13-9-21.
  */
 public class fiveidiot_analyze {
-    private String[] BRIEF_KEYS = {"date_y", "fchh", "index_uv"};
-    private String[] TODAY_KEYS = {"city", "temp", "SD","time", "WD", "WS"};
-    private String[] LIST_BRIEF_KEYS = {"week", "temp","wind", "weather", "img_title"};
-    private String[] WEEKS = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日",};
     private JSONObject json_object = null;
     private HashMap<String, String> brief_info;
     private HashMap<String, List<String>> list_breif_info;
@@ -44,35 +40,36 @@ public class fiveidiot_analyze {
      * "index_ls":"适宜","index_ag":"较易发"}}
      */
 
-    public fiveidiot_analyze() {
-        brief_info = new HashMap<String, String>();
-        list_breif_info = new HashMap<String, List<String>>();
-        today_info = new HashMap<String, String>();
-    }
-
     public void init_brief_info(String info) {
         try {
             json_object = new JSONObject(info).getJSONObject("weatherinfo");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        get_brief_info(json_object);
-        get_list_brief_info(json_object);
+
+        brief_info = get_brief_info(json_object);
+        list_breif_info = get_list_brief_info(json_object);
     }
 
-    private void get_brief_info(JSONObject json_object) {
+    private HashMap<String, String> get_brief_info(JSONObject json_object) {
+        String[] BRIEF_KEYS = {"date_y", "fchh", "index_uv"};
+        HashMap<String, String> info = new HashMap<String, String>();
         String key;
         for (int i = 0; i < BRIEF_KEYS.length; i++) {
             key = BRIEF_KEYS[i];
             try {
-                brief_info.put(key, json_object.getString(key));
+                info.put(key, json_object.getString(key));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+        return info;
     }
 
-    private void get_list_brief_info(JSONObject json_object) {
+    private HashMap<String, List<String>> get_list_brief_info(JSONObject json_object) {
+        String[] LIST_BRIEF_KEYS = {"week", "temp","wind", "weather", "img_title"};
+        String[] WEEKS = {"星期一","星期二","星期三","星期四","星期五","星期六","星期日",};
+        HashMap<String, List<String>> info = new HashMap<String, List<String>>();
         if (null != json_object) {
             try {
                 for (int j = 0; j < LIST_BRIEF_KEYS.length; j++) {
@@ -88,7 +85,7 @@ public class fiveidiot_analyze {
                     for (int k = 0; k < 6; k++) {
                         value.add(WEEKS[(i + k) % 7]);
                     }
-                    list_breif_info.put("week", value);
+                    info.put("week", value);
                     continue;
                 }
                 for (int i = 0; i < 6; i++) {
@@ -99,14 +96,22 @@ public class fiveidiot_analyze {
                     } else
                         value.add(json_object.getString(LIST_BRIEF_KEYS[j] + (i + 1)));
                 }
-                    list_breif_info.put(LIST_BRIEF_KEYS[j], value);
+                info.put(LIST_BRIEF_KEYS[j], value);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
+        return info;
     }
+
+    public void clear() {
+        brief_info = null;
+        list_breif_info = null;
+        today_info = null;
+    }
+
 
 //    public String get_city() {
 //        String city = null;
@@ -232,6 +237,8 @@ public class fiveidiot_analyze {
      */
 
     public void init_today_info(String info) {
+        String[] TODAY_KEYS = {"city", "temp", "SD","time", "WD", "WS"};
+        today_info = new HashMap<String, String>();
         try {
             json_object = new JSONObject(info).getJSONObject("weatherinfo");
         } catch (JSONException e) {
