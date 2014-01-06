@@ -109,15 +109,18 @@ public class fiveidiot_set_ui {
     }
 
     public void setWidgetTodayUi(RemoteViews views, int city_index, boolean has_after) {
-        mCitys = citydb.get_citys();
-        int index = city_index % mCitys.size();
-        String city = mCitys.get(index);
+
+        setWidgetClock(views);
 
         views.setOnClickPendingIntent(R.id.today_con, mainIntent);
         views.setOnClickPendingIntent(R.id.clock_time, clockIntent);
         views.setOnClickPendingIntent(R.id.next_city, nextIntent);
 
-        setWidgetClock(views);
+        mCitys = citydb.get_citys();
+        if (mCitys.size() == 0)
+            return;
+        int index = city_index % mCitys.size();
+        String city = mCitys.get(index);
 
         today_data_map = readdb.getTodayBriefMapData(city);
         if (today_data_map.get("city") == null)
