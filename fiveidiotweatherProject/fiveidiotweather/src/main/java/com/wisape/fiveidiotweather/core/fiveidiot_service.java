@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.wisape.fiveidiotweather.core.data.fiveidiot_analyze;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_db;
@@ -31,13 +31,7 @@ public class fiveidiot_service extends Service {
     private fiveidiot_net_receiver net_receiver;
 
     public IBinder onBind(Intent intent) {
-        return new fiBinder();
-    }
-
-    public class fiBinder extends Binder {
-        public fiveidiot_service getService() {
-            return fiveidiot_service.this;
-        }
+        return null;
     }
 
     @Override
@@ -45,9 +39,7 @@ public class fiveidiot_service extends Service {
         super.onCreate();
         net_receiver = new fiveidiot_net_receiver();
         IntentFilter net_filter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
-        get_weather_info_thread thread = new get_weather_info_thread();
-        this.registerReceiver(net_receiver, net_filter);
-        thread.start();
+        registerReceiver(net_receiver, net_filter);
     }
 
     @Override
@@ -58,37 +50,16 @@ public class fiveidiot_service extends Service {
 
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
+        update_service();
         return super.onStartCommand(intent, flags, startId);
-    }
-
-    private class get_weather_info_thread extends Thread {
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    Thread.sleep(900000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
-                ArrayList<String> citys = mCitys.get_citys();
-                String city;
-                for (int i = 0; i < citys.size(); i++) {
-                    try {
-                        city = citys.get(i);
-                        manage_data(city, mCitys.find_cityid(city));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
     }
 
     public void update_service() {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                if (!net_available())
+                    return;
                 fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
                 ArrayList<String> citys = mCitys.get_citys();
                 String city;
@@ -106,8 +77,6 @@ public class fiveidiot_service extends Service {
 
     private synchronized void manage_data(String city, String city_id) throws IOException {
         boolean today, other;
-        if (!net_available())
-            return;
         fiveidiot_analyze analyzer = new fiveidiot_analyze();
         fiveidiot_db db = new fiveidiot_db(this);
         today = unwrap_save_now_data(db, analyzer, city, city_id);
@@ -218,5 +187,4 @@ public class fiveidiot_service extends Service {
             }
         }
     }
-
 }

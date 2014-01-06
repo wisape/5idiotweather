@@ -76,7 +76,7 @@
         <receiver android:name=".core.fiveidiot_receiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="com.wisape.fiveidiotweather.fiveidiotservice"/>
+                <action android:name="com.wisape.fiveidiotweather.start.fiveidiotservice"/>
             </intent-filter>
         </receiver>
 

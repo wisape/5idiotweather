@@ -3,15 +3,14 @@ package com.wisape.fiveidiotweather;
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.res.Configuration;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.IBinder;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -52,8 +51,6 @@ import java.util.ArrayList;
 public class fiveidiot extends FragmentActivity {
     public final static String BROADCAST_UPDATE_UI = "com.wisape.fiveidiotweather.update_ui";
     private fiveidiot_receiver receiver;
-    private ServiceConnection sconn;
-    private fiveidiot_service mservice;
     private DrawerLayout slideLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menuList;
@@ -76,19 +73,8 @@ public class fiveidiot extends FragmentActivity {
 
         mCitys = new fiveidiot_citys(getApplicationContext());
         citys = mCitys.get_citys();
-        sconn = new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-                mservice = ((fiveidiot_service.fiBinder)iBinder).getService();
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName componentName) {
-
-            }
-        };
-        Intent service_intent = new Intent(this, fiveidiot_service.class);
-        bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
+        Intent service_intent = new Intent("com.wisape.fiveidiotweather.start.fiveidiotservice");
+        sendBroadcast(service_intent);
 
         slideLayout = (DrawerLayout) findViewById(R.id.slide_layout);
         slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -342,14 +328,21 @@ public class fiveidiot extends FragmentActivity {
 
 
     private void update_data() {
-        Intent service_intent = new Intent(this, fiveidiot_service.class);
-        bindService(service_intent, sconn, Context.BIND_AUTO_CREATE);
-        if (!mservice.net_available()) {
+        if (!net_available()) {
             Toast.makeText(getApplicationContext(), "网络不给力！", Toast.LENGTH_SHORT).show();
             return;
         }
-        mservice.update_service();
-        unbindService(sconn);
+        Intent service_intent = new Intent(this, fiveidiot_service.class);
+        startService(service_intent);
+    }
+
+    public boolean net_available() {
+        ConnectivityManager manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        if (info != null && info.isAvailable()) {
+            return true;
+        }
+        return false;
     }
 
     private void update_ui() {
