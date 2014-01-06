@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -70,11 +71,20 @@ public class fiveidiot extends FragmentActivity {
         /*
          * Start the Service which get the weather information
          */
+        Intent service_intent = new Intent("com.wisape.fiveidiotweather.start.fiveidiotservice");
+        sendBroadcast(service_intent);
+        Button addButton = (Button)findViewById(R.id.main_add_city);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(getApplicationContext(), fiveidiot_add_city.class);
+                startActivity(it);
+            }
+        });
 
         mCitys = new fiveidiot_citys(getApplicationContext());
         citys = mCitys.get_citys();
-        Intent service_intent = new Intent("com.wisape.fiveidiotweather.start.fiveidiotservice");
-        sendBroadcast(service_intent);
 
         slideLayout = (DrawerLayout) findViewById(R.id.slide_layout);
         slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
