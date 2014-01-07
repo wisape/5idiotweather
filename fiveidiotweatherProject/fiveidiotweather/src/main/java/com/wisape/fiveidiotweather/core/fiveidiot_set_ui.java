@@ -188,8 +188,9 @@ public class fiveidiot_set_ui {
 
     public void setAfterUi(View view, String mcity) {
         data_map = readdb.getAfterBriefAdapterData(mcity);
-        if (data_map == null)
+        if (data_map == null) {
             return;
+        }
         ((TextView) view.findViewById(R.id.week_1)).setText(setDefault(data_map.get(0).get("week"), DEFAULT_WEEK));
         ((TextView) view.findViewById(R.id.temp_1)).setText(setDefault(data_map.get(0).get("temp"),DEFAULT));
         ((TextView) view.findViewById(R.id.weather_1)).setText(setDefault(data_map.get(0).get("weather"),DEFAULT));

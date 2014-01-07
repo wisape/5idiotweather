@@ -23,7 +23,6 @@ public class fiveidiot_db {
     private String DB_NAME = "fiveidiot";
     private String NAME = "name";
     private String VALUE = "value";
-    private List<Map<String, Object>> list;
     private SQLiteDatabase db;
     private Cursor cursor;
     private ContentValues cv;
@@ -45,7 +44,6 @@ public class fiveidiot_db {
             }
         };
         cv = new ContentValues();
-        list = new ArrayList<Map<String, Object>>();
     }
 
     public synchronized void create_table(String table) {
@@ -159,6 +157,7 @@ public class fiveidiot_db {
     private List<Map<String, Object>> getBriefAdapterData(String table) {
         String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
         db = dbhelper.getReadableDatabase();
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         HashMap<String, Object> map = null;
 
         for (int i = 0; i < 6; i++) {

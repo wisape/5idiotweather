@@ -41,6 +41,7 @@ import android.widget.Toast;
 
 import com.wisape.fiveidiotweather.core.fiveidiot_service;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
+import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
 import com.wisape.fiveidiotweather.ui.fiveidiot_main_fragment;
 
 import java.util.ArrayList;
@@ -71,10 +72,12 @@ public class fiveidiot extends FragmentActivity {
         /*
          * Start the Service which get the weather information
          */
-        Intent service_intent = new Intent("com.wisape.fiveidiotweather.start.fiveidiotservice");
-        sendBroadcast(service_intent);
-        Button addButton = (Button)findViewById(R.id.main_add_city);
+        Intent preintent = new Intent("com.wisape.fiveidiotweather.start.fiveidiotservice");
+        sendBroadcast(preintent);
 
+        preintent.setAction(fiveidiot_set_ui.WIDGET_UPDATE);
+        sendBroadcast(preintent);
+        Button addButton = (Button)findViewById(R.id.main_add_city);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -331,9 +334,9 @@ public class fiveidiot extends FragmentActivity {
 
     private void addCity(String city) {
         citys.add(city);
+        update_data();
         update_ui();
         viewPager.setCurrentItem(citys.indexOf(city));
-        update_data();
     }
 
 
