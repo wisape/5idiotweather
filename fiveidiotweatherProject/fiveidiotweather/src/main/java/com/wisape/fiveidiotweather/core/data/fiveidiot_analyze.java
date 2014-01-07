@@ -90,11 +90,11 @@ public class fiveidiot_analyze {
                 }
                 for (int i = 0; i < 6; i++) {
                     if (LIST_BRIEF_KEYS[j].equals("temp"))
-                        value.add(json_object.getString(LIST_BRIEF_KEYS[j] + (i + 1)).replace("℃~", "/"));
+                        value.add(json_object.getString(new StringBuffer(LIST_BRIEF_KEYS[j]).append(i + 1).toString().replace("℃~", "/")));
                     else if (LIST_BRIEF_KEYS[j].equals("img_title")) {
-                        value.add(json_object.getString(LIST_BRIEF_KEYS[j] + (i * 2 + 1)));
+                        value.add(json_object.getString(new StringBuffer(LIST_BRIEF_KEYS[j]).append(i * 2 + 1).toString()));
                     } else
-                        value.add(json_object.getString(LIST_BRIEF_KEYS[j] + (i + 1)));
+                        value.add(json_object.getString(new StringBuffer(LIST_BRIEF_KEYS[j]).append(i + 1).toString()));
                 }
                 info.put(LIST_BRIEF_KEYS[j], value);
                 }
@@ -265,7 +265,7 @@ public class fiveidiot_analyze {
     }
 
     public String get_today_wind() {
-        return today_info.get("WD") + today_info.get("WS");
+        return new StringBuffer(today_info.get("WD")).append(today_info.get("WS")).toString();
     }
 
     public String get_today_hum() {

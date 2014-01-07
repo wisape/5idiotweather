@@ -54,7 +54,7 @@ public class fiveidiot_cityids_db {
         if (!(new File(databaseFilename)).exists()) {
             InputStream is = context.getResources().openRawResource(R.raw.cityids);
             FileOutputStream fos = new FileOutputStream(databaseFilename);
-            byte[] buffer = new byte[8192];
+            byte[] buffer = new byte[512];
             int count = 0;
             while ((count = is.read(buffer)) > 0) {
                 fos.write(buffer, 0, count);

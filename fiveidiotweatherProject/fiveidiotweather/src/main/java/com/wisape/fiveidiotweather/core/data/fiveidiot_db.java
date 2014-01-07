@@ -163,7 +163,7 @@ public class fiveidiot_db {
         for (int i = 0; i < 6; i++) {
             map = new HashMap<String, Object>();
             for (int j = 0; j < SMP_PROPS.length; j++) {
-                map.put(SMP_PROPS[j], getvalue(db, table, SMP_PROPS[j] + i));
+                map.put(SMP_PROPS[j], getvalue(db, table, new StringBuffer(SMP_PROPS[j]).append(i).toString()));
             }
             list.add(map);
         }

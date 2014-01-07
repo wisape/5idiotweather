@@ -94,7 +94,7 @@ public class fiveidiot_service extends Service {
         if (city_code == null)
             return false;
 
-        String weather_path = per_address + city_code + suf_address;
+        String weather_path = new StringBuffer(per_address).append(city_code).append(suf_address).toString();
         fiveidiot_net net = new fiveidiot_net(weather_path);
         analyzer.init_brief_info(net.getContext());
         String date = analyzer.get_date();
@@ -127,11 +127,11 @@ public class fiveidiot_service extends Service {
         List<String> weeks = analyzer.get_week();
 
         for (int i = 0; i < weather.size(); i++) {
-            db.insert(city, "week" + i, weeks.get(i));
-            db.insert(city, "weather" + i, weather.get(i));
-            db.insert(city, "temp" + i, temp.get(i));
-            db.insert(city, "wind" + i, wind.get(i));
-            db.insert(city, "image" + i, image.get(i));
+            db.insert(city, new StringBuffer("week").append(i).toString(), weeks.get(i));
+            db.insert(city, new StringBuffer("weather").append(i).toString(), weather.get(i));
+            db.insert(city, new StringBuffer("temp").append(i).toString(), temp.get(i));
+            db.insert(city, new StringBuffer("wind").append(i).toString(), wind.get(i));
+            db.insert(city, new StringBuffer("image").append(i).toString(), image.get(i));
         }
         return true;
     }
@@ -139,7 +139,7 @@ public class fiveidiot_service extends Service {
     private synchronized boolean unwrap_save_now_data(fiveidiot_db db, fiveidiot_analyze analyzer, String city, String city_code) throws IOException {
         if (city_code == null)
             return false;
-        String today_weather_path = today_per_address + city_code + suf_address;
+        String today_weather_path = new StringBuffer(today_per_address ).append(city_code).append(suf_address).toString();
         fiveidiot_net net = new fiveidiot_net(today_weather_path);
         analyzer.init_today_info(net.getContext());
 
@@ -167,7 +167,7 @@ public class fiveidiot_service extends Service {
         myear = calendar.get(Calendar.YEAR);
         mmonth = calendar.get(Calendar.MONTH) + 1;
         mday = calendar.get(Calendar.DATE);
-        return myear + "年" + mmonth + "月" + mday + "日";
+        return new StringBuffer(myear).append("年").append(mmonth).append("月").append(mday ).append("日").toString();
     }
 
     public boolean net_available() {
