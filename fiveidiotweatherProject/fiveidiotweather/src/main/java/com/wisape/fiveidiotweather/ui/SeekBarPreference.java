@@ -27,7 +27,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
     public SeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         con = context.getApplicationContext();
-        inflater = LayoutInflater.from(context);
+        inflater = LayoutInflater.from(con);
         setPositiveButtonText("设置");
         setNegativeButtonText("取消");
     }
@@ -59,7 +59,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
                 persistString(value);
             }
             Intent intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
-            getContext().sendBroadcast(intent);
+            con.sendBroadcast(intent);
         }
     }
 

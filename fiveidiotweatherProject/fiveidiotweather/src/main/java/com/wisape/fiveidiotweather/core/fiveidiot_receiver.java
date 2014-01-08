@@ -13,9 +13,10 @@ import android.util.Log;
  */
 public class fiveidiot_receiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
+        Context con = context.getApplicationContext();
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
-        Intent it = new Intent(context, fiveidiot_service.class);
-        PendingIntent pendIntent = PendingIntent.getService(context,
+        Intent it = new Intent(con, fiveidiot_service.class);
+        PendingIntent pendIntent = PendingIntent.getService(con,
                 100, it, PendingIntent.FLAG_UPDATE_CURRENT);
         long triggerAtTime = SystemClock.elapsedRealtime() + 500;
         am.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, 1800000, pendIntent);

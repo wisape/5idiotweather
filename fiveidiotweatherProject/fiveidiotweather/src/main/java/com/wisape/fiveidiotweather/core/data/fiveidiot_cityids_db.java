@@ -28,12 +28,12 @@ public class fiveidiot_cityids_db {
 
     public fiveidiot_cityids_db(Context context) {
         try {
-            copyCityDb(context);
+            copyCityDb(context.getApplicationContext());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        dbhelper = new SQLiteOpenHelper(context, DB_NAME, null, 1) {
+        dbhelper = new SQLiteOpenHelper(context.getApplicationContext(), DB_NAME, null, 1) {
             @Override
             public void onCreate(SQLiteDatabase sqLiteDatabase) {
 

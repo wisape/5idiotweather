@@ -51,16 +51,16 @@ public class fiveidiot_set_ui{
         con = context.getApplicationContext();
         readdb = new fiveidiot_db(con);
         citydb = new fiveidiot_citys(con);
-        intent = new Intent(context, fiveidiot_splash.class);
-        mainIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        intent = new Intent(con, fiveidiot_splash.class);
+        mainIntent = PendingIntent.getActivity(con, 0, intent, 0);
         intent = new Intent(AlarmClock.ACTION_SET_ALARM);
-        clockIntent = PendingIntent.getActivity(context, 0, intent, 0);
+        clockIntent = PendingIntent.getActivity(con, 0, intent, 0);
         intent = new Intent(broadtext);
         Bundle bundle = new Bundle();
         bundle.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, id);
         bundle.putInt("CityIndex", index);
         intent.putExtras(bundle);
-        nextIntent = PendingIntent.getBroadcast(context, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        nextIntent = PendingIntent.getBroadcast(con, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
     }
 

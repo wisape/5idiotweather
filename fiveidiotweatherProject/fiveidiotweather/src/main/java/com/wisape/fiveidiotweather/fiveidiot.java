@@ -280,7 +280,7 @@ public class fiveidiot extends FragmentActivity {
     private class CityArrayAdapter extends ArrayAdapter<String> {
         private ArrayList<String> texts;
         public CityArrayAdapter(Context context, int resource, int textViewResourceId, ArrayList<String> objects) {
-            super(context, resource, textViewResourceId, objects);
+            super(context.getApplicationContext(), resource, textViewResourceId, objects);
             texts = objects;
         }
 

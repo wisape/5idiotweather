@@ -20,9 +20,11 @@ import com.wisape.fiveidiotweather.fiveidiot_splash;
  */
 public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
     private IntentFilter intentFilter = null;
+    private Context con;
 
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+        con = context.getApplicationContext();
         String action = intent.getAction();
         if (action.equals("clock_next_city4x2")) {
             Bundle extras = intent.getExtras();
@@ -31,35 +33,36 @@ public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
                         AppWidgetManager.INVALID_APPWIDGET_ID);
                 int city_index = extras.getInt("CityIndex", 0);
                 city_index += 1;
-                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                updateWidgetView(context, appWidgetManager, mAppWidgetId, city_index);
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(con);
+                updateWidgetView(con, appWidgetManager, mAppWidgetId, city_index);
             }
         }
 
         if (intent.getAction().equals(fiveidiot_set_ui.WIDGET_UPDATE) ||
                 action.equals(Intent.ACTION_TIME_TICK) || action.equals(Intent.ACTION_TIME_CHANGED) ||
                 action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName wd = new ComponentName(context, fiveidiot_clock_widget4x2_provider.class);
-            onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(con);
+            ComponentName wd = new ComponentName(con, fiveidiot_clock_widget4x2_provider.class);
+            onUpdate(con, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
         }
     }
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         final int N = appWidgetIds.length;
+        con = context.getApplicationContext();
 //        add clock update reciver
         if (intentFilter == null) {
             intentFilter = new IntentFilter();
             intentFilter.addAction(Intent.ACTION_TIME_TICK);
             intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
             intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-            context.getApplicationContext().registerReceiver(this, intentFilter);
+            con.registerReceiver(this, intentFilter);
         }
 
         // Perform this loop procedure for each App Widget that belongs to this provider
         for (int i=0; i<N; i++) {
             int appWidgetId = appWidgetIds[i];
-            updateWidgetView(context, appWidgetManager,  appWidgetId, 0);
+            updateWidgetView(con, appWidgetManager,  appWidgetId, 0);
         }
     }
 

@@ -33,7 +33,7 @@ public class fiveidiot_db {
 //    List<Map<String, Object>> info_list = null;
 
     public fiveidiot_db(Context context) {
-        dbhelper = new SQLiteOpenHelper(context, DB_NAME, null, 1) {
+        dbhelper = new SQLiteOpenHelper(context.getApplicationContext(), DB_NAME, null, 1) {
             @Override
             public void onCreate(SQLiteDatabase sqLiteDatabase) {
             }

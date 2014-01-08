@@ -12,7 +12,7 @@ public class fiveidiot_citys {
     private fiveidiot_db citydb;
 
     public fiveidiot_citys(Context context) {
-        citydb = new fiveidiot_db(context);
+        citydb = new fiveidiot_db(context.getApplicationContext());
         citydb.create_table(CITYS_TABLE);
     }
 

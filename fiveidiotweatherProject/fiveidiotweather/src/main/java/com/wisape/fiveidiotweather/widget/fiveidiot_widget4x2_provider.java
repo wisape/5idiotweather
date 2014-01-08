@@ -17,17 +17,20 @@ import com.wisape.fiveidiotweather.fiveidiot_splash;
  * Created by wisape on 13-12-3.
  */
 public class fiveidiot_widget4x2_provider extends AppWidgetProvider {
+    private Context con;
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         final int N = appWidgetIds.length;
+        con = context.getApplicationContext();
         // Perform this loop procedure for each App Widget that belongs to this provider
         for (int i=0; i<N; i++) {
             int appWidgetId = appWidgetIds[i];
-            updateWidgetView(context, appWidgetManager,  appWidgetId, 0);
+            updateWidgetView(con, appWidgetManager,  appWidgetId, 0);
         }
     }
 
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+        con = context.getApplicationContext();
         if (intent.getAction().equals("next_city4x2")) {
             Bundle extras = intent.getExtras();
             if (extras != null) {
@@ -35,14 +38,14 @@ public class fiveidiot_widget4x2_provider extends AppWidgetProvider {
                         AppWidgetManager.INVALID_APPWIDGET_ID);
                 int city_index = extras.getInt("CityIndex", 0);
                 city_index += 1;
-                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                updateWidgetView(context, appWidgetManager, mAppWidgetId, city_index);
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(con);
+                updateWidgetView(con, appWidgetManager, mAppWidgetId, city_index);
             }
         }
         if (intent.getAction().equals(fiveidiot_set_ui.WIDGET_UPDATE)) {
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            ComponentName wd = new ComponentName(context, fiveidiot_widget4x2_provider.class);
-            onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(con);
+            ComponentName wd = new ComponentName(con, fiveidiot_widget4x2_provider.class);
+            onUpdate(con, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
         }
     }
 
