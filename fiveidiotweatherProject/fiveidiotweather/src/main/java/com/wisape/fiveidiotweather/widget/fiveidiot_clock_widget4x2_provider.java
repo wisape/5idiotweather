@@ -1,6 +1,5 @@
 package com.wisape.fiveidiotweather.widget;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -8,23 +7,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.provider.AlarmClock;
 import android.widget.RemoteViews;
 
 import com.wisape.fiveidiotweather.R;
 import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
-import com.wisape.fiveidiotweather.fiveidiot_splash;
 
 /**
  * Created by wisape on 13-12-22.
  */
 public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
     private IntentFilter intentFilter = null;
-    private Context con;
 
     public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
-        con = context.getApplicationContext();
+        super.onReceive(context.getApplicationContext(), intent);
+        Context con = context.getApplicationContext();
         String action = intent.getAction();
         if (action.equals("clock_next_city4x2")) {
             Bundle extras = intent.getExtras();
@@ -49,7 +45,7 @@ public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
 
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         final int N = appWidgetIds.length;
-        con = context.getApplicationContext();
+        Context con = context.getApplicationContext();
 //        add clock update reciver
         if (intentFilter == null) {
             intentFilter = new IntentFilter();

@@ -27,8 +27,8 @@ public class TimePreference extends DialogPreference {
         return(Integer.parseInt(pieces[1]));
     }
 
-    public TimePreference(Context ctxt, AttributeSet attrs) {
-        super(ctxt, attrs);
+    public TimePreference(Context context, AttributeSet attrs) {
+        super(context.getApplicationContext(), attrs);
         setPositiveButtonText("设置");
         setNegativeButtonText("取消");
     }

@@ -21,7 +21,7 @@ public class fiveidiot_splash extends Activity {
     }
 
     private void startMainActivity() {
-        Intent intent = new Intent(this, fiveidiot.class);
+        Intent intent = new Intent(getApplicationContext(), fiveidiot.class);
         this.startActivity(intent);
         this.finish();
     }

@@ -78,7 +78,7 @@ public class fiveidiot_service extends Service {
     private synchronized void manage_data(String city, String city_id) throws IOException {
         boolean today, other;
         fiveidiot_analyze analyzer = new fiveidiot_analyze();
-        fiveidiot_db db = new fiveidiot_db(this);
+        fiveidiot_db db = new fiveidiot_db(getApplicationContext());
         today = unwrap_save_now_data(db, analyzer, city, city_id);
         other = unwrap_save_data(db, analyzer, city, city_id);
         if (today || other) {

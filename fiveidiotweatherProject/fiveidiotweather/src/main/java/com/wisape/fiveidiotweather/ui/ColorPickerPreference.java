@@ -11,14 +11,12 @@ import android.graphics.Shader;
 import android.graphics.SweepGradient;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
-import com.wisape.fiveidiotweather.fiveidiot;
 
 
 /**
@@ -30,7 +28,7 @@ public class ColorPickerPreference extends DialogPreference {
     private ColorPickerView colorPickerView;
     private int mInitialColor = 0xFF000000;
     public ColorPickerPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        super(context.getApplicationContext(), attrs);
         setPositiveButtonText("设置");
         setNegativeButtonText("取消");
     }
@@ -113,7 +111,7 @@ public class ColorPickerPreference extends DialogPreference {
         private int centerColor;
 
         public ColorPickerView(Context context, int height, int width) {
-            super(context);
+            super(context.getApplicationContext());
             this.mHeight = height;
             this.mWidth = width;
             setMinimumHeight(mHeight);

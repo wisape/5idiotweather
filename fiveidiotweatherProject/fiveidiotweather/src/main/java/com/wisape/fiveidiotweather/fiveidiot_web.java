@@ -20,7 +20,7 @@ public class fiveidiot_web extends Activity {
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
         String url = intent.getStringExtra("url");
-        webView = new WebView(this);
+        webView = new WebView(getApplicationContext());
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);

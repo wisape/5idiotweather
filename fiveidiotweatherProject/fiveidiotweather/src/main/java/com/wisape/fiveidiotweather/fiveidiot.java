@@ -59,7 +59,6 @@ public class fiveidiot extends FragmentActivity {
     private ListView cityList;
     private String[] menuItems;
     private fiveidiot_citys mCitys;
-//    private MainPagerAdapter mainPagerAdapter;
     private CityArrayAdapter cityArrayAdapter;
     private ViewPager viewPager;
     private ArrayList<String> citys;
@@ -93,20 +92,20 @@ public class fiveidiot extends FragmentActivity {
         slideLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         menuList = (ListView) findViewById(R.id.menu_list);
         menuItems = getResources().getStringArray(R.array.menu_array);
-        TextView menuTitle = new TextView(this);
+        TextView menuTitle = new TextView(getApplicationContext());
         menuTitle.setTextColor(getResources().getColor(R.color.textcolor));
         menuTitle.setGravity(Gravity.CENTER);
         menuTitle.setTextSize(20);
         menuTitle.setBackgroundColor(getResources().getColor(R.color.titlecolor));
         menuTitle.setText(R.string.setting);
         menuList.addHeaderView(menuTitle, null, false);
-        menuList.setAdapter(new ArrayAdapter<String>(this,
+        menuList.setAdapter(new ArrayAdapter<String>(getApplicationContext(),
                 R.layout.menu_list_item, menuItems));
         menuList.setOnItemClickListener(new MenuItemClickListener());
 
         cityList = (ListView) findViewById(R.id.city_list);
-        cityArrayAdapter = new CityArrayAdapter(this, R.layout.city_list_item, R.id.city_list_item, citys);
-        TextView cityTitle = new TextView(this);
+        cityArrayAdapter = new CityArrayAdapter(getApplicationContext(), R.layout.city_list_item, R.id.city_list_item, citys);
+        TextView cityTitle = new TextView(getApplicationContext());
         cityTitle.setTextColor(getResources().getColor(R.color.textcolor));
         cityTitle.setGravity(Gravity.CENTER);
         cityTitle.setTextSize(20);
@@ -191,7 +190,7 @@ public class fiveidiot extends FragmentActivity {
         switch (item.getItemId()) {
             case R.id.newcity:
 //              add new city
-                Intent it = new Intent(this, fiveidiot_add_city.class);
+                Intent it = new Intent(getApplicationContext(), fiveidiot_add_city.class);
                 startActivity(it);
                 slideLayout.closeDrawers();
                 return true;
@@ -280,7 +279,7 @@ public class fiveidiot extends FragmentActivity {
     private class CityArrayAdapter extends ArrayAdapter<String> {
         private ArrayList<String> texts;
         public CityArrayAdapter(Context context, int resource, int textViewResourceId, ArrayList<String> objects) {
-            super(context.getApplicationContext(), resource, textViewResourceId, objects);
+            super(context, resource, textViewResourceId, objects);
             texts = objects;
         }
 
@@ -303,7 +302,7 @@ public class fiveidiot extends FragmentActivity {
         public void onClick(View view) {
             slideLayout.closeDrawers();
             final int position = Integer.parseInt(view.getTag().toString());
-            AlertDialog.Builder builder = new AlertDialog.Builder(fiveidiot.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
             builder.setMessage("确定删除城市：" + citys.get(position) + "?");
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
@@ -345,7 +344,7 @@ public class fiveidiot extends FragmentActivity {
             Toast.makeText(getApplicationContext(), "网络不给力！", Toast.LENGTH_SHORT).show();
             return;
         }
-        Intent service_intent = new Intent(this, fiveidiot_service.class);
+        Intent service_intent = new Intent(getApplicationContext(), fiveidiot_service.class);
         startService(service_intent);
     }
 
