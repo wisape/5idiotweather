@@ -8,7 +8,6 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.wisape.fiveidiotweather.core.data.fiveidiot_analyze;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_db;
@@ -62,11 +61,13 @@ public class fiveidiot_service extends Service {
                     return;
                 fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
                 ArrayList<String> citys = mCitys.get_citys();
+                fiveidiot_analyze analyzer = new fiveidiot_analyze();
+                fiveidiot_db db = new fiveidiot_db(getApplicationContext());
                 String city;
                 for (int i = 0; i < citys.size(); i++) {
                     try {
                         city = citys.get(i);
-                        manage_data(city, mCitys.find_cityid(city));
+                        manage_data(db, analyzer, city, mCitys.find_cityid(city));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -75,10 +76,8 @@ public class fiveidiot_service extends Service {
         }).start();
     }
 
-    private synchronized void manage_data(String city, String city_id) throws IOException {
+    private synchronized void manage_data(fiveidiot_db db, fiveidiot_analyze analyzer, String city, String city_id) throws IOException {
         boolean today, other;
-        fiveidiot_analyze analyzer = new fiveidiot_analyze();
-        fiveidiot_db db = new fiveidiot_db(getApplicationContext());
         today = unwrap_save_now_data(db, analyzer, city, city_id);
         other = unwrap_save_data(db, analyzer, city, city_id);
         if (today || other) {

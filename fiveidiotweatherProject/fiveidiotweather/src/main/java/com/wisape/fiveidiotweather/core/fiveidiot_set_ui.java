@@ -90,9 +90,9 @@ public class fiveidiot_set_ui{
         int salpha = (100 - Integer.valueOf(preferences.getString("setting_widget_trans", "0"))) * 255 / 100;
         String color;
         if (salpha > 15)
-            color = "#" + Integer.toHexString(salpha) + scolor;
+            color = new StringBuffer("#").append(Integer.toHexString(salpha)).append(scolor).toString();
         else
-            color = "#0" + Integer.toHexString(salpha) + scolor;
+            color = new StringBuffer("#0").append(Integer.toHexString(salpha)).append(scolor).toString();
         return Color.parseColor(color);
     }
 
