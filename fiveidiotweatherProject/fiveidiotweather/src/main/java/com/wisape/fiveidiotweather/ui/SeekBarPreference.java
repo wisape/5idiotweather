@@ -26,7 +26,7 @@ public class SeekBarPreference extends DialogPreference implements SeekBar.OnSee
 
     public SeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        con = context;
+        con = context.getApplicationContext();
         inflater = LayoutInflater.from(context);
         setPositiveButtonText("设置");
         setNegativeButtonText("取消");

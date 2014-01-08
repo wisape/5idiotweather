@@ -167,7 +167,7 @@ public class fiveidiot_service extends Service {
         myear = calendar.get(Calendar.YEAR);
         mmonth = calendar.get(Calendar.MONTH) + 1;
         mday = calendar.get(Calendar.DATE);
-        return new StringBuffer(myear).append("年").append(mmonth).append("月").append(mday ).append("日").toString();
+        return new StringBuffer().append(myear).append("年").append(mmonth).append("月").append(mday ).append("日").toString();
     }
 
     public boolean net_available() {

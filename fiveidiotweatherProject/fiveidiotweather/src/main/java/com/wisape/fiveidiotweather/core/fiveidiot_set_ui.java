@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * Created by wisape on 13-12-25.
  */
-public class fiveidiot_set_ui {
+public class fiveidiot_set_ui{
     public final static String WIDGET_UPDATE = "com.wisape.fiveidiotweather.widget_update";
     private String DEFAULT = "更新..";
     private String DEFAULT_WEEK = "星期？";
@@ -43,12 +43,12 @@ public class fiveidiot_set_ui {
     private ArrayList<String> mCitys;
 
     public fiveidiot_set_ui(Context context) {
-        con = context;
+        con = context.getApplicationContext();
         readdb = new fiveidiot_db(con);
     }
 
     public fiveidiot_set_ui(Context context, String broadtext, int id, int index) {
-        con = context;
+        con = context.getApplicationContext();
         readdb = new fiveidiot_db(con);
         citydb = new fiveidiot_citys(con);
         intent = new Intent(context, fiveidiot_splash.class);

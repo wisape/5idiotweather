@@ -90,7 +90,7 @@ public class fiveidiot_analyze {
                 }
                 for (int i = 0; i < 6; i++) {
                     if (LIST_BRIEF_KEYS[j].equals("temp"))
-                        value.add(json_object.getString(new StringBuffer(LIST_BRIEF_KEYS[j]).append(i + 1).toString().replace("℃~", "/")));
+                        value.add(json_object.getString((new StringBuffer(LIST_BRIEF_KEYS[j]).append(i + 1).toString())).replace("℃~", "/"));
                     else if (LIST_BRIEF_KEYS[j].equals("img_title")) {
                         value.add(json_object.getString(new StringBuffer(LIST_BRIEF_KEYS[j]).append(i * 2 + 1).toString()));
                     } else

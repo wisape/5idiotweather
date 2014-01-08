@@ -37,9 +37,9 @@ public class ColorPickerPreference extends DialogPreference {
 
     @Override
     protected View onCreateDialogView() {
-        LinearLayout layout = new LinearLayout(getContext());
+        LinearLayout layout = new LinearLayout(getContext().getApplicationContext());
         layout.setGravity(Gravity.CENTER);
-        colorPickerView = new ColorPickerView(getContext(), mHeight, mWidth);
+        colorPickerView = new ColorPickerView(getContext().getApplicationContext(), mHeight, mWidth);
         layout.addView(colorPickerView);
         return(layout);
     }
@@ -63,7 +63,7 @@ public class ColorPickerPreference extends DialogPreference {
 //            it.putExtra("changebackground", "update");
             Intent intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
 //            getContext().sendBroadcast(it);
-            getContext().sendBroadcast(intent);
+            getContext().getApplicationContext().sendBroadcast(intent);
         }
     }
 
