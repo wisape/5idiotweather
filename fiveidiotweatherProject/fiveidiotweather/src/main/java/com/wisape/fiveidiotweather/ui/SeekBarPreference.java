@@ -18,22 +18,21 @@ import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
  */
 public class SeekBarPreference extends DialogPreference implements SeekBar.OnSeekBarChangeListener {
     private final static int mMax = 100;
-    private LayoutInflater inflater;
     private Context con;
     private SeekBar seekBar;
     private TextView transText;
     private int mValue;
 
     public SeekBarPreference(Context context, AttributeSet attrs) {
-        super(context.getApplicationContext(), attrs);
-        con = context.getApplicationContext();
-        inflater = LayoutInflater.from(con);
+        super(context, attrs);
+        con = context;
         setPositiveButtonText("设置");
         setNegativeButtonText("取消");
     }
 
     @Override
     protected View onCreateDialogView() {
+        LayoutInflater inflater = LayoutInflater.from(con);
         View view =  inflater.inflate(R.layout.seek_bar, null);
         seekBar = (SeekBar) view.findViewById(R.id.transseekbar);
         transText = (TextView) view.findViewById(R.id.trans);

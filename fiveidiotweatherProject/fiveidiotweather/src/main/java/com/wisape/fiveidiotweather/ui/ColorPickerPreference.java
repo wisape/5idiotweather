@@ -28,7 +28,7 @@ public class ColorPickerPreference extends DialogPreference {
     private ColorPickerView colorPickerView;
     private int mInitialColor = 0xFF000000;
     public ColorPickerPreference(Context context, AttributeSet attrs) {
-        super(context.getApplicationContext(), attrs);
+        super(context, attrs);
         setPositiveButtonText("设置");
         setNegativeButtonText("取消");
     }
