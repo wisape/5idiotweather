@@ -48,9 +48,9 @@ public class fiveidiot_widget4x1_provider extends AppWidgetProvider {
     }
 
     private void updateWidgetView(Context context, AppWidgetManager appWidgetManager, int appWidgetId, int city_index) {
-        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context, "next_city4x1", appWidgetId, city_index);
+        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget4x1);
-        set_ui.setWidgetTodayUi(views, city_index, false);
+        set_ui.setWidgetTodayUi(views, city_index,  "next_city4x1", appWidgetId, city_index, false);
         // Tell the AppWidgetManager to perform an update on the current app widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

@@ -16,7 +16,7 @@ import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
  * Created by wisape on 13-12-22.
  */
 public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
-    private IntentFilter intentFilter = null;
+//    private IntentFilter intentFilter = null;
 
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context.getApplicationContext(), intent);
@@ -47,13 +47,13 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
         Context con = context.getApplicationContext();
 
 //        add clock update reciver
-        if (intentFilter == null) {
-            intentFilter = new IntentFilter();
+//        if (intentFilter == null) {
+            IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(Intent.ACTION_TIME_TICK);
             intentFilter.addAction(Intent.ACTION_TIME_CHANGED);
             intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
             con.registerReceiver(this, intentFilter);
-        }
+//        }
 
         // Perform this loop procedure for each App Widget that belongs to this provider
         for (int i=0; i<N; i++) {
@@ -63,9 +63,9 @@ public class fiveidiot_clock_widget4x1_provider extends AppWidgetProvider {
     }
 
     private void updateWidgetView(Context context, AppWidgetManager appWidgetManager, int appWidgetId, int city_index) {
-        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context, "clock_next_city4x1", appWidgetId, city_index);
+        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x1);
-        set_ui.setWidgetTodayUi(views, city_index, false);
+        set_ui.setWidgetTodayUi(views, city_index,  "clock_next_city4x1", appWidgetId, city_index, false);
         // Tell the AppWidgetManager to perform an update on the current app widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

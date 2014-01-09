@@ -31,36 +31,30 @@ public class fiveidiot_set_ui{
     public final static String WIDGET_UPDATE = "com.wisape.fiveidiotweather.widget_update";
     private String DEFAULT = "更新..";
     private String DEFAULT_WEEK = "星期？";
-    private fiveidiot_db readdb;
+//    private fiveidiot_db readdb;
     private Context con;
-    private Intent intent;
-    private PendingIntent mainIntent;
-    private PendingIntent clockIntent;
-    private PendingIntent nextIntent;
-    private List<Map<String, Object>> data_map;
-    private Map<String, Object> today_data_map;
-    private fiveidiot_citys citydb;
-    private ArrayList<String> mCitys;
+//    private PendingIntent mainIntent;
+//    private PendingIntent clockIntent;
+//    private PendingIntent nextIntent;
+//    private List<Map<String, Object>> data_map;
+//    private Map<String, Object> today_data_map;
+//    private fiveidiot_citys citydb;
+//    private ArrayList<String> mCitys;
 
     public fiveidiot_set_ui(Context context) {
         con = context.getApplicationContext();
-        readdb = new fiveidiot_db(con);
-    }
-
-    public fiveidiot_set_ui(Context context, String broadtext, int id, int index) {
-        con = context.getApplicationContext();
-        readdb = new fiveidiot_db(con);
-        citydb = new fiveidiot_citys(con);
-        intent = new Intent(con, fiveidiot_splash.class);
-        mainIntent = PendingIntent.getActivity(con, 0, intent, 0);
-        intent = new Intent(AlarmClock.ACTION_SET_ALARM);
-        clockIntent = PendingIntent.getActivity(con, 0, intent, 0);
-        intent = new Intent(broadtext);
-        Bundle bundle = new Bundle();
-        bundle.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, id);
-        bundle.putInt("CityIndex", index);
-        intent.putExtras(bundle);
-        nextIntent = PendingIntent.getBroadcast(con, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        readdb = new fiveidiot_db(con);
+//        citydb = new fiveidiot_citys(con);
+//        Intent intent = new Intent(con, fiveidiot_splash.class);
+//        mainIntent = PendingIntent.getActivity(con, 0, intent, 0);
+//        intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+//        clockIntent = PendingIntent.getActivity(con, 0, intent, 0);
+//        intent = new Intent(broadtext);
+//        Bundle bundle = new Bundle();
+//        bundle.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, id);
+//        bundle.putInt("CityIndex", index);
+//        intent.putExtras(bundle);
+//        nextIntent = PendingIntent.getBroadcast(con, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
     }
 
@@ -108,21 +102,33 @@ public class fiveidiot_set_ui{
         views.setTextViewText(R.id.clock_time, getTime());
     }
 
-    public void setWidgetTodayUi(RemoteViews views, int city_index, boolean has_after) {
+    public void setWidgetTodayUi(RemoteViews views, int city_index, String broadtext, int id, int cityindex, boolean has_after) {
 
+        Intent intent = new Intent(con, fiveidiot_splash.class);
+        PendingIntent mainIntent = PendingIntent.getActivity(con, 0, intent, 0);
+        intent = new Intent(AlarmClock.ACTION_SET_ALARM);
+        PendingIntent clockIntent = PendingIntent.getActivity(con, 0, intent, 0);
+        intent = new Intent(broadtext);
+        Bundle bundle = new Bundle();
+        bundle.putInt(AppWidgetManager.EXTRA_APPWIDGET_ID, id);
+        bundle.putInt("CityIndex", cityindex);
+        intent.putExtras(bundle);
+        PendingIntent nextIntent = PendingIntent.getBroadcast(con, id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         setWidgetClock(views);
 
         views.setOnClickPendingIntent(R.id.today_con, mainIntent);
         views.setOnClickPendingIntent(R.id.clock_time, clockIntent);
         views.setOnClickPendingIntent(R.id.next_city, nextIntent);
 
-        mCitys = citydb.get_citys();
+        fiveidiot_citys citydb = new fiveidiot_citys(con);
+        ArrayList<String> mCitys = citydb.get_citys();
         if (mCitys.size() == 0)
             return;
         int index = city_index % mCitys.size();
         String city = mCitys.get(index);
 
-        today_data_map = readdb.getTodayBriefMapData(city);
+        fiveidiot_db readdb = new fiveidiot_db(con);
+        Map<String, Object> today_data_map = readdb.getTodayBriefMapData(city);
         if (today_data_map.get("city") == null)
             return;
         views.setTextViewText(R.id.city, today_data_map.get("city").toString());
@@ -140,7 +146,7 @@ public class fiveidiot_set_ui{
     }
 
     private void setWidgetAfterUi(fiveidiot_db readdb, RemoteViews views, String mcity) {
-        data_map = readdb.getAfterBriefAdapterData(mcity);
+        List<Map<String, Object>> data_map = readdb.getAfterBriefAdapterData(mcity);
         if (data_map == null)
             return;
 
@@ -171,7 +177,8 @@ public class fiveidiot_set_ui{
 
     public void setTodayUi(View view, String mcity) {
         ((TextView) view.findViewById(R.id.city)).setText(mcity);
-        today_data_map = readdb.getTodayBriefMapData(mcity);
+        fiveidiot_db readdb = new fiveidiot_db(con);
+        Map<String, Object> today_data_map = readdb.getTodayBriefMapData(mcity);
         if (today_data_map.get("city") == null)
             return;
         ((TextView) view.findViewById(R.id.city)).setText(setDefault(today_data_map.get("city").toString(), mcity));
@@ -187,7 +194,8 @@ public class fiveidiot_set_ui{
     }
 
     public void setAfterUi(View view, String mcity) {
-        data_map = readdb.getAfterBriefAdapterData(mcity);
+        fiveidiot_db readdb = new fiveidiot_db(con);
+        List<Map<String, Object>> data_map = readdb.getAfterBriefAdapterData(mcity);
         if (data_map == null) {
             return;
         }

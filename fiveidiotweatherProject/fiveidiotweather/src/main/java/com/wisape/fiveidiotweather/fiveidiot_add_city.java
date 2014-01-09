@@ -66,7 +66,7 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
 
     @Override
     public boolean onQueryTextChange(String s) {
-        listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, cityids_db.findCitys(s)));
+        listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cityids_db.findCitys(s)));
         listView.setOnItemClickListener(new onCityItemClick());
         return false;
     }
@@ -75,7 +75,7 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
     private class onProvinceItemClick implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            listView.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, cityids_db.getCitys(i)));
+            listView.setAdapter(new ArrayAdapter<String>(adapterView.getContext(), android.R.layout.simple_list_item_1, cityids_db.getCitys(i)));
             listView.setOnItemClickListener(new onCityItemClick());
         }
     }
