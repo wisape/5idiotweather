@@ -52,7 +52,7 @@ import java.util.ArrayList;
 
 public class fiveidiot extends FragmentActivity {
     public final static String BROADCAST_UPDATE_UI = "com.wisape.fiveidiotweather.update_ui";
-    private fiveidiot_receiver receiver;
+//    private fiveidiot_receiver receiver;
     private DrawerLayout slideLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView menuList;
@@ -144,16 +144,16 @@ public class fiveidiot extends FragmentActivity {
         viewPager = (ViewPager) findViewById(R.id.main_activity);
         viewPager.setAdapter(mainPagerAdapter);
 
-        receiver = new fiveidiot_receiver();
+        fiveidiot_receiver receiver = new fiveidiot_receiver();
         IntentFilter update_filter = new IntentFilter(BROADCAST_UPDATE_UI);
         registerReceiver(receiver, update_filter);
     }
-
-    @Override
-    public void onDestroy() {
-        unregisterReceiver(receiver);
-        super.onDestroy();
-    }
+//
+//    @Override
+//    public void onDestroy() {
+//        unregisterReceiver(receiver);
+//        super.onDestroy();
+//    }
 
     @Override
     public boolean onKeyDown(int keycode, KeyEvent event) {
@@ -302,7 +302,7 @@ public class fiveidiot extends FragmentActivity {
         public void onClick(View view) {
             slideLayout.closeDrawers();
             final int position = Integer.parseInt(view.getTag().toString());
-            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+            AlertDialog.Builder builder = new AlertDialog.Builder(fiveidiot.this);
             builder.setMessage("确定删除城市：" + citys.get(position) + "?");
             builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                 @Override
