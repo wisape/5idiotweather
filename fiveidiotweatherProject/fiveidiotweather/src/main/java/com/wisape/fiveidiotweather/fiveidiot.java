@@ -286,8 +286,13 @@ public class fiveidiot extends FragmentActivity {
         @Override
         public View getView(final int position, View convertView,
                             ViewGroup parent) {
-            LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View row = inflator.inflate(R.layout.city_list_item, parent, false);
+            View row = null;
+            if (convertView != null) {
+                row = convertView;
+            } else {
+                LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                row = inflator.inflate(R.layout.city_list_item, parent, false);
+            }
             TextView tv = (TextView) row.findViewById(R.id.city_list_item);
             tv.setText(texts.get(position));
             ImageButton btn = (ImageButton) row.findViewById(R.id.discard_city);
