@@ -128,6 +128,9 @@ public class fiveidiot_set_ui{
         String city = mCitys.get(index);
 
         fiveidiot_db readdb = new fiveidiot_db(con);
+        if (!readdb.has_table(city)) {
+            return;
+        }
         Map<String, Object> today_data_map = readdb.getTodayBriefMapData(city);
         if (today_data_map.get("city") == null)
             return;
