@@ -11,7 +11,6 @@ import com.wisape.fiveidiotweather.core.fiveidiot_service;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -57,17 +56,20 @@ public class fiveidiot_db {
     public synchronized void insert(String table, String key, String vlaue) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
-
-        if (cursor.getCount() > 0) {
-            update(db, table, key, vlaue);
-        } else {
-            ContentValues cv = new ContentValues();
-            cv.put(NAME, key);
-            cv.put(VALUE, vlaue);
-            db.insert(table, null, cv);
-            cv.clear();
+        try {
+            if (cursor.getCount() > 0) {
+                update(db, table, key, vlaue);
+            } else {
+                ContentValues cv = new ContentValues();
+                cv.put(NAME, key);
+                cv.put(VALUE, vlaue);
+                db.insert(table, null, cv);
+                cv.clear();
+            }
+        } finally {
+            cursor.close();
         }
-        cursor.close();
+
         db.close();
     }
 
@@ -81,10 +83,14 @@ public class fiveidiot_db {
         ArrayList<String> names = new ArrayList<String>();
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from " + table, null);
-        while (cursor.moveToNext()) {
-            names.add(cursor.getString(cursor.getColumnIndexOrThrow(NAME)));
+        try {
+            while (cursor.moveToNext()) {
+                names.add(cursor.getString(cursor.getColumnIndexOrThrow(NAME)));
+            }
+        } finally {
+            cursor.close();
         }
-        cursor.close();
+
         db.close();
         return names;
     }
@@ -108,12 +114,15 @@ public class fiveidiot_db {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
-        if (cursor.getCount() > 0) {
-            for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
-                value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));
+        try {
+            if (cursor.getCount() > 0) {
+                for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
+                    value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));
+                }
             }
+        } finally {
+              cursor.close();
         }
-        cursor.close();
         db.close();
 
         return value;
@@ -127,12 +136,15 @@ public class fiveidiot_db {
 //        }
         Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
 
-        if (cursor.getCount() > 0) {
-            for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
-                value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));
+        try {
+            if (cursor.getCount() > 0) {
+                for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
+                    value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));
+                }
             }
+        } finally {
+            cursor.close();
         }
-        cursor.close();
 
         return value;
     }
@@ -141,14 +153,18 @@ public class fiveidiot_db {
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("select name from sqlite_master where type='table' order by name", null);
-        while(cursor.moveToNext()) {
-            if (table.equals(cursor.getString(0))) {
-                cursor.close();
-                db.close();
-                return true;
+        try {
+            while(cursor.moveToNext()) {
+                if (table.equals(cursor.getString(0))) {
+                    cursor.close();
+                    db.close();
+                    return true;
+                }
             }
+        } finally {
+            cursor.close();
         }
-        cursor.close();
+
         db.close();
         return false;
     }
