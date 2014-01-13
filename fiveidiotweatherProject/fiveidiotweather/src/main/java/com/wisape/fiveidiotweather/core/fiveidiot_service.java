@@ -16,6 +16,7 @@ import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
 import com.wisape.fiveidiotweather.net.fiveidiot_net;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -57,12 +58,14 @@ public class fiveidiot_service extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if (!net_available())
+                if (!net_available()) {
+                    System.gc();
                     return;
+                }
                 fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
                 ArrayList<String> citys = mCitys.get_citys();
-                fiveidiot_analyze analyzer = new fiveidiot_analyze();
-                fiveidiot_db db = new fiveidiot_db(getApplicationContext());
+                fiveidiot_analyze analyzer = new WeakReference<fiveidiot_analyze>(new fiveidiot_analyze()).get();
+                fiveidiot_db db = new WeakReference<fiveidiot_db>(new fiveidiot_db(getApplicationContext())).get();
                 String city;
                 for (int i = 0; i < citys.size(); i++) {
                     try {
@@ -87,6 +90,7 @@ public class fiveidiot_service extends Service {
             sendBroadcast(widget_intent);
         }
         analyzer.clear();
+        System.gc();
     }
 
     private synchronized boolean unwrap_save_data(fiveidiot_db db, fiveidiot_analyze analyzer, String city, String city_code) throws IOException {

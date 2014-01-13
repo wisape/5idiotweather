@@ -12,6 +12,8 @@ import android.widget.RemoteViews;
 import com.wisape.fiveidiotweather.R;
 import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by wisape on 13-12-22.
  */
@@ -63,7 +65,9 @@ public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
     }
 
     private void updateWidgetView(Context context, AppWidgetManager appWidgetManager, int appWidgetId, int city_index) {
-        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
+        WeakReference<fiveidiot_set_ui> weak_set_ui = new WeakReference<fiveidiot_set_ui>(new fiveidiot_set_ui(context));
+//        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
+        fiveidiot_set_ui set_ui = weak_set_ui.get();
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x2);
         set_ui.setWidgetTodayUi(views, city_index, "clock_next_city4x2", appWidgetId, city_index, true);
         // Tell the AppWidgetManager to perform an update on the current app widget

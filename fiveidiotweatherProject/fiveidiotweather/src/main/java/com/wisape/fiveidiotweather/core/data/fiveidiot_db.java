@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.wisape.fiveidiotweather.R;
 import com.wisape.fiveidiotweather.core.fiveidiot_service;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -166,7 +167,8 @@ public class fiveidiot_db {
     private List<Map<String, Object>> getBriefAdapterData(String table) {
         String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
         SQLiteDatabase db = dbhelper.getReadableDatabase();
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        WeakReference<ArrayList> weaklist = new WeakReference<ArrayList>(new ArrayList<Map<String, Object>>());
+        List<Map<String, Object>> list = weaklist.get();
         WeakHashMap<String, Object> map = null;
 
         for (int i = 0; i < 6; i++) {

@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.wisape.fiveidiotweather.R;
 import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by wisape on 13-11-17.
  */
@@ -27,7 +29,10 @@ public class fiveidiot_main_fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(getActivity());
+        WeakReference<fiveidiot_set_ui> weak_set_ui = new WeakReference<fiveidiot_set_ui>(new fiveidiot_set_ui(getActivity().getApplicationContext()));
+//        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
+        fiveidiot_set_ui set_ui = weak_set_ui.get();
+//        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(getActivity().getApplicationContext());
 //        backgroud_color = set_ui.getMainColor();
         fiveidiot_today_brief tb = new fiveidiot_today_brief(mcity, set_ui);
         fiveidiot_after_brief ab = new fiveidiot_after_brief(mcity, set_ui);

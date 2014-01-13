@@ -2,6 +2,7 @@ package com.wisape.fiveidiotweather.core.data;
 
 import android.content.Context;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,7 @@ public class fiveidiot_citys {
     private fiveidiot_db citydb;
 
     public fiveidiot_citys(Context context) {
-        citydb = new fiveidiot_db(context.getApplicationContext());
+        citydb = new WeakReference<fiveidiot_db>(new fiveidiot_db(context.getApplicationContext())).get();
         citydb.create_table(CITYS_TABLE);
     }
 

@@ -19,6 +19,7 @@ import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_db;
 import com.wisape.fiveidiotweather.fiveidiot_splash;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -127,7 +128,9 @@ public class fiveidiot_set_ui{
         int index = city_index % mCitys.size();
         String city = mCitys.get(index);
 
-        fiveidiot_db readdb = new fiveidiot_db(con);
+        WeakReference<fiveidiot_db> weakreaddb = new WeakReference<fiveidiot_db>(new fiveidiot_db(con));
+//        fiveidiot_db readdb = new fiveidiot_db(con);
+        fiveidiot_db readdb = weakreaddb.get();
         if (!readdb.has_table(city)) {
             return;
         }
@@ -180,7 +183,9 @@ public class fiveidiot_set_ui{
 
     public void setTodayUi(View view, String mcity) {
         ((TextView) view.findViewById(R.id.city)).setText(mcity);
-        fiveidiot_db readdb = new fiveidiot_db(con);
+        WeakReference<fiveidiot_db> weakreaddb = new WeakReference<fiveidiot_db>(new fiveidiot_db(con));
+//        fiveidiot_db readdb = new fiveidiot_db(con);
+        fiveidiot_db readdb = weakreaddb.get();
         if (!readdb.has_table(mcity)) {
             return;
         }
@@ -200,7 +205,9 @@ public class fiveidiot_set_ui{
     }
 
     public void setAfterUi(View view, String mcity) {
-        fiveidiot_db readdb = new fiveidiot_db(con);
+        WeakReference<fiveidiot_db> weakreaddb = new WeakReference<fiveidiot_db>(new fiveidiot_db(con));
+//        fiveidiot_db readdb = new fiveidiot_db(con);
+        fiveidiot_db readdb = weakreaddb.get();
         if (!readdb.has_table(mcity)) {
             return;
         }
