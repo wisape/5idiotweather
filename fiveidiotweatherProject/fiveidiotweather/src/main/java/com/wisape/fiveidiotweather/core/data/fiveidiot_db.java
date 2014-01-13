@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * Created by wisape on 13-10-27.
@@ -55,16 +56,16 @@ public class fiveidiot_db {
     public synchronized void insert(String table, String key, String vlaue) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
-        ContentValues cv = new ContentValues();
 
         if (cursor.getCount() > 0) {
             update(db, table, key, vlaue);
         } else {
+            ContentValues cv = new ContentValues();
             cv.put(NAME, key);
             cv.put(VALUE, vlaue);
             db.insert(table, null, cv);
+            cv.clear();
         }
-        cv.clear();
         cursor.close();
         db.close();
     }
@@ -72,7 +73,6 @@ public class fiveidiot_db {
     private synchronized int update(SQLiteDatabase db, String table, String key, String value) {
         ContentValues cv = new ContentValues();
         cv.put(VALUE, value);
-        cv.clear();
         return db.update(table, cv,  NAME +" = ?", new String[]{key});
     }
 
@@ -167,10 +167,10 @@ public class fiveidiot_db {
         String[] SMP_PROPS = {"image", "image_n", "temp", "weather", "wind", "week"};
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        HashMap<String, Object> map = null;
+        WeakHashMap<String, Object> map = null;
 
         for (int i = 0; i < 6; i++) {
-            map = new HashMap<String, Object>();
+            map = new WeakHashMap<String, Object>();
             for (int j = 0; j < SMP_PROPS.length; j++) {
                 map.put(SMP_PROPS[j], getvalue(db, table, new StringBuffer(SMP_PROPS[j]).append(i).toString()));
             }
