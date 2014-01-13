@@ -181,6 +181,9 @@ public class fiveidiot_set_ui{
     public void setTodayUi(View view, String mcity) {
         ((TextView) view.findViewById(R.id.city)).setText(mcity);
         fiveidiot_db readdb = new fiveidiot_db(con);
+        if (!readdb.has_table(mcity)) {
+            return;
+        }
         Map<String, Object> today_data_map = readdb.getTodayBriefMapData(mcity);
         if (today_data_map.get("city") == null)
             return;
@@ -198,6 +201,9 @@ public class fiveidiot_set_ui{
 
     public void setAfterUi(View view, String mcity) {
         fiveidiot_db readdb = new fiveidiot_db(con);
+        if (!readdb.has_table(mcity)) {
+            return;
+        }
         List<Map<String, Object>> data_map = readdb.getAfterBriefAdapterData(mcity);
         if (data_map == null) {
             return;
