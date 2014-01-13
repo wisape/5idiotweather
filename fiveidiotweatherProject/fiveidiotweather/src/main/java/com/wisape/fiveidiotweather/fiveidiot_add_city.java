@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_cityids_db;
 import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by wisape on 13-12-2.
  */
@@ -27,7 +29,7 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_city_activity);
-        cityids_db = new fiveidiot_cityids_db(getApplicationContext());
+        cityids_db = new WeakReference<fiveidiot_cityids_db>(new fiveidiot_cityids_db(getApplicationContext())).get();
         listView = (ListView) findViewById(R.id.add_city);
         listView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cityids_db.getProvinces()));
         listView.setOnItemClickListener(new onProvinceItemClick());
@@ -88,7 +90,7 @@ public class fiveidiot_add_city extends Activity implements SearchView.OnQueryTe
             int city_index = -1;
             //To do add the city
 
-            fiveidiot_citys city_box = new fiveidiot_citys(getApplicationContext());
+            fiveidiot_citys city_box = new WeakReference<fiveidiot_citys>(new fiveidiot_citys(getApplicationContext())).get();
             String city_b = city.replace(".", "");
             Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
             city_index = city_box.has_city(city_b);
