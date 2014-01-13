@@ -18,6 +18,7 @@ import java.lang.ref.WeakReference;
  * Created by wisape on 13-12-22.
  */
 public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
+    private boolean is_clock = false;
 //    private IntentFilter intentFilter = null;
 
     public void onReceive(Context context, Intent intent) {
@@ -36,9 +37,15 @@ public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
             }
         }
 
-        if (intent.getAction().equals(fiveidiot_set_ui.WIDGET_UPDATE) ||
-                action.equals(Intent.ACTION_TIME_TICK) || action.equals(Intent.ACTION_TIME_CHANGED) ||
+        if (action.equals(Intent.ACTION_TIME_TICK) || action.equals(Intent.ACTION_TIME_CHANGED) ||
                 action.equals(Intent.ACTION_TIMEZONE_CHANGED)) {
+            is_clock = true;
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(con);
+            ComponentName wd = new ComponentName(con, fiveidiot_clock_widget4x2_provider.class);
+            onUpdate(con, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
+        }
+
+        if (intent.getAction().equals(fiveidiot_set_ui.WIDGET_UPDATE)) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(con);
             ComponentName wd = new ComponentName(con, fiveidiot_clock_widget4x2_provider.class);
             onUpdate(con, appWidgetManager, appWidgetManager.getAppWidgetIds(wd));
@@ -69,7 +76,11 @@ public class fiveidiot_clock_widget4x2_provider extends AppWidgetProvider {
 //        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(context);
         fiveidiot_set_ui set_ui = weak_set_ui.get();
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.clock_widget4x2);
-        set_ui.setWidgetTodayUi(views, city_index, "clock_next_city4x2", appWidgetId, city_index, true);
+        if (is_clock) {
+            set_ui.setWidgetClock(views);
+        } else {
+            set_ui.setWidgetTodayUi(views, city_index, "clock_next_city4x2", appWidgetId, city_index, true);
+        }
         // Tell the AppWidgetManager to perform an update on the current app widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

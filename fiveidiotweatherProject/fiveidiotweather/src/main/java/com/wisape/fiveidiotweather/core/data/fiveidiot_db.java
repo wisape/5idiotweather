@@ -55,8 +55,9 @@ public class fiveidiot_db {
 
     public synchronized void insert(String table, String key, String vlaue) {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
-        Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
+        Cursor cursor = null;
         try {
+            cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
             if (cursor.getCount() > 0) {
                 update(db, table, key, vlaue);
             } else {
@@ -113,8 +114,9 @@ public class fiveidiot_db {
         String value = null;
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
-        Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
+        Cursor cursor = null;
         try {
+            cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
             if (cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
                     value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));
@@ -134,9 +136,12 @@ public class fiveidiot_db {
 //        if (!has_table(db, table)) {
 //            return value;
 //        }
-        Cursor cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
-
+        Cursor cursor = null;
         try {
+//            String querycmd = new StringBuilder().append("select * from ").append(table).append(" where ").append(NAME).append("=?").toString();
+            cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
+//            cursor = db.rawQuery(querycmd, new String[]{key});
+
             if (cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
                     value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));
@@ -150,15 +155,15 @@ public class fiveidiot_db {
     }
 
     public boolean has_table(String table) {
+        Boolean is_has_table = false;
         SQLiteDatabase db = dbhelper.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select name from sqlite_master where type='table' order by name", null);
+        Cursor cursor = null;
         try {
+            cursor = db.rawQuery("select name from sqlite_master where type='table' order by name", null);
             while(cursor.moveToNext()) {
                 if (table.equals(cursor.getString(0))) {
-                    cursor.close();
-                    db.close();
-                    return true;
+                    is_has_table = true;
                 }
             }
         } finally {
@@ -166,7 +171,7 @@ public class fiveidiot_db {
         }
 
         db.close();
-        return false;
+        return is_has_table;
     }
 //
 //    public Map<String, Object> getTodayDetailMapData(String table) {
