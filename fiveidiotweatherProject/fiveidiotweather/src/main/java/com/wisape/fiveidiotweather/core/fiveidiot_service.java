@@ -108,12 +108,12 @@ public class fiveidiot_service extends Service {
         String saved_date = db.getvalue(city, "date");
         String saved_update_time = db.getvalue(city, "updatetime");
         if (saved_date != null && saved_update_time != null) {
-            if (saved_date.equals(date) && saved_update_time.equals(analyzer.get_brief_update_time())) {
+            if (system_date.equals(date) && saved_update_time.equals(analyzer.get_brief_update_time())) {
                 return false;
             }
         }
 
-        db.insert(city, "date", system_date);
+        db.insert(city, "date", date);
 //        db.insert(city, "dress", analyzer.get_dress()[0]);
 //        db.insert(city, "dress_d", analyzer.get_dress()[1]);
 //        db.insert(city, "chenlian", analyzer.get_cl());

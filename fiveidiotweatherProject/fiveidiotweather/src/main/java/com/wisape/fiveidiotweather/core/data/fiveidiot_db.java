@@ -57,7 +57,7 @@ public class fiveidiot_db {
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         Cursor cursor = null;
         try {
-            cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
+            cursor = new WeakReference<Cursor>(db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null)).get();
             if (cursor.getCount() > 0) {
                 update(db, table, key, vlaue);
             } else {
@@ -83,7 +83,7 @@ public class fiveidiot_db {
     public synchronized ArrayList<String> getnames(String table) {
         ArrayList<String> names = new ArrayList<String>();
         SQLiteDatabase db = dbhelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + table, null);
+        Cursor cursor = new WeakReference<Cursor>(db.rawQuery("select * from " + table, null)).get();
         try {
             while (cursor.moveToNext()) {
                 names.add(cursor.getString(cursor.getColumnIndexOrThrow(NAME)));
@@ -116,7 +116,7 @@ public class fiveidiot_db {
 
         Cursor cursor = null;
         try {
-            cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
+            cursor = new WeakReference<Cursor>(db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null)).get();
             if (cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !(cursor.isAfterLast()); cursor.moveToNext()) {
                     value = cursor.getString(cursor.getColumnIndexOrThrow(VALUE));
@@ -139,7 +139,7 @@ public class fiveidiot_db {
         Cursor cursor = null;
         try {
 //            String querycmd = new StringBuilder().append("select * from ").append(table).append(" where ").append(NAME).append("=?").toString();
-            cursor = db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null);
+            cursor = new WeakReference<Cursor>(db.query(table, null, NAME + " = ?", new String[]{key}, null, null, null)).get();
 //            cursor = db.rawQuery(querycmd, new String[]{key});
 
             if (cursor.getCount() > 0) {
@@ -160,7 +160,7 @@ public class fiveidiot_db {
 
         Cursor cursor = null;
         try {
-            cursor = db.rawQuery("select name from sqlite_master where type='table' order by name", null);
+            cursor = new WeakReference<Cursor>(db.rawQuery("select name from sqlite_master where type='table' order by name", null)).get();
             while(cursor.moveToNext()) {
                 if (table.equals(cursor.getString(0))) {
                     is_has_table = true;
