@@ -39,6 +39,13 @@ public class fiveidiot_analyze {
      * "st2":"14","st3":"29","st4":"15","st5":"30","st6":"16","index_cl":"适宜",
      * "index_ls":"适宜","index_ag":"较易发"}}
      */
+    /*
+     *[{"aqi":21,"area":"上海","pm2_5":15,"pm2_5_24h":18,"quality":"优","primary_pollutant":"","time_point":"2014-01-14T13:00:00Z"}]
+     */
+
+    /*
+     *http://www.pm25.in/api/querys/pm2_5.json?city=%E4%B8%8A%E6%B5%B7&token=5j1znBVAsnSf5xQyNQyq&stations=no
+     */
 
     public void init_brief_info(String info) {
         try {
