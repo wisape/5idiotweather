@@ -85,7 +85,6 @@ public class fiveidiot_service extends Service {
         boolean today, other;
         today = unwrap_save_now_data(db, analyzer, city, city_id);
         other = unwrap_save_data(db, analyzer, city, city_id);
-        unwrap_save_pollution_data(db, analyzer, city);
         if (today || other) {
             Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
             Intent widget_intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
@@ -157,24 +156,34 @@ public class fiveidiot_service extends Service {
                 return false;
             }
         }
-
-        db.insert(city, "city", analyzer.get_city());
+        String subcity = analyzer.get_city();
+        db.insert(city, "city", subcity);
         db.insert(city, "nowtemp", analyzer.get_now_temp());
         db.insert(city, "todayupdatetime", analyzer.get_today_update_time());
         db.insert(city, "wind", analyzer.get_today_wind());
         db.insert(city, "humidity", analyzer.get_today_hum());
 
+        unwrap_save_pollution_data(db, analyzer, city, city.replace(subcity, ""));
+
         return true;
     }
 
-    private synchronized boolean unwrap_save_pollution_data(fiveidiot_db db, fiveidiot_analyze analyzer, String city) throws IOException {
+    private synchronized boolean unwrap_save_pollution_data(fiveidiot_db db, fiveidiot_analyze analyzer, String city, String supercity) throws IOException {
         if (city == null)
             return false;
         String pollution_path = new StringBuffer(pollution_address).append(URLEncoder.encode(city, "UTF-8")).toString();
         fiveidiot_net net = new fiveidiot_net(pollution_path);
         String content = net.getContext();
-        if (content.equals(city))
-            return false;
+        if (content.equals(city)) {
+            if (supercity.equals("")) {
+                return false;
+            }
+            pollution_path = new StringBuffer(pollution_address).append(URLEncoder.encode(supercity, "UTF-8")).toString();
+            net = new fiveidiot_net(pollution_path);
+            content = net.getContext();
+            if (content.equals(supercity))
+                return false;
+        }
         analyzer.init_pollute_info(content);
 
         db.create_table(city);
