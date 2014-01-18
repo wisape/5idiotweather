@@ -64,7 +64,7 @@ public class fiveidiot_service extends Service {
                     System.gc();
                     return;
                 }
-                fiveidiot_citys mCitys = new fiveidiot_citys(getApplicationContext());
+                fiveidiot_citys mCitys = new WeakReference<fiveidiot_citys>(new fiveidiot_citys(getApplicationContext())).get();
                 ArrayList<String> citys = mCitys.get_citys();
                 fiveidiot_analyze analyzer = new WeakReference<fiveidiot_analyze>(new fiveidiot_analyze()).get();
                 fiveidiot_db db = new WeakReference<fiveidiot_db>(new fiveidiot_db(getApplicationContext())).get();
@@ -100,7 +100,7 @@ public class fiveidiot_service extends Service {
             return false;
 
         String weather_path = new StringBuffer(per_address).append(city_code).append(suf_address).toString();
-        fiveidiot_net net = new fiveidiot_net(weather_path);
+        fiveidiot_net net = new WeakReference<fiveidiot_net>(new fiveidiot_net(weather_path)).get();
         analyzer.init_brief_info(net.getContext());
         String date = analyzer.get_date();
         String system_date = system_date();
@@ -145,7 +145,7 @@ public class fiveidiot_service extends Service {
         if (city_code == null)
             return false;
         String today_weather_path = new StringBuffer(today_per_address ).append(city_code).append(suf_address).toString();
-        fiveidiot_net net = new fiveidiot_net(today_weather_path);
+        fiveidiot_net net = new WeakReference<fiveidiot_net>(new fiveidiot_net(today_weather_path)).get();
         analyzer.init_today_info(net.getContext());
 
         db.create_table(city);
@@ -172,7 +172,7 @@ public class fiveidiot_service extends Service {
         if (city == null)
             return false;
         String pollution_path = new StringBuffer(pollution_address).append(URLEncoder.encode(city, "UTF-8")).toString();
-        fiveidiot_net net = new fiveidiot_net(pollution_path);
+        fiveidiot_net net = new WeakReference<fiveidiot_net>(new fiveidiot_net(pollution_path)).get();
         String content = net.getContext();
         if (content.equals(city)) {
             if (supercity.equals("")) {
