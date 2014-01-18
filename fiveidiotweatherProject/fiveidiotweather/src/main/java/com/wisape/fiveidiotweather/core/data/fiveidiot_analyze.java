@@ -16,6 +16,8 @@ public class fiveidiot_analyze {
     private HashMap<String, String> brief_info;
     private HashMap<String, List<String>> list_breif_info;
     private HashMap<String, String> today_info;
+    private HashMap<String, String> pollute_info;
+
     /**
      *{"weatherinfo":{"city":"西安","city_en":"xian","date_y":"2013年9月26日",
      * "date":"","week":"星期四","fchh":"18","cityid":"101110101","temp1":"14℃~26℃",
@@ -281,5 +283,33 @@ public class fiveidiot_analyze {
 
     public String get_today_update_time() {
         return today_info.get("time");
+    }
+
+    public void init_pollute_info(String info) {
+        String[] POLLUTE_KEYS = {"pm2_5", "quality"};
+        pollute_info = new HashMap<String, String>();
+        try {
+            json_object = new JSONObject(info);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String key;
+        for (int i = 0; i < POLLUTE_KEYS.length; i++) {
+            key = POLLUTE_KEYS[i];
+            try {
+                pollute_info.put(key, json_object.getString(key));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public String get_pm2_5() {
+        return pollute_info.get("pm2_5");
+    }
+
+    public String get_quality() {
+        return pollute_info.get("quality");
     }
 }

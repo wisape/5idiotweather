@@ -209,7 +209,7 @@ public class fiveidiot_db {
     }
 
     public Map<String, Object> getTodayBriefMapData(String table) {
-        String[] TODAY_PROPS = {"city", "todayupdatetime", "date", "nowtemp",  "wind", "humidity"};
+        String[] TODAY_PROPS = {"city", "todayupdatetime", "date", "nowtemp",  "wind", "uv", "humidity", "pm2_5", "quality"};
         List<Map<String, Object>> info_list = getBriefAdapterData(table);
         SQLiteDatabase db = dbhelper.getReadableDatabase();
         String date = fiveidiot_service.system_date();

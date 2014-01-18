@@ -17,6 +17,7 @@ import com.wisape.fiveidiotweather.net.fiveidiot_net;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.List;
 public class fiveidiot_service extends Service {
     private String per_address = "http://m.weather.com.cn/data/";
     private String today_per_address = "http://www.weather.com.cn/data/sk/";
+    private String pollution_address = "http://5idiot.duapp.com/weather/";
     private String suf_address = ".html";
     private fiveidiot_net_receiver net_receiver;
 
@@ -83,6 +85,7 @@ public class fiveidiot_service extends Service {
         boolean today, other;
         today = unwrap_save_now_data(db, analyzer, city, city_id);
         other = unwrap_save_data(db, analyzer, city, city_id);
+        unwrap_save_pollution_data(db, analyzer, city);
         if (today || other) {
             Intent it = new Intent(fiveidiot.BROADCAST_UPDATE_UI);
             Intent widget_intent = new Intent(fiveidiot_set_ui.WIDGET_UPDATE);
@@ -160,6 +163,24 @@ public class fiveidiot_service extends Service {
         db.insert(city, "todayupdatetime", analyzer.get_today_update_time());
         db.insert(city, "wind", analyzer.get_today_wind());
         db.insert(city, "humidity", analyzer.get_today_hum());
+
+        return true;
+    }
+
+    private synchronized boolean unwrap_save_pollution_data(fiveidiot_db db, fiveidiot_analyze analyzer, String city) throws IOException {
+        if (city == null)
+            return false;
+        String pollution_path = new StringBuffer(pollution_address).append(URLEncoder.encode(city, "UTF-8")).toString();
+        fiveidiot_net net = new fiveidiot_net(pollution_path);
+        String content = net.getContext();
+        if (content.equals(city))
+            return false;
+        analyzer.init_pollute_info(content);
+
+        db.create_table(city);
+
+        db.insert(city, "pm2_5", new StringBuffer(analyzer.get_pm2_5()).append("  PM2.5").toString());
+        db.insert(city, "quality", analyzer.get_quality());
 
         return true;
     }

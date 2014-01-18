@@ -73,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="35dp"
                         android:gravity="right|end"
-                        android:layout_gravity="center"
+                        android:layout_gravity="left"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:textSize="45dp"
                         android:text="@string/default_info"
@@ -81,8 +81,8 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="25dp"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="15dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textSize="@dimen/meida_size"
                         android:text="@string/default_info"
@@ -90,7 +90,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_gravity="left"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:textSize="@dimen/meida_size"
                         android:text="@string/default_info"
@@ -98,11 +98,67 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textSize="@dimen/small_size"
                     android:text="@string/default_info"
                     android:id="@+id/wind"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_gravity="left"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="@dimen/small_size"
+                        android:text="@string/default_info"
+                        android:id="@+id/uv"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textSize="@dimen/small_size"
+                        android:textColor="?attr/subtextColor"
+                        android:text=" 紫外线"
+                        android:id="@+id/uv_label"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="right"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textSize="@dimen/meida_size"
+                            android:id="@+id/quality"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="?attr/subtextColor"
+                        android:textSize="@dimen/small_size"
+                        android:id="@+id/pm2_5"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

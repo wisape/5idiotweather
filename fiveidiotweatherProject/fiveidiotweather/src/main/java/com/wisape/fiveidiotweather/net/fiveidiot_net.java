@@ -1,6 +1,5 @@
 package com.wisape.fiveidiotweather.net;
 
-
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -17,14 +16,12 @@ public class fiveidiot_net {
     private String weatherAddress;
     public fiveidiot_net(String address) {
         weatherAddress = address;
-
     }
 
     public String getContext() throws IOException {
         URL weatherUrl = new URL(weatherAddress);
         String context = "No data!!";
         HttpURLConnection conn = (HttpURLConnection) weatherUrl.openConnection();
-
         try {
             InputStream is = new BufferedInputStream(conn.getInputStream());
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -37,7 +34,6 @@ public class fiveidiot_net {
         } finally {
             conn.disconnect();
         }
-
         return context;
     }
 

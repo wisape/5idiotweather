@@ -200,6 +200,9 @@ public class fiveidiot_set_ui{
         ((TextView) view.findViewById(R.id.weather)).setText(setDefault(today_data_map.get("weather"),DEFAULT));
         ((TextView) view.findViewById(R.id.wind)).setText(setDefault(today_data_map.get("wind"),DEFAULT));
         ((TextView) view.findViewById(R.id.nowtemp)).setText(setDefault(today_data_map.get("nowtemp") + "℃",DEFAULT));
+        ((TextView) view.findViewById(R.id.uv)).setText(setDefault(today_data_map.get("uv"),DEFAULT));
+        ((TextView) view.findViewById(R.id.pm2_5)).setText(setDefault(today_data_map.get("pm2_5"),""));
+        ((TextView) view.findViewById(R.id.quality)).setText(setDefault(today_data_map.get("quality"),""));
         ((ImageView) view.findViewById(R.id.today_image)).setImageResource(setDefaultImage(readdb.getImageId(setDefault(today_data_map.get("image"), "1")),
                 R.drawable.download));
     }
