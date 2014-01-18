@@ -44,6 +44,7 @@ import com.wisape.fiveidiotweather.core.data.fiveidiot_citys;
 import com.wisape.fiveidiotweather.core.fiveidiot_set_ui;
 import com.wisape.fiveidiotweather.ui.fiveidiot_main_fragment;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
@@ -430,7 +431,7 @@ public class fiveidiot extends FragmentActivity {
 
         @Override
         public Fragment getItem(int i) {
-            Fragment fragment = new fiveidiot_main_fragment(citys.get(i));
+            Fragment fragment = new WeakReference<fiveidiot_main_fragment>(new fiveidiot_main_fragment(citys.get(i))).get();
             return fragment;
         }
 

@@ -34,8 +34,8 @@ public class fiveidiot_main_fragment extends Fragment {
         fiveidiot_set_ui set_ui = weak_set_ui.get();
 //        fiveidiot_set_ui set_ui = new fiveidiot_set_ui(getActivity().getApplicationContext());
 //        backgroud_color = set_ui.getMainColor();
-        fiveidiot_today_brief tb = new fiveidiot_today_brief(mcity, set_ui);
-        fiveidiot_after_brief ab = new fiveidiot_after_brief(mcity, set_ui);
+        fiveidiot_today_brief tb = new WeakReference<fiveidiot_today_brief>(new fiveidiot_today_brief(mcity, set_ui)).get();
+        fiveidiot_after_brief ab = new WeakReference<fiveidiot_after_brief>(new fiveidiot_after_brief(mcity, set_ui)).get();
         FragmentManager fm = getChildFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.today_brief, tb);
