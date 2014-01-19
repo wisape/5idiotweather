@@ -2,7 +2,7 @@
     android:minWidth="250dp"
     android:minHeight="40dp"
     android:updatePeriodMillis="30000"
-    android:previewImage="@drawable/ic_launcher"
+    android:previewImage="@drawable/clock_widget4x1"
     android:initialLayout="@layout/clock_widget4x1"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen|keyguard"
