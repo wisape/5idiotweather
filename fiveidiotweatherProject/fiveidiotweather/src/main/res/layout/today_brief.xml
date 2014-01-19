@@ -35,7 +35,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:gravity="top|center"
                         android:textSize="@dimen/large_size"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -82,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="3dp"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textSize="@dimen/meida_size"
                         android:text="@string/default_info"
@@ -106,7 +106,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="3sp"
                     android:layout_gravity="left"
                     android:orientation="horizontal">
                     <TextView
