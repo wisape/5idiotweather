@@ -59,6 +59,7 @@ public class fiveidiot extends FragmentActivity {
     private ListView menuList;
     private ListView cityList;
     private String[] menuItems;
+    private fiveidiot_receiver receiver;
     private fiveidiot_citys mCitys;
     private CityArrayAdapter cityArrayAdapter;
     private ViewPager viewPager;
@@ -145,16 +146,16 @@ public class fiveidiot extends FragmentActivity {
         viewPager = (ViewPager) findViewById(R.id.main_activity);
         viewPager.setAdapter(mainPagerAdapter);
 
-        fiveidiot_receiver receiver = new fiveidiot_receiver();
+        receiver = new fiveidiot_receiver();
         IntentFilter update_filter = new IntentFilter(BROADCAST_UPDATE_UI);
         registerReceiver(receiver, update_filter);
     }
-//
-//    @Override
-//    public void onDestroy() {
-//        unregisterReceiver(receiver);
-//        super.onDestroy();
-//    }
+
+    @Override
+    public void onDestroy() {
+        unregisterReceiver(receiver);
+        super.onDestroy();
+    }
 
     @Override
     public boolean onKeyDown(int keycode, KeyEvent event) {
@@ -258,6 +259,7 @@ public class fiveidiot extends FragmentActivity {
 ////                    browserIntent.setClassName("com.android.vending", "com.android.vending.AssetBrowserActivity");
 //                    browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                    startActivity(browserIntent);
+                    Toast.makeText(getApplicationContext(), "请到各应用商店为5傻天气打分 谢谢！", Toast.LENGTH_LONG).show();
                     break;
                 case 5:
                     startWebview("公益", "http://5idiot.duapp.com/pb");
